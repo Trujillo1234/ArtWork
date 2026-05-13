@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760" aria-hidden="true">
+  <defs>
+    <linearGradient id="ribFade" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.86"/>
+      <stop offset="0.52" stop-color="#d8e5e8" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#153b4f" stop-opacity="0.14"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#ribFade)" stroke-width="2.4">
+    <path d="M54 650 C256 250 508 74 836 38"/>
+    <path d="M112 668 C314 284 552 98 884 56"/>
+    <path d="M176 688 C374 320 602 126 940 82"/>
+    <path d="M244 704 C440 356 654 154 998 116"/>
+    <path d="M318 718 C502 392 704 190 1052 154"/>
+    <path d="M398 728 C570 430 758 226 1108 198"/>
+    <path d="M480 736 C636 466 814 270 1164 248"/>
+    <path d="M566 740 C704 502 872 318 1222 304"/>
+    <path d="M652 738 C772 538 934 374 1278 370"/>
+  </g>
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.58" stroke-width="1.2">
+    <path d="M278 96 C486 182 708 204 1038 166"/>
+    <path d="M206 184 C454 270 726 292 1128 234"/>
+    <path d="M136 282 C424 366 756 380 1224 304"/>
+  </g>
+</svg>

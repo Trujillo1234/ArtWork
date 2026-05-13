@@ -1,0 +1,20 @@
+{
+  "capturedAt": "2026-05-09T11:43:10.144991+00:00",
+  "archiveType": "one-page-html-with-downloaded-assets",
+  "archives": [
+    {
+      "name": "Spanish Schoolhouse Tomball",
+      "source": "https://spanishschoolhouse.com/tomball/",
+      "finalUrl": "https://spanishschoolhouse.com/tomball/",
+      "assetCount": 44,
+      "errorCount": 8
+    },
+    {
+      "name": "Esprit International School",
+      "source": "https://www.espritinternationalschool.com/",
+      "finalUrl": "https://www.espritinternationalschool.com/",
+      "assetCount": 134,
+      "errorCount": 3
+    }
+  ]
+}

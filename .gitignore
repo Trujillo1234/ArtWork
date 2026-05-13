@@ -1,0 +1,6 @@
+assets/artwork/_incoming_*/
+assets/artwork/_originals_pxl/
+assets/artwork/_review/
+assets/artwork/_review_artworks.json
+**/__pycache__/
+*.pyc

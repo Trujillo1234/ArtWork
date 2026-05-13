@@ -1,0 +1,79 @@
+/* ****************** Required - start ****************** */
+.simple { position: relative; z-index: 10; font-family: Arial, Helvetica, sans-serif;}
+.simple .enImgTransContainer { display:block; top: 0px; position: absolute; z-index: 20;}
+.simple .enImgTransContainer .enImgTransWrap { position:relative; display: block; }
+.simple .enImgTransWrap .enImgTrans {z-index: 20;}
+/* ****************** Required - end ****************** */
+
+/* ****************** Carousel Horizontal - start ****************** */
+.simple .carousel-horizontal { position: relative; }
+.simple .carousel-horizontal .carousellist { overflow: hidden; position: relative; display: block; margin-left: auto; margin-right: auto; }
+.simple .carousel-horizontal .carousellist .clImgWrap {width: 62px; display: block;}
+.simple .carousel-horizontal .carousellist img {width: 55px;}
+.simple .carousel-horizontal .numeric {width: 20px; height: 20px; display: block; padding-top: 6px;}
+.simple .carousel-horizontal .bullets {width: 20px; height: 20px; display: block; background: url(bullets2.png) no-repeat; background-position: top left;}
+.simple .carousel-horizontal .current-item .bullets {background-position: right bottom;}
+.simple .carousel-horizontal .button { position: absolute; top: 11px; width: 32px; height: 32px; cursor: pointer; }
+.simple .carousel-horizontal .leftTopButton { left: 10px; background: transparent url(backward.png) no-repeat center; }
+.simple .carousel-horizontal .rightBottomButton { right: 10px; background: transparent url(forward.png) no-repeat center; }
+.simple .carousel-horizontal ul { position: relative; display: block; margin: 0; padding: 0; }
+.simple .carousel-horizontal li { left: 0px; float:left; overflow: hidden; padding-top: 10px; }
+
+.simple .carousel-horizontal .current-item-pointer { position: absolute; top: 0; left: 50%; margin-left: -7px; width: 14px; height: 9px; background: transparent; display: none; background: url(caret_active_black.gif) no-repeat; opacity: 0.7; filter:alpha(opacity=70); }
+
+.simple .infowrap-horizontal { }
+.simple .infowrap-horizontal .leftEnImgTrans { }
+.simple .infowrap-horizontal .rightEnImgTrans { }
+/* ****************** Carousel Horizontal - end ****************** */
+
+/* ***************** Carousel Vertical - start ***************** */
+.simple .carousel-vertical { float: right; }
+.simple .carousel-vertical .carousellist { overflow: hidden; position: relative; display: block; margin-top: auto; margin-bottom: auto; }
+.simple .carousel-vertical .carousellist img { height: 37px; width: 55px;}
+.simple .carousel-vertical .leftTopButton { left: 10px; background: transparent url(up.png) no-repeat center; }
+.simple .carousel-vertical .rightBottomButton { right: 10px; background: transparent url(down.png) no-repeat center; }
+.simple .carousel-vertical ul { position: relative; margin: 0; padding: 0; display: block; }
+.simple .carousel-vertical ul li { overflow: hidden; width: 67px;}
+
+.simple .carousel-vertical .current-item-pointer { position: absolute; top: 0; left: 50%; margin-left: -7px; width: 14px; height: 9px; background: transparent; display: none; background: url(caret_active_black.gif) no-repeat; opacity: 0.7; filter:alpha(opacity=70); }
+
+.simple .infowrap-vertical {float: left;}
+.simple .infowrap-vertical .leftEnImgTrans {}
+.simple .infowrap-vertical div h3 {}
+/* ****************** Carousel Vertical - end ****************** */
+
+/* ****************** Carousel Image - start ****************** */
+.simple .imagewrap {display:block;}
+.simple .imagewrap .wallpaper {display:block; z-index: 15;}
+/* ****************** Carousel Image - start ****************** */
+
+/* ****************** Carousel Info - start ****************** */
+.simple h2 { width: 0; height: 0; margin: 0; padding: 0; overflow: hidden; }
+.simple div { display: none; position: relative; z-index: 30; }
+.simple .infowrap { display: block; }
+.simple .overlaycontainer {display: block;}
+.simple .infowrap .carouselInfo { position: relative; height: auto!important; height: 100%; min-height: 100%; }
+.simple div p, .simple div h3, .simple div a  { color:#ebebeb; }
+
+.simple div h3 { width: 100%; margin: 0; font-size: 18px; position: absolute; bottom: 0; background: url(trans_bg.png); text-shadow: 0 0 5px #000; }
+.simple div h3 span { height: 20px; margin: 0; padding: 5px; display: block; overflow: hidden; }
+.simple div h3 a { height: 20px; text-align: left; display: block; overflow: hidden; }
+.simple div h3 a .arrow { background: url(arrow.png) no-repeat center center; behavior: url(iepngfix.htc); width: 12px; height: 12px; margin: 2px 0 0 5px; *margin: 0; zoom: 1; display: none; }
+
+.simple p { position: absolute; bottom: -300px; margin: 0; font-size: 12px; border-bottom: none; display: block; width: 100%; height: 75px; }
+.simple p span { margin: 0; padding: 5px; display: block; }
+.simple p .read-more { float: right; font-size: 8pt; padding: 5px 10px 5px 5px; font-style: italic; text-decoration: underline; }
+.simple p a, .simple p a:visited, .simple p a:link, .simple h3 a, .simple h3 a:visited, .simple h3 a:link { text-decoration: none; }
+/* ****************** Carousel Info - end ****************** */
+
+/* ****************** Carousel Wrap - start ****************** */
+.simple .carouselwrap { margin: 0; z-index: 30; }
+
+.simple ul { overflow: auto; }
+.simple li { opacity: 0.4; filter:alpha(opacity=40); text-align: center; line-height: 1px; list-style: none; position: relative;}
+
+.simple .carouselwrap img { z-index: 10; border: 1px solid #888; margin-bottom: 5px; }
+.simple .current-item { opacity: 1.0; filter:alpha(opacity=100); }
+.simple .current-item img { box-shadow: 0 0 3px #333; -moz-box-shadow: 0 0 3px #333; -webkit-box-shadow: 0 0 3px #333; behavior: url(https://www.espritinternationalschool.com/apps/shared/PIE.htc); position: relative; }
+.simple .current-item .current-item-pointer { z-index: 0; }
+/* ****************** Carousel Wrap - end ****************** */

@@ -1,0 +1,316 @@
+{
+  "name": "Spanish Schoolhouse Tomball",
+  "source": "https://spanishschoolhouse.com/tomball/",
+  "finalUrl": "https://spanishschoolhouse.com/tomball/",
+  "capturedAt": "2026-05-09T11:41:36.517247+00:00",
+  "archiveType": "one-page-html-with-downloaded-assets",
+  "assetCount": 44,
+  "errorCount": 8,
+  "files": [
+    "index.html",
+    "source.html",
+    "live-url.txt",
+    "manifest.json",
+    "assets/"
+  ],
+  "assets": [
+    {
+      "url": "https://spanishschoolhouse.com/css/stylesheet3.css?v=25",
+      "path": "assets\\spanishschoolhouse.com\\css\\stylesheet3.8c088d9197.css",
+      "contentType": "text/css",
+      "size": 47325
+    },
+    {
+      "url": "https://fonts.googleapis.com/css?family=Lora:700",
+      "path": "assets\\fonts.googleapis.com\\css.19f4d4f598.css",
+      "contentType": "text/css",
+      "size": 4604
+    },
+    {
+      "url": "https://spanishschoolhouse.com/js/jquery-2.1.4.min.js",
+      "path": "assets\\spanishschoolhouse.com\\js\\jquery-2.1.4.min.js",
+      "contentType": "application/javascript",
+      "size": 84344
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/logo.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\logo.png",
+      "contentType": "image/png",
+      "size": 13105
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/School_Periquito.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\School_Periquito.png",
+      "contentType": "image/png",
+      "size": 195383
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/locations.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\locations.png",
+      "contentType": "image/png",
+      "size": 1831
+    },
+    {
+      "url": "https://www.googletagmanager.com/ns.html?id=GTM-MXC563DW",
+      "path": "assets\\www.googletagmanager.com\\ns.c9d3f2f93d.html",
+      "contentType": "text/html",
+      "size": 266
+    },
+    {
+      "url": "https://www.googletagmanager.com/ns.html?id=GTM-5BTB69F",
+      "path": "assets\\www.googletagmanager.com\\ns.0280ae393d.html",
+      "contentType": "text/html",
+      "size": 268
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/Feature-Image-tomball.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\Feature-Image-tomball.jpg",
+      "contentType": "image/jpeg",
+      "size": 115432
+    },
+    {
+      "url": "https://maps.googleapis.com/maps/api/js?key=AIzaSyBkldQjzUT5tdnU0NXZds52lymPJpvb1ho&callback=initMap&libraries=places,marker&loading=async",
+      "path": "assets\\maps.googleapis.com\\maps\\api\\js.88578d3dbf.js",
+      "contentType": "text/javascript",
+      "size": 13068
+    },
+    {
+      "url": "https://spanishschoolhouse.com/js/tether.min.js",
+      "path": "assets\\spanishschoolhouse.com\\js\\tether.min.js",
+      "contentType": "application/javascript",
+      "size": 23217
+    },
+    {
+      "url": "https://spanishschoolhouse.com/js/bootstrap.min.js",
+      "path": "assets\\spanishschoolhouse.com\\js\\bootstrap.min.js",
+      "contentType": "application/javascript",
+      "size": 44826
+    },
+    {
+      "url": "https://spanishschoolhouse.com/css/bootstrap-iso.css",
+      "path": "assets\\spanishschoolhouse.com\\css\\bootstrap-iso.css",
+      "contentType": "text/css",
+      "size": 214247
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/yellow-quotes-L.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\yellow-quotes-L.png",
+      "contentType": "image/png",
+      "size": 1037
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/yellow-quotes-R.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\yellow-quotes-R.png",
+      "contentType": "image/png",
+      "size": 1026
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/programs_preschool.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\programs_preschool.jpg",
+      "contentType": "image/jpeg",
+      "size": 82363
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/programs_kindergarten.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\programs_kindergarten.jpg",
+      "contentType": "image/jpeg",
+      "size": 96640
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/programs_summer_school.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\programs_summer_school.jpg",
+      "contentType": "image/jpeg",
+      "size": 83591
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/programs_after_school.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\programs_after_school.jpg",
+      "contentType": "image/jpeg",
+      "size": 74294
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/director-creekside-tomball-mary-tirado.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\director-creekside-tomball-mary-tirado.jpg",
+      "contentType": "image/jpeg",
+      "size": 73241
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/kids-with-goggles.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\kids-with-goggles.jpg",
+      "contentType": "image/jpeg",
+      "size": 129833
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/logoFacebook.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\logoFacebook.png",
+      "contentType": "image/png",
+      "size": 1374
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/logoInstagram.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\logoInstagram.png",
+      "contentType": "image/png",
+      "size": 3278
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/iconFeedbackFooter.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\iconFeedbackFooter.png",
+      "contentType": "image/png",
+      "size": 8981
+    },
+    {
+      "url": "https://spanishschoolhouse.com/fonts/chalkboard-bold.ttf",
+      "path": "assets\\spanishschoolhouse.com\\fonts\\chalkboard-bold.ttf",
+      "contentType": "",
+      "size": 108868
+    },
+    {
+      "url": "https://spanishschoolhouse.com/fonts/chalkboard-bold.eot",
+      "path": "assets\\spanishschoolhouse.com\\fonts\\chalkboard-bold.eot",
+      "contentType": "application/vnd.ms-fontobject",
+      "size": 108968
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/select.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\select.png",
+      "contentType": "image/png",
+      "size": 341
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/bgTransparent.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\bgTransparent.png",
+      "contentType": "image/png",
+      "size": 180
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/nav2BG.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\nav2BG.jpg",
+      "contentType": "image/jpeg",
+      "size": 42434
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/SSH-Slider-01.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\SSH-Slider-01.jpg",
+      "contentType": "image/jpeg",
+      "size": 144505
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/SSH-Slider-02.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\SSH-Slider-02.jpg",
+      "contentType": "image/jpeg",
+      "size": 176219
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/SSH-Slider-03.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\SSH-Slider-03.jpg",
+      "contentType": "image/jpeg",
+      "size": 177100
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/oslide1.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\oslide1.jpg",
+      "contentType": "image/jpeg",
+      "size": 107515
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/oslide2.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\oslide2.jpg",
+      "contentType": "image/jpeg",
+      "size": 239110
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/oslide3.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\oslide3.jpg",
+      "contentType": "image/jpeg",
+      "size": 120361
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/oslide4.jpg",
+      "path": "assets\\spanishschoolhouse.com\\img\\oslide4.jpg",
+      "contentType": "image/jpeg",
+      "size": 206426
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/grass.png",
+      "path": "assets\\spanishschoolhouse.com\\img\\grass.png",
+      "contentType": "image/png",
+      "size": 37771
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QI6MX1D_JOuGQbT0gvTJPa787z5vBJMkq1umA.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\lora\\v37\\0QI6MX1D_JOuGQbT0gvTJPa787z5vBJMkq1umA.woff2",
+      "contentType": "font/woff2",
+      "size": 12604
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QI6MX1D_JOuGQbT0gvTJPa787z5vBJFkq1umA.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\lora\\v37\\0QI6MX1D_JOuGQbT0gvTJPa787z5vBJFkq1umA.woff2",
+      "contentType": "font/woff2",
+      "size": 11388
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QI6MX1D_JOuGQbT0gvTJPa787z5vBI9kq1umA.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\lora\\v37\\0QI6MX1D_JOuGQbT0gvTJPa787z5vBI9kq1umA.woff2",
+      "contentType": "font/woff2",
+      "size": 16364
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QI6MX1D_JOuGQbT0gvTJPa787z5vBIvkq1umA.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\lora\\v37\\0QI6MX1D_JOuGQbT0gvTJPa787z5vBIvkq1umA.woff2",
+      "contentType": "font/woff2",
+      "size": 9396
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QI6MX1D_JOuGQbT0gvTJPa787z5vBJOkq1umA.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\lora\\v37\\0QI6MX1D_JOuGQbT0gvTJPa787z5vBJOkq1umA.woff2",
+      "contentType": "font/woff2",
+      "size": 5288
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QI6MX1D_JOuGQbT0gvTJPa787z5vBJPkq1umA.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\lora\\v37\\0QI6MX1D_JOuGQbT0gvTJPa787z5vBJPkq1umA.woff2",
+      "contentType": "font/woff2",
+      "size": 11968
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QI6MX1D_JOuGQbT0gvTJPa787z5vBJBkq0.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\lora\\v37\\0QI6MX1D_JOuGQbT0gvTJPa787z5vBJBkq0.woff2",
+      "contentType": "font/woff2",
+      "size": 21044
+    }
+  ],
+  "errors": [
+    {
+      "url": "https://spanishschoolhouse.com/js/slideshow.js",
+      "error": "skipped HTML response for asset URL: https://spanishschoolhouse.com/requesterr"
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/tear.gif",
+      "error": "skipped HTML response for asset URL: https://spanishschoolhouse.com/requesterr"
+    },
+    {
+      "url": "https://spanishschoolhouse.com/img/cslide4.jpg",
+      "error": "skipped HTML response for asset URL: https://spanishschoolhouse.com/requesterr"
+    },
+    {
+      "url": "https://spanishschoolhouse.com/fonts/glyphicons-halflings-regular.eot",
+      "error": "skipped HTML response for asset URL: https://spanishschoolhouse.com/requesterr"
+    },
+    {
+      "url": "https://spanishschoolhouse.com/fonts/glyphicons-halflings-regular.woff2",
+      "error": "skipped HTML response for asset URL: https://spanishschoolhouse.com/requesterr"
+    },
+    {
+      "url": "https://spanishschoolhouse.com/fonts/glyphicons-halflings-regular.woff",
+      "error": "skipped HTML response for asset URL: https://spanishschoolhouse.com/requesterr"
+    },
+    {
+      "url": "https://spanishschoolhouse.com/fonts/glyphicons-halflings-regular.ttf",
+      "error": "skipped HTML response for asset URL: https://spanishschoolhouse.com/requesterr"
+    },
+    {
+      "url": "https://spanishschoolhouse.com/fonts/glyphicons-halflings-regular.svg",
+      "error": "skipped HTML response for asset URL: https://spanishschoolhouse.com/requesterr"
+    }
+  ]
+}
