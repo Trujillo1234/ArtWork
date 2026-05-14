@@ -12,6 +12,7 @@ const roomShortcut = document.querySelector("#roomShortcut");
 const roomView = document.querySelector("#roomView");
 const dialog = document.querySelector("#detailDialog");
 const detailPanel = document.querySelector("#detailPanel");
+const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 let activeTheme = "all";
 let roomOpen = false;
@@ -132,6 +133,7 @@ function renderGrid(items) {
       </span>
     `;
     card.addEventListener("click", () => openDetail(item.id));
+    wireTilt(card);
     grid.append(card);
   });
 }
@@ -149,6 +151,11 @@ function renderRoom(items) {
       <button class="room-scroll" type="button" data-dir="1" aria-label="Scroll gallery wall right">&rsaquo;</button>
     </div>
     <div class="room-stage" tabindex="0">
+      <div class="room-fragments" aria-hidden="true">
+        <img class="artifact-sprite gallery-green" src="assets/generated/fragments/green-torn-paper.png" alt="" data-depth="8">
+        <img class="artifact-sprite gallery-note" src="assets/generated/fragments/small-note.png" alt="" data-depth="-10">
+        <img class="artifact-sprite gallery-corner" src="assets/generated/fragments/black-paper-corner.png" alt="" data-depth="12">
+      </div>
       <div class="gallery-track">
         ${roomItems.map((item, index) => {
           const hang = index % 5 === 0 ? "0px" : index % 5 === 1 ? "34px" : index % 5 === 2 ? "14px" : index % 5 === 3 ? "52px" : "24px";
@@ -167,6 +174,7 @@ function renderRoom(items) {
 
   roomView.querySelectorAll(".room-art").forEach((button) => {
     button.addEventListener("click", () => openDetail(button.dataset.id));
+    wireTilt(button);
   });
 
   roomView.querySelectorAll(".room-scroll").forEach((button) => {
@@ -177,6 +185,38 @@ function renderRoom(items) {
         behavior: "smooth"
       });
     });
+  });
+}
+
+function wireAmbientArtifacts() {
+  if (motionQuery.matches) return;
+
+  window.addEventListener("pointermove", (event) => {
+    const x = (event.clientX / window.innerWidth - 0.5).toFixed(4);
+    const y = (event.clientY / window.innerHeight - 0.5).toFixed(4);
+    document.documentElement.style.setProperty("--mx", x);
+    document.documentElement.style.setProperty("--my", y);
+  }, { passive: true });
+
+  window.addEventListener("scroll", () => {
+    document.documentElement.style.setProperty("--scroll-depth", String(Math.min(1, window.scrollY / 900).toFixed(4)));
+  }, { passive: true });
+}
+
+function wireTilt(element) {
+  if (motionQuery.matches) return;
+
+  element.addEventListener("pointermove", (event) => {
+    const rect = element.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+    element.style.setProperty("--tilt-x", `${(-y * 4).toFixed(2)}deg`);
+    element.style.setProperty("--tilt-y", `${(x * 5).toFixed(2)}deg`);
+  });
+
+  element.addEventListener("pointerleave", () => {
+    element.style.removeProperty("--tilt-x");
+    element.style.removeProperty("--tilt-y");
   });
 }
 
@@ -287,6 +327,7 @@ themeFilter.addEventListener("change", () => {
 clearFilters.addEventListener("click", resetFilters);
 toggleRoom.addEventListener("click", toggleRoomView);
 roomShortcut.addEventListener("click", toggleRoomView);
+wireAmbientArtifacts();
 
 dialog.addEventListener("click", (event) => {
   const rect = dialog.getBoundingClientRect();
