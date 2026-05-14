@@ -128,6 +128,7 @@ function renderGrid(items) {
       <span class="card-image"><img src="${imagePath(item.images[0])}" alt="${item.title}" loading="lazy"></span>
       <span class="card-body">
         <span class="card-title">${item.title}</span>
+        <span class="card-artist">${item.artist}</span>
         <span class="card-meta">${item.school}</span>
         <span class="view-count">${item.period} &middot; ${item.images.length} ${item.images.length === 1 ? "view" : "views"}</span>
       </span>
@@ -210,13 +211,17 @@ function wireTilt(element) {
     const rect = element.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
     const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    element.style.setProperty("--tilt-x", `${(-y * 4).toFixed(2)}deg`);
-    element.style.setProperty("--tilt-y", `${(x * 5).toFixed(2)}deg`);
+    element.style.setProperty("--tilt-x", `${(-y * 8).toFixed(2)}deg`);
+    element.style.setProperty("--tilt-y", `${(x * 10).toFixed(2)}deg`);
+    element.style.setProperty("--pointer-x", `${((x + 1) * 50).toFixed(2)}%`);
+    element.style.setProperty("--pointer-y", `${((y + 1) * 50).toFixed(2)}%`);
   });
 
   element.addEventListener("pointerleave", () => {
     element.style.removeProperty("--tilt-x");
     element.style.removeProperty("--tilt-y");
+    element.style.removeProperty("--pointer-x");
+    element.style.removeProperty("--pointer-y");
   });
 }
 

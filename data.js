@@ -474,13 +474,46 @@ const fifthPassMetadataByFirstImage = {
 
 const allIntakeGroups = [...intakeGroups, ...secondPassIntakeGroups, ...thirdPassIntakeGroups, ...fourthPassIntakeGroups, ...fifthPassIntakeGroups];
 const allIntakeMetadataByFirstImage = {...intakeMetadataByFirstImage, ...secondPassMetadataByFirstImage, ...thirdPassMetadataByFirstImage, ...fourthPassMetadataByFirstImage, ...fifthPassMetadataByFirstImage};
+const emmyIntakeFirstImages = new Set([
+  "PXL_20260508_191547347.jpg",
+  "PXL_20260508_191855073.jpg",
+  "PXL_20260508_191913618.jpg",
+  "PXL_20260508_191932262.jpg",
+  "PXL_20260508_192028721.jpg",
+  "PXL_20260508_192048743.jpg",
+  "PXL_20260508_192055351.jpg",
+  "PXL_20260508_192107795.jpg",
+  "PXL_20260508_192127271.jpg",
+  "PXL_20260508_192201770.jpg",
+  "PXL_20260508_192255712.jpg",
+  "PXL_20260508_192323946.jpg",
+  "PXL_20260508_192405521.jpg",
+  "PXL_20260508_192438415.jpg",
+  "PXL_20260508_192505554.jpg",
+  "PXL_20260508_192535283.jpg",
+  "PXL_20260508_193956044.jpg",
+  "PXL_20260508_194016313.jpg",
+  "PXL_20260508_194036212.jpg",
+  "PXL_20260508_194133153.jpg",
+  "PXL_20260508_194149995.jpg",
+  "PXL_20260508_194208596.jpg",
+  "PXL_20260508_194221054.jpg",
+  "PXL_20260508_194235056.jpg",
+  "PXL_20260508_194317919.jpg",
+  "PXL_20260508_194351292.jpg",
+  "PXL_20260508_194403828.jpg",
+  "PXL_20260508_194428374.jpg",
+  "PXL_20260508_194450815.jpg",
+  "PXL_20260508_194548624.jpg",
+  "PXL_20260508_194601578.jpg"
+]);
 
 const intakeArtworks = allIntakeGroups.map((images, index) => {
   const count = String(index + 1).padStart(2, "0");
   const meta = allIntakeMetadataByFirstImage[images[0]] || firstPassIntakeMetadata[index];
   return {
     id: `intake-batch-${count}`,
-    artist: meta.artist || "Penelope Trujillo",
+    artist: meta.artist || (emmyIntakeFirstImages.has(images[0]) ? "Emmy Trujillo" : "Penelope Trujillo"),
     ...meta,
     images
   };
