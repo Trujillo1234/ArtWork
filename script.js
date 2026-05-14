@@ -21,6 +21,7 @@ const types = [...new Set(artworks.map((item) => item.type))].sort();
 const themes = [...new Set(artworks.flatMap((item) => item.themes))].sort();
 const featuredThemes = ["family", "hearts", "animals", "writing", "schoolwork", "painting", "collage", "keepsake"];
 const commentKey = (id) => `trujillo-archive-comments-${id}`;
+const reviewRepo = "Trujillo1234/ArtWork";
 
 function option(value) {
   const el = document.createElement("option");
@@ -52,6 +53,39 @@ function commentsFor(id) {
 
 function saveComments(id, comments) {
   localStorage.setItem(commentKey(id), JSON.stringify(comments));
+}
+
+function reviewIssueUrl(item) {
+  const title = `Review note: ${item.title}`;
+  const body = [
+    "## Artwork",
+    `- ID: ${item.id}`,
+    `- Current title: ${item.title}`,
+    `- Artist: ${item.artist || "Penelope Trujillo"}`,
+    `- School: ${item.school}`,
+    `- Stage: ${item.grade}`,
+    `- Medium: ${item.type}`,
+    `- Image files: ${item.images.join(", ")}`,
+    "",
+    "## Requested correction or memory",
+    "",
+    "<!-- Write the note here. Examples: rotate the second photo 90 degrees clockwise; change the school to Esprit; title should mention Mother's Day; these two photos are not the same artwork. -->",
+    "",
+    "## Checklist",
+    "- [ ] Fix title",
+    "- [ ] Fix description",
+    "- [ ] Fix school/stage/medium",
+    "- [ ] Split or regroup photos",
+    "- [ ] Rotate/crop image",
+    "- [ ] Add memory/context",
+    "- [ ] Other"
+  ].join("\n");
+  const params = new URLSearchParams({
+    title,
+    body,
+    labels: "archive-review"
+  });
+  return `https://github.com/${reviewRepo}/issues/new?${params.toString()}`;
 }
 
 function themeList() {
@@ -237,12 +271,14 @@ function openDetail(id) {
       <div class="tag-row">${item.themes.map((tag) => `<span>${tag}</span>`).join("")}</div>
 
       <section class="comments">
-        <h3>Archive Notes</h3>
+        <h3>Review Notes</h3>
+        <p class="review-help">Open a GitHub review note when a change should be saved for later cleanup.</p>
+        <a class="review-link" href="${reviewIssueUrl(item)}" target="_blank" rel="noreferrer">Open review issue</a>
         <div id="commentList">${commentMarkup(item)}</div>
         <form id="commentForm">
-          <label for="commentText">Add a note for later</label>
-          <textarea id="commentText" rows="4" placeholder="Memory, correction, installation note, or family context"></textarea>
-          <button type="submit">Save note</button>
+          <label for="commentText">Private browser scratch note</label>
+          <textarea id="commentText" rows="4" placeholder="Temporary note on this device only"></textarea>
+          <button type="submit">Save local note</button>
         </form>
       </section>
     </div>
