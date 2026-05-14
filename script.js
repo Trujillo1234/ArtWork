@@ -88,6 +88,22 @@ function reviewIssueUrl(item) {
   return `https://github.com/${reviewRepo}/issues/new?${params.toString()}`;
 }
 
+function renderPublicComments(item) {
+  const container = detailPanel.querySelector("#publicComments");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const script = document.createElement("script");
+  script.src = "https://utteranc.es/client.js";
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  script.setAttribute("repo", reviewRepo);
+  script.setAttribute("issue-term", `artwork:${item.id}`);
+  script.setAttribute("label", "archive-comment");
+  script.setAttribute("theme", "github-light");
+  container.append(script);
+}
+
 function themeList() {
   const curated = featuredThemes.filter((theme) => themes.includes(theme));
   const rest = themes.filter((theme) => !curated.includes(theme));
@@ -272,8 +288,9 @@ function openDetail(id) {
 
       <section class="comments">
         <h3>Review Notes</h3>
-        <p class="review-help">Open a GitHub review note when a change should be saved for later cleanup.</p>
+        <p class="review-help">Public comments are saved in GitHub and visible to everyone. Use the review issue for specific cleanup requests.</p>
         <a class="review-link" href="${reviewIssueUrl(item)}" target="_blank" rel="noreferrer">Open review issue</a>
+        <div class="public-comments" id="publicComments"></div>
         <div id="commentList">${commentMarkup(item)}</div>
         <form id="commentForm">
           <label for="commentText">Private browser scratch note</label>
@@ -313,6 +330,8 @@ function openDetail(id) {
     saveComments(item.id, comments);
     openDetail(item.id);
   });
+
+  renderPublicComments(item);
 
   if (!dialog.open) {
     dialog.showModal();
