@@ -218,29 +218,6 @@ h1 {
   gap: 18px;
 }
 
-.place-memory {
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 250, 0.78);
-  background: rgba(255, 255, 250, 0.58);
-  box-shadow: var(--card-shadow);
-}
-
-.place-memory img {
-  width: 100%;
-  height: clamp(150px, 22vw, 230px);
-  object-fit: cover;
-}
-
-.place-memory figcaption {
-  padding: 12px 14px;
-  color: var(--soft-ink);
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .curator-card,
 .feature-panel,
 .filters,
