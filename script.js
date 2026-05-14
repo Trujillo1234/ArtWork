@@ -20,8 +20,6 @@ const schools = [...new Set(artworks.map((item) => item.school))].sort();
 const types = [...new Set(artworks.map((item) => item.type))].sort();
 const themes = [...new Set(artworks.flatMap((item) => item.themes))].sort();
 const featuredThemes = ["family", "hearts", "animals", "writing", "schoolwork", "painting", "collage", "keepsake"];
-const commentKey = (id) => `trujillo-archive-comments-${id}`;
-const reviewRepo = "Trujillo1234/ArtWork";
 
 function option(value) {
   const el = document.createElement("option");
@@ -41,67 +39,6 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
-}
-
-function commentsFor(id) {
-  try {
-    return JSON.parse(localStorage.getItem(commentKey(id)) || "[]");
-  } catch {
-    return [];
-  }
-}
-
-function saveComments(id, comments) {
-  localStorage.setItem(commentKey(id), JSON.stringify(comments));
-}
-
-function reviewIssueUrl(item) {
-  const title = `Review note: ${item.title}`;
-  const body = [
-    "## Artwork",
-    `- ID: ${item.id}`,
-    `- Current title: ${item.title}`,
-    `- Artist: ${item.artist || "Penelope Trujillo"}`,
-    `- School: ${item.school}`,
-    `- Stage: ${item.grade}`,
-    `- Medium: ${item.type}`,
-    `- Image files: ${item.images.join(", ")}`,
-    "",
-    "## Requested correction or memory",
-    "",
-    "<!-- Write the note here. Examples: rotate the second photo 90 degrees clockwise; change the school to Esprit; title should mention Mother's Day; these two photos are not the same artwork. -->",
-    "",
-    "## Checklist",
-    "- [ ] Fix title",
-    "- [ ] Fix description",
-    "- [ ] Fix school/stage/medium",
-    "- [ ] Split or regroup photos",
-    "- [ ] Rotate/crop image",
-    "- [ ] Add memory/context",
-    "- [ ] Other"
-  ].join("\n");
-  const params = new URLSearchParams({
-    title,
-    body,
-    labels: "archive-review"
-  });
-  return `https://github.com/${reviewRepo}/issues/new?${params.toString()}`;
-}
-
-function renderPublicComments(item) {
-  const container = detailPanel.querySelector("#publicComments");
-  if (!container) return;
-  container.innerHTML = "";
-
-  const script = document.createElement("script");
-  script.src = "https://utteranc.es/client.js";
-  script.async = true;
-  script.crossOrigin = "anonymous";
-  script.setAttribute("repo", reviewRepo);
-  script.setAttribute("issue-term", `artwork:${item.id}`);
-  script.setAttribute("label", "archive-comment");
-  script.setAttribute("theme", "github-light");
-  container.append(script);
 }
 
 function themeList() {
@@ -243,17 +180,6 @@ function renderRoom(items) {
   });
 }
 
-function commentMarkup(item) {
-  const comments = commentsFor(item.id);
-  if (!comments.length) return `<p class="no-comments">No notes yet.</p>`;
-  return comments.map((comment) => `
-    <div class="comment">
-      <p>${escapeHtml(comment.text)}</p>
-      <time>${comment.created}</time>
-    </div>
-  `).join("");
-}
-
 function openDetail(id) {
   const item = artworks.find((artwork) => artwork.id === id);
   if (!item) return;
@@ -287,16 +213,8 @@ function openDetail(id) {
       <div class="tag-row">${item.themes.map((tag) => `<span>${tag}</span>`).join("")}</div>
 
       <section class="comments">
-        <h3>Review Notes</h3>
-        <p class="review-help">Public comments are saved in GitHub and visible to everyone. Use the review issue for specific cleanup requests.</p>
-        <a class="review-link" href="${reviewIssueUrl(item)}" target="_blank" rel="noreferrer">Open review issue</a>
-        <div class="public-comments" id="publicComments"></div>
-        <div id="commentList">${commentMarkup(item)}</div>
-        <form id="commentForm">
-          <label for="commentText">Private browser scratch note</label>
-          <textarea id="commentText" rows="4" placeholder="Temporary note on this device only"></textarea>
-          <button type="submit">Save local note</button>
-        </form>
+        <h3>Comments</h3>
+        <p class="review-help">A single no-sign-in comment form will live here once storage is connected.</p>
       </section>
     </div>
   `;
@@ -309,29 +227,6 @@ function openDetail(id) {
       button.classList.add("active");
     });
   });
-
-  detailPanel.querySelector("#commentForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const textarea = detailPanel.querySelector("#commentText");
-    const text = textarea.value.trim();
-    if (!text) return;
-
-    const comments = commentsFor(item.id);
-    comments.unshift({
-      text,
-      created: new Date().toLocaleString([], {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
-      })
-    });
-    saveComments(item.id, comments);
-    openDetail(item.id);
-  });
-
-  renderPublicComments(item);
 
   if (!dialog.open) {
     dialog.showModal();
