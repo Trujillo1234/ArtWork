@@ -102,7 +102,6 @@ button {
 .top-rail,
 .hero,
 .summary-band,
-.feature-band,
 .school-strip,
 .archive-shell {
   width: min(1360px, calc(100% - 40px));
@@ -172,9 +171,9 @@ button {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.75fr);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
   gap: 42px;
-  padding: 54px 0 84px;
+  padding: 46px 0 58px;
 }
 
 .kicker,
@@ -214,12 +213,10 @@ h1 {
 
 .hero-aside {
   display: grid;
-  align-content: end;
-  gap: 18px;
+  align-content: center;
+  gap: 14px;
 }
 
-.curator-card,
-.feature-panel,
 .filters,
 .collection,
 .detail-panel,
@@ -228,22 +225,31 @@ h1 {
   backdrop-filter: blur(18px);
 }
 
-.curator-card,
-.feature-panel {
-  padding: 22px 22px 24px;
-  border: 1px solid rgba(255, 250, 244, 0.7);
-  box-shadow: var(--card-shadow);
-}
-
-.curator-card p,
-.feature-panel p,
 .collection-note,
-.summary-copy p,
 .school-link small,
 .record-note {
   margin: 0;
   color: var(--soft-ink);
   line-height: 1.55;
+}
+
+.archive-object {
+  margin: 0;
+}
+
+.archive-object img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  box-shadow: var(--card-shadow);
+}
+
+.wall-label {
+  max-width: 520px;
+  margin: 0;
+  color: var(--soft-ink);
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 .hero-actions {
@@ -281,28 +287,15 @@ h1 {
   background: var(--accent);
 }
 
-.summary-band,
-.feature-band {
+.summary-band {
   display: grid;
   gap: 18px;
   padding: 22px 0;
 }
 
 .summary-band {
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 1fr;
   align-items: start;
-}
-
-.summary-copy {
-  display: grid;
-  grid-template-columns: 148px minmax(0, 1fr);
-  gap: 22px;
-}
-
-.summary-copy p {
-  font-family: var(--display);
-  font-size: 1.45rem;
-  line-height: 1.24;
 }
 
 .stats {
@@ -336,12 +329,6 @@ h1 {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.feature-band {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  padding-top: 0;
-  padding-bottom: 32px;
 }
 
 .school-strip {
@@ -931,9 +918,6 @@ textarea:focus {
     position: static;
   }
 
-  .summary-copy {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 820px) {
@@ -941,7 +925,6 @@ textarea:focus {
   .top-links,
   .collection-head,
   .summary-band,
-  .feature-band,
   .school-strip {
     grid-template-columns: 1fr;
   }
@@ -951,8 +934,7 @@ textarea:focus {
     display: grid;
   }
 
-  .school-strip,
-  .feature-band {
+  .school-strip {
     grid-template-columns: 1fr;
   }
 
