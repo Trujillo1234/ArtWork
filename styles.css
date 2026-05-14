@@ -310,8 +310,10 @@ h1 {
   position: relative;
   z-index: 2;
   display: grid;
-  align-content: center;
+  align-content: end;
   gap: 14px;
+  min-height: 360px;
+  padding: 0 0 32px;
 }
 
 .filters,
@@ -330,26 +332,13 @@ h1 {
   line-height: 1.55;
 }
 
-.archive-object {
-  margin: 0;
-}
-
-.archive-object img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  box-shadow: var(--card-shadow);
-  transform: rotateX(calc(var(--my) * -2deg)) rotateY(calc(var(--mx) * 3deg));
-  transform-origin: center;
-  transition: transform 180ms ease;
-}
-
 .wall-label {
-  max-width: 520px;
+  max-width: 560px;
   margin: 0;
   color: var(--soft-ink);
-  font-size: 0.95rem;
-  line-height: 1.45;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2.2vw, 2.2rem);
+  line-height: 1.08;
 }
 
 .hero-actions {
@@ -1110,7 +1099,6 @@ textarea:focus {
   }
 
   .artifact-sprite,
-  .archive-object img,
   .art-card,
   .room-art {
     animation: none;
@@ -1121,7 +1109,6 @@ textarea:focus {
     transform: rotate(var(--sprite-rotate, 0deg));
   }
 
-  .archive-object img,
   .art-card,
   .art-card:hover,
   .room-art,
