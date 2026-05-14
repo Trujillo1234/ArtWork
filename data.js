@@ -245,7 +245,7 @@ const intakeMetadataByFirstImage = {
   "PXL_20260508_183553362.jpg": {title:"Layered Heart Card",school:"Spanish School House",grade:"PreK-K",type:"Card",themes:["hearts","valentine","3d"],note:"Heart card with layered paper hearts and a tied string detail."},
   "PXL_20260508_183621220.jpg": {title:"Paper Plate Heart Wreath",school:"Spanish School House",grade:"PreK-K",type:"Paper Craft",themes:["hearts","wreath","valentine"],note:"Heart-themed paper plate wreath with attached center note."},
   "PXL_20260508_183659908.jpg": {title:"Dog Portrait on Pink",school:"Spanish School House",grade:"PreK-K",type:"Painting",themes:["dogs","portrait","pink"],note:"Gray-and-white dog portrait against a pink ground."},
-  "PXL_20260508_183726845.jpg": {title:"Colorado Girl Canvas",artist:"Penelope Trujillo",school:"Esprit International School",grade:"Grade 1-2",type:"Painting",themes:["colorado","school-pride","canvas"],note:"Colorful 'Colorado Girl' canvas photographed from the front, with the back view grouped alongside it."},
+  "PXL_20260508_183726845.jpg": {title:"Colorado Girl Canvas",artist:"Emmy Trujillo",school:"Esprit International School",grade:"Grade 1-2",type:"Painting",themes:["colorado","school-pride","canvas"],note:"Colorful 'Colorado Girl' canvas photographed from the front, with the back view grouped alongside it; the canvas back is signed Emmy."},
   "PXL_20260508_183803253.jpg": {title:"Spelling Words Foldout",school:"Esprit International School",grade:"Grade 1-2",type:"Schoolwork",themes:["spelling","writing","foldout"],note:"Folded spelling-words sheet photographed closed and open."},
   "PXL_20260508_183836784.jpg": {title:"Framed Red Figure Painting",school:"Spanish School House",grade:"PreK-K",type:"Painting",themes:["framed","figure","abstract"],note:"Framed painting of a simple red figure with the back shown in the second view."},
   "PXL_20260508_185826165.jpg": {title:"Texas Flag and Yellow Animal Crafts",school:"Spanish School House",grade:"PreK-K",type:"Paper Craft",themes:["flag","animals","hearts"],note:"Grouped preschool crafts including a flag painting, rolled yellow animal figure, and valentine heart pages."},
@@ -513,7 +513,7 @@ const intakeArtworks = allIntakeGroups.map((images, index) => {
   const meta = allIntakeMetadataByFirstImage[images[0]] || firstPassIntakeMetadata[index];
   return {
     id: `intake-batch-${count}`,
-    artist: meta.artist || (emmyIntakeFirstImages.has(images[0]) ? "Emmy Trujillo" : "Penelope Trujillo"),
+    artist: meta.artist || (emmyIntakeFirstImages.has(images[0]) ? "Emmy Trujillo" : "Needs Review"),
     ...meta,
     images
   };

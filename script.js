@@ -128,7 +128,6 @@ function renderGrid(items) {
       <span class="card-image"><img src="${imagePath(item.images[0])}" alt="${item.title}" loading="lazy"></span>
       <span class="card-body">
         <span class="card-title">${item.title}</span>
-        <span class="card-artist">${item.artist}</span>
         <span class="card-meta">${item.school}</span>
         <span class="view-count">${item.period} &middot; ${item.images.length} ${item.images.length === 1 ? "view" : "views"}</span>
       </span>
@@ -157,6 +156,7 @@ function renderRoom(items) {
         <img class="artifact-sprite gallery-note" src="assets/generated/fragments/small-note.png" alt="" data-depth="-10">
         <img class="artifact-sprite gallery-corner" src="assets/generated/fragments/black-paper-corner.png" alt="" data-depth="12">
       </div>
+      <div class="room-surface" aria-hidden="true"></div>
       <div class="gallery-track">
         ${roomItems.map((item, index) => {
           const hang = index % 5 === 0 ? "0px" : index % 5 === 1 ? "34px" : index % 5 === 2 ? "14px" : index % 5 === 3 ? "52px" : "24px";
@@ -173,6 +173,8 @@ function renderRoom(items) {
     </div>
   `;
 
+  syncRoomSurface();
+
   roomView.querySelectorAll(".room-art").forEach((button) => {
     button.addEventListener("click", () => openDetail(button.dataset.id));
     wireTilt(button);
@@ -187,6 +189,19 @@ function renderRoom(items) {
       });
     });
   });
+}
+
+function syncRoomSurface() {
+  const stage = roomView.querySelector(".room-stage");
+  const track = roomView.querySelector(".gallery-track");
+  if (!stage || !track) return;
+
+  const setWidth = () => {
+    stage.style.setProperty("--gallery-width", `${Math.max(stage.clientWidth, track.scrollWidth)}px`);
+  };
+
+  setWidth();
+  requestAnimationFrame(setWidth);
 }
 
 function wireAmbientArtifacts() {
@@ -249,7 +264,7 @@ function openDetail(id) {
       </div>
       <h2>${item.title}</h2>
       <dl class="metadata">
-        <div><dt>Artist</dt><dd>${item.artist || "Penelope Trujillo"}</dd></div>
+        <div><dt>Artist</dt><dd>${item.artist || "Needs Review"}</dd></div>
         <div><dt>School</dt><dd>${item.school}</dd></div>
         <div><dt>Stage</dt><dd>${item.grade}</dd></div>
         <div><dt>Medium</dt><dd>${item.type}</dd></div>
@@ -311,6 +326,7 @@ function resetFilters() {
 function toggleRoomView() {
   roomOpen = !roomOpen;
   syncRoomButtons();
+  syncRoomSurface();
   document.querySelector("#collection").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -330,6 +346,7 @@ themeFilter.addEventListener("change", () => {
 });
 
 clearFilters.addEventListener("click", resetFilters);
+window.addEventListener("resize", syncRoomSurface);
 toggleRoom.addEventListener("click", toggleRoomView);
 roomShortcut.addEventListener("click", toggleRoomView);
 wireAmbientArtifacts();
