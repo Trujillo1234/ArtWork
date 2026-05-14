@@ -123,10 +123,10 @@ def crop_from_mask(mask: Image.Image, image_size: tuple[int, int], padding: floa
 
 
 def detect_rotation(box: tuple[int, int, int, int]) -> int:
-    width = box[2] - box[0]
-    height = box[3] - box[1]
-    if width > height * 1.55:
-        return 90
+    # EXIF orientation is already applied when the image is opened. Automatic
+    # content rotation is intentionally conservative because school artwork
+    # often includes landscape pages, folded backs, and sideways writing that
+    # should not be rotated just because the crop is wide.
     return 0
 
 
