@@ -22,7 +22,6 @@ const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 let activeTheme = "all";
 let roomOpen = false;
 let activeView = "collection";
-let detailRotation = 0;
 
 const schools = [...new Set(artworks.map((item) => item.school))].sort();
 const artists = [...new Set(artworks.map((item) => item.artist))].sort();
@@ -36,24 +35,6 @@ const curatedPaths = [
   { label: "Needs Review", theme: "all", artist: "Needs Review", note: "The honest workbench: good records whose artist or grouping still needs memory." }
 ];
 
-const imageRotations = {
-  "1000001582.jpg": 90,
-  "1000001583.jpg": 90,
-  "1000001585.jpg": 90,
-  "1000001586.jpg": 90,
-  "1000001589.jpg": 90,
-  "1000001623.jpg": 90,
-  "1000001840.jpg": 90,
-  "1000001865.jpg": 90,
-  "PXL_20260508_191645420.jpg": 90,
-  "PXL_20260508_194317919.jpg": 90,
-  "PXL_20260509_144012616.jpg": 90,
-  "PXL_20260509_144029935.jpg": 90,
-  "PXL_20260509_144050060.jpg": 90,
-  "PXL_20260509_144141430.jpg": 90,
-  "PXL_20260509_144149450.jpg": 90
-};
-
 function option(value) {
   const el = document.createElement("option");
   el.value = value;
@@ -63,17 +44,6 @@ function option(value) {
 
 function imagePath(file) {
   return `assets/artwork/${file}`;
-}
-
-function imageRotation(file) {
-  return imageRotations[file] || 0;
-}
-
-function imageAttrs(file, extraClass = "") {
-  const rotation = imageRotation(file);
-  const rotatedClass = rotation % 180 !== 0 ? " is-rotated-quarter" : "";
-  const classes = `oriented-image${rotatedClass}${extraClass ? ` ${extraClass}` : ""}`;
-  return `class="${classes}" style="--image-rotation:${rotation}deg"`;
 }
 
 function escapeHtml(value) {
@@ -265,7 +235,7 @@ function renderGrid(items) {
     card.type = "button";
     card.className = `art-card art-card-${meta.shape}`;
     card.innerHTML = `
-      <span class="card-image"><img ${imageAttrs(meta.file)} src="${imagePath(meta.file)}" alt="${escapeHtml(item.title)}" loading="lazy"></span>
+      <span class="card-image"><img src="${imagePath(meta.file)}" alt="${escapeHtml(item.title)}" loading="lazy"></span>
       <span class="card-body">
         <span class="card-title">${escapeHtml(item.title)}</span>
         <span class="card-meta">${escapeHtml(item.artist)} &middot; ${escapeHtml(item.school)}</span>
@@ -309,7 +279,7 @@ function renderRoom(items) {
           const tilt = index % 2 === 0 ? "-0.7deg" : "0.7deg";
           return `
             <button class="room-art" style="--hang:${hang}; --frame-width:${width}; --tilt:${tilt};" type="button" data-id="${item.id}">
-              <img ${imageAttrs(item.images[0])} src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
+              <img src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
               <span>${escapeHtml(item.title)}</span>
             </button>
           `;
@@ -356,7 +326,7 @@ function renderStory(items) {
           <div class="chapter-strip">
             ${featured.map((item) => `
               <button type="button" class="chapter-piece" data-id="${escapeHtml(item.id)}">
-                <img ${imageAttrs(item.images[0])} src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
+                <img src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
                 <span>${escapeHtml(item.title)}</span>
               </button>
             `).join("")}
@@ -373,32 +343,71 @@ function renderStory(items) {
 
 function renderLab(items) {
   const reviewItems = items.filter((item) => item.artist === "Needs Review");
-  const packets = items.filter((item) => item.images.length > 4);
-  const rotatedVisible = items.filter((item) => item.images.some((file) => imageRotation(file)));
+  const packets = items.filter((item) => item.images.length > 4).sort((a, b) => b.images.length - a.images.length);
+  const titleReviewIds = new Set([
+    "intake-batch-31",
+    "intake-batch-74",
+    "intake-batch-79",
+    "intake-batch-117",
+    "intake-batch-149"
+  ]);
+  const orientationFiles = new Set([
+    "PXL_20260508_190249325.jpg",
+    "1000001840.jpg",
+    "1000001623.jpg",
+    "PXL_20260509_144012616.jpg",
+    "PXL_20260509_144029935.jpg",
+    "PXL_20260509_144050060.jpg",
+    "PXL_20260509_144141430.jpg",
+    "PXL_20260509_144149450.jpg"
+  ]);
+  const backsideWords = ["back", "backing", "reverse"];
+  const titleReviewItems = items.filter((item) => titleReviewIds.has(item.id) || /certificate|diploma|report/i.test(`${item.title} ${item.note}`));
+  const orientationItems = items.filter((item) => item.images.some((file) => orientationFiles.has(file)));
+  const contextItems = items.filter((item) => backsideWords.some((word) => `${item.title} ${item.note}`.toLowerCase().includes(word)));
   const possibleRepeats = [
     { kept: "Bird Branch Card", hidden: "duplicate intake scan", reason: "Exact duplicate photo removed while keeping the separate teacher note record." },
     { kept: "Planet Research: Earth", hidden: "Early Worksheet Page", reason: "Exact duplicate photo removed from the visible intake sequence." }
   ];
 
+  const issueList = (list, emptyText) => `
+    <div class="lab-list">
+      ${list.map((item) => `
+        <button type="button" data-id="${escapeHtml(item.id)}">
+          <span>${escapeHtml(item.title)}</span>
+          <small>${escapeHtml(item.school)} / ${escapeHtml(item.type)} / ${item.images.length} ${item.images.length === 1 ? "view" : "views"}</small>
+        </button>
+      `).join("") || `<p class="empty">${emptyText}</p>`}
+    </div>
+  `;
+
   labView.innerHTML = `
     <section class="lab-panel">
-      <h3>Catalog Health</h3>
+      <h3>Help Fix the Archive</h3>
+      <p>This is the honest workbench: records that may need a human memory check, a better title, a front-first grouping, or a fresh photo rather than a forced browser rotation.</p>
       <div class="lab-metrics">
         <div><strong>${reviewItems.length}</strong><span>records needing artist review</span></div>
-        <div><strong>${packets.length}</strong><span>large packets</span></div>
-        <div><strong>${rotatedVisible.length}</strong><span>records with display rotation</span></div>
+        <div><strong>${titleReviewItems.length}</strong><span>title / certificate checks</span></div>
+        <div><strong>${orientationItems.length}</strong><span>orientation checks</span></div>
+        <div><strong>${contextItems.length}</strong><span>front / back context checks</span></div>
+        <div><strong>${possibleRepeats.length}</strong><span>exact duplicates suppressed</span></div>
       </div>
     </section>
     <section class="lab-panel">
-      <h3>Review Queue</h3>
-      <div class="lab-list">
-        ${reviewItems.slice(0, 24).map((item) => `
-          <button type="button" data-id="${escapeHtml(item.id)}">
-            <span>${escapeHtml(item.title)}</span>
-            <small>${escapeHtml(item.school)} / ${escapeHtml(item.type)} / ${item.images.length} ${item.images.length === 1 ? "view" : "views"}</small>
-          </button>
-        `).join("") || `<p class="empty">No visible records need review.</p>`}
-      </div>
+      <h3>Title and Certificate Checks</h3>
+      ${issueList(titleReviewItems.slice(0, 20), "No visible records are flagged for title review.")}
+    </section>
+    <section class="lab-panel">
+      <h3>Orientation Checks</h3>
+      ${issueList(orientationItems.slice(0, 20), "No visible records are flagged for orientation review.")}
+    </section>
+    <section class="lab-panel">
+      <h3>Front and Back Context</h3>
+      ${issueList(contextItems.slice(0, 20), "No visible records mention reverse or backing context.")}
+    </section>
+    <section class="lab-panel">
+      <h3>Large Packets to Split</h3>
+      ${issueList(packets.slice(0, 12), "No visible packets are large enough to split.")}
     </section>
     <section class="lab-panel">
       <h3>Duplicate Decisions</h3>
@@ -472,17 +481,16 @@ function wireTilt(element) {
 function openDetail(id) {
   const item = artworks.find((artwork) => artwork.id === id);
   if (!item) return;
-  detailRotation = 0;
 
   detailPanel.innerHTML = `
     <div class="detail-media">
       <div class="detail-main-image">
-        <img ${imageAttrs(item.images[0])} id="mainDetailImage" src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}">
+        <img id="mainDetailImage" src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}">
       </div>
       <div class="thumb-row">
         ${item.images.map((file, index) => `
           <button class="${index === 0 ? "active" : ""}" type="button" data-file="${file}" aria-label="View ${index + 1}">
-            <img ${imageAttrs(file)} src="${imagePath(file)}" alt="">
+            <img src="${imagePath(file)}" alt="">
           </button>
         `).join("")}
       </div>
@@ -493,11 +501,6 @@ function openDetail(id) {
         <button class="icon-button" id="closeDetail" type="button" aria-label="Close">&times;</button>
       </div>
       <h2>${escapeHtml(item.title)}</h2>
-      <div class="viewer-tools" aria-label="Image tools">
-        <button type="button" data-rotate="-90">Rotate left</button>
-        <button type="button" data-rotate="90">Rotate right</button>
-        <button type="button" data-rotate="0">Reset</button>
-      </div>
       <dl class="metadata">
         <div><dt>Artist</dt><dd>${escapeHtml(item.artist || "Needs Review")}</dd></div>
         <div><dt>School</dt><dd>${escapeHtml(item.school)}</dd></div>
@@ -515,20 +518,10 @@ function openDetail(id) {
   `;
 
   detailPanel.querySelector("#closeDetail").addEventListener("click", () => dialog.close());
-  detailPanel.querySelectorAll(".viewer-tools button").forEach((button) => {
-    button.addEventListener("click", () => {
-      detailRotation = button.dataset.rotate === "0" ? 0 : detailRotation + Number(button.dataset.rotate);
-      detailPanel.querySelector("#mainDetailImage").style.setProperty("--detail-rotation", `${detailRotation}deg`);
-    });
-  });
   detailPanel.querySelectorAll(".thumb-row button").forEach((button) => {
     button.addEventListener("click", () => {
       const img = detailPanel.querySelector("#mainDetailImage");
       img.src = imagePath(button.dataset.file);
-      detailRotation = 0;
-      img.style.setProperty("--image-rotation", `${imageRotation(button.dataset.file)}deg`);
-      img.classList.toggle("is-rotated-quarter", imageRotation(button.dataset.file) % 180 !== 0);
-      img.style.removeProperty("--detail-rotation");
       detailPanel.querySelectorAll(".thumb-row button").forEach((thumb) => thumb.classList.remove("active"));
       button.classList.add("active");
     });
