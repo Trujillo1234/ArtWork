@@ -4,15 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trujillo Family Archive</title>
-    <link rel="stylesheet" href="styles.css?v=20260912h">
+    <link rel="stylesheet" href="styles.css?v=20260912k">
   </head>
   <body>
     <div class="page-shell">
       <header class="site-header">
         <nav class="top-rail" aria-label="Archive navigation">
+          <div class="global-search" role="search">
+            <label class="sr-only" for="globalSearch">Search the archive</label>
+            <input id="globalSearch" type="search" placeholder="Search">
+            <button id="globalSearchButton" type="button" aria-label="Search archive">Go</button>
+          </div>
           <a class="wordmark" href="#collection">
             <span class="wordmark-mark" aria-hidden="true"></span>
-            <span>Trujillo Family Archive</span>
+            <span>Trujillo<br>Family Archive</span>
           </a>
           <div class="top-links">
             <a href="#dashboard">Archive Desk</a>
@@ -22,6 +27,14 @@
           </div>
         </nav>
 
+        <figure class="hero-media">
+          <img src="assets/artwork/PXL_20260509_115819495.jpg" alt="Cotton Ball Rainbow paper craft">
+          <figcaption>
+            <span>Featured Record</span>
+            <strong>Cotton Ball Rainbow</strong>
+          </figcaption>
+        </figure>
+
         <section class="hero" id="salon">
           <div class="artifact-field hero-artifacts" aria-hidden="true">
             <img class="artifact-sprite sprite-card" src="assets/generated/fragments/drawing-card.png" alt="" data-depth="18">
@@ -30,16 +43,17 @@
             <img class="artifact-sprite sprite-string" src="assets/generated/fragments/red-string-loop.png" alt="" data-depth="-8">
           </div>
           <div class="hero-copy">
-            <p class="kicker">Family archive in progress</p>
+            <p class="kicker">Trujillo Family Archive</p>
             <h1>Trujillo Family Archive</h1>
-            <p class="intro">A working archive of school years, handmade gifts, classroom documents, family notes, and the pieces whose labels still need memory.</p>
+            <p class="intro">Pre-K - Present</p>
+            <p class="archive-statement">Documentation of school years, handmade gifts, classroom documents, family notes, and unfinished catalog records in the form of images, packets, letters, keepsakes, and printed matter.</p>
           </div>
 
           <div class="hero-aside">
             <p class="wall-label">Built to browse like a family album, audit like a catalog, and open calmly on a headset when you want the collection to feel room-sized.</p>
             <div class="hero-actions">
               <button class="ghost-button" id="toggleRoom" type="button" aria-label="Open headset-friendly walk mode">Walk Mode</button>
-              <a class="solid-link" href="#collection">Browse the Archive</a>
+              <a class="solid-link" href="#collection">Archive Search</a>
             </div>
           </div>
         </section>
@@ -136,7 +150,7 @@
       <article class="detail-panel" id="detailPanel"></article>
     </dialog>
 
-    <script src="data.js?v=20260912h"></script>
-    <script src="script.js?v=20260912h"></script>
+    <script src="data.js?v=20260912k"></script>
+    <script src="script.js?v=20260912k"></script>
   </body>
 </html>

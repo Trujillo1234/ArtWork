@@ -5,6 +5,8 @@ const carePanel = document.querySelector("#carePanel");
 const schoolStrip = document.querySelector("#schoolStrip");
 const resultTitle = document.querySelector("#resultTitle");
 const searchInput = document.querySelector("#search");
+const globalSearch = document.querySelector("#globalSearch");
+const globalSearchButton = document.querySelector("#globalSearchButton");
 const schoolFilter = document.querySelector("#schoolFilter");
 const artistFilter = document.querySelector("#artistFilter");
 const typeFilter = document.querySelector("#typeFilter");
@@ -776,6 +778,7 @@ function render() {
 
 function resetFilters() {
   searchInput.value = "";
+  if (globalSearch) globalSearch.value = "";
   schoolFilter.value = "all";
   artistFilter.value = "all";
   typeFilter.value = "all";
@@ -802,6 +805,21 @@ renderCuratorStrip();
 [searchInput, schoolFilter, artistFilter, typeFilter].forEach((control) => {
   control.addEventListener("input", render);
   control.addEventListener("change", render);
+});
+
+globalSearch?.addEventListener("input", () => {
+  searchInput.value = globalSearch.value;
+  render();
+});
+
+globalSearchButton?.addEventListener("click", () => {
+  searchInput.value = globalSearch.value;
+  render();
+  document.querySelector("#collection").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+searchInput.addEventListener("input", () => {
+  if (globalSearch) globalSearch.value = searchInput.value;
 });
 
 themeFilter.addEventListener("change", () => {
