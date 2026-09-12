@@ -379,6 +379,7 @@ function renderRoom(items) {
     <div class="room-controls" aria-label="Gallery wall scrolling">
       <button class="room-scroll" type="button" data-dir="-1" aria-label="Scroll gallery wall left">&lsaquo;</button>
       <span>Wide wall for headset browsers: larger targets, fewer controls, horizontal movement.</span>
+      <button class="room-exit" type="button">Return</button>
       <button class="room-scroll" type="button" data-dir="1" aria-label="Scroll gallery wall right">&rsaquo;</button>
     </div>
     <div class="room-stage" tabindex="0">
@@ -422,6 +423,8 @@ function renderRoom(items) {
       });
     });
   });
+
+  roomView.querySelector(".room-exit")?.addEventListener("click", toggleRoomView);
 }
 
 function renderStory(items) {
