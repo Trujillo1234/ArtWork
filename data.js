@@ -1,15 +1,13 @@
 const schoolLinks = [
   {
     name: "Spanish Schoolhouse Tomball",
-    url: "archives/school-sites/spanish-schoolhouse-tomball/index.html",
     liveUrl: "https://spanishschoolhouse.com/tomball/",
-    note: "Local one-page mirror with downloaded assets; live links stay available for dynamic parts."
+    note: "Early-childhood school context for the PreK and kindergarten keepsakes in the archive."
   },
   {
     name: "Esprit International School",
-    url: "archives/school-sites/esprit-international-school/index.html",
     liveUrl: "https://www.espritinternationalschool.com/",
-    note: "Local one-page mirror with downloaded assets; live links stay available for dynamic parts."
+    note: "Elementary-school context for later drawings, writing, reports, and classroom papers."
   }
 ];
 

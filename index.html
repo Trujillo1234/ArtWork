@@ -72,6 +72,13 @@
             </div>
 
             <div class="filter-block">
+              <label for="artistFilter">Artist</label>
+              <select id="artistFilter">
+                <option value="all">All artists</option>
+              </select>
+            </div>
+
+            <div class="filter-block">
               <label for="typeFilter">Medium</label>
               <select id="typeFilter">
                 <option value="all">All media</option>
@@ -97,6 +104,7 @@
               <p class="collection-note">Each record groups the strongest available views of a single object or packet.</p>
             </div>
 
+            <div class="curator-strip" id="curatorStrip" aria-label="Curated paths"></div>
             <div class="room-view" id="roomView" aria-label="Gallery wall"></div>
             <div class="art-grid" id="artGrid"></div>
           </section>

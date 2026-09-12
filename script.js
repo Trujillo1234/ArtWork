@@ -4,12 +4,14 @@ const schoolStrip = document.querySelector("#schoolStrip");
 const resultTitle = document.querySelector("#resultTitle");
 const searchInput = document.querySelector("#search");
 const schoolFilter = document.querySelector("#schoolFilter");
+const artistFilter = document.querySelector("#artistFilter");
 const typeFilter = document.querySelector("#typeFilter");
 const themeFilter = document.querySelector("#themeFilter");
 const clearFilters = document.querySelector("#clearFilters");
 const toggleRoom = document.querySelector("#toggleRoom");
 const roomShortcut = document.querySelector("#roomShortcut");
 const roomView = document.querySelector("#roomView");
+const curatorStrip = document.querySelector("#curatorStrip");
 const dialog = document.querySelector("#detailDialog");
 const detailPanel = document.querySelector("#detailPanel");
 const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -18,9 +20,16 @@ let activeTheme = "all";
 let roomOpen = false;
 
 const schools = [...new Set(artworks.map((item) => item.school))].sort();
+const artists = [...new Set(artworks.map((item) => item.artist))].sort();
 const types = [...new Set(artworks.map((item) => item.type))].sort();
 const themes = [...new Set(artworks.flatMap((item) => item.themes))].sort();
 const featuredThemes = ["family", "hearts", "animals", "writing", "schoolwork", "painting", "collage", "keepsake"];
+const curatedPaths = [
+  { label: "Penelope", theme: "all", artist: "Penelope Trujillo", note: "A chronological-feeling walk through her schoolwork, artwork, notes, and objects." },
+  { label: "Emmy", theme: "all", artist: "Emmy Trujillo", note: "Early Spanish Schoolhouse pieces, classroom artifacts, and a few small keepsakes." },
+  { label: "Love Notes", theme: "family", artist: "all", note: "Cards, letters, family drawings, and the pieces that explain why this archive exists." },
+  { label: "Schoolwork", theme: "schoolwork", artist: "all", note: "Worksheets, spelling tests, reports, charts, and the paper trail of growing up." }
+];
 
 function option(value) {
   const el = document.createElement("option");
@@ -34,7 +43,7 @@ function imagePath(file) {
 }
 
 function escapeHtml(value) {
-  return value
+  return String(value ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -42,9 +51,41 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+function primaryImageMeta(item) {
+  const file = item.images[0];
+  return { file, shape: "standard" };
+}
+
+function wireImageShape(img) {
+  const apply = () => {
+    if (!img.naturalWidth || !img.naturalHeight) return;
+    const ratio = img.naturalWidth / img.naturalHeight;
+    const card = img.closest(".art-card, .room-art");
+    if (!card) return;
+    card.classList.toggle("is-wide-image", ratio > 1.42);
+    card.classList.toggle("is-tall-image", ratio < 0.72);
+  };
+
+  if (img.complete) apply();
+  else img.addEventListener("load", apply, { once: true });
+}
+
+function confidenceLabel(item) {
+  if (item.artist === "Needs Review") return "Needs label review";
+  if (item.artist === "Unknown") return "Received keepsake";
+  if (item.images.length > 6) return "Packet";
+  return "";
+}
+
 function themeList() {
+  const counts = artworks
+    .flatMap((item) => item.themes)
+    .reduce((totals, theme) => totals.set(theme, (totals.get(theme) || 0) + 1), new Map());
   const curated = featuredThemes.filter((theme) => themes.includes(theme));
-  const rest = themes.filter((theme) => !curated.includes(theme));
+  const rest = themes
+    .filter((theme) => !curated.includes(theme) && (counts.get(theme) || 0) >= 3)
+    .sort((a, b) => (counts.get(b) || 0) - (counts.get(a) || 0) || a.localeCompare(b))
+    .slice(0, 22);
   return [...curated, ...rest];
 }
 
@@ -68,14 +109,34 @@ function buildThemeOptions() {
 function schoolMarkup() {
   schoolStrip.innerHTML = schoolLinks.map((link) => `
     <article class="school-link">
-      <span>${link.name}</span>
-      <small>${link.note}</small>
+      <span>${escapeHtml(link.name)}</span>
+      <small>${escapeHtml(link.note)}</small>
       <div class="school-actions">
-        <a href="${link.url}" target="_blank" rel="noreferrer">Archived copy</a>
-        <a href="${link.liveUrl}" target="_blank" rel="noreferrer">Live site</a>
+        <a href="${escapeHtml(link.liveUrl)}" target="_blank" rel="noreferrer">Live site</a>
       </div>
     </article>
   `).join("");
+}
+
+function renderCuratorStrip() {
+  curatorStrip.innerHTML = curatedPaths.map((path) => `
+    <button class="curator-card" type="button" data-theme="${escapeHtml(path.theme)}" data-artist="${escapeHtml(path.artist)}">
+      <span>${escapeHtml(path.label)}</span>
+      <small>${escapeHtml(path.note)}</small>
+    </button>
+  `).join("");
+
+  curatorStrip.querySelectorAll(".curator-card").forEach((button) => {
+    button.addEventListener("click", () => {
+      searchInput.value = "";
+      schoolFilter.value = "all";
+      typeFilter.value = "all";
+      activeTheme = button.dataset.theme;
+      themeFilter.value = activeTheme;
+      artistFilter.value = button.dataset.artist;
+      render();
+    });
+  });
 }
 
 function filteredItems() {
@@ -94,9 +155,10 @@ function filteredItems() {
 
     const matchesSearch = !query || searchText.includes(query);
     const matchesSchool = schoolFilter.value === "all" || item.school === schoolFilter.value;
+    const matchesArtist = artistFilter.value === "all" || item.artist === artistFilter.value;
     const matchesType = typeFilter.value === "all" || item.type === typeFilter.value;
     const matchesTheme = activeTheme === "all" || item.themes.includes(activeTheme);
-    return matchesSearch && matchesSchool && matchesType && matchesTheme;
+    return matchesSearch && matchesSchool && matchesArtist && matchesType && matchesTheme;
   });
 }
 
@@ -120,21 +182,53 @@ function renderGrid(items) {
     return;
   }
 
-  items.forEach((item) => {
+  const grouped = items.reduce((periods, item) => {
+    const key = item.period || "Collection";
+    if (!periods.has(key)) periods.set(key, []);
+    periods.get(key).push(item);
+    return periods;
+  }, new Map());
+
+  const periodOrder = ["Early Childhood", "Elementary Years", "Family Archive"];
+  const orderedGroups = [...grouped.entries()].sort((a, b) => {
+    const ai = periodOrder.indexOf(a[0]);
+    const bi = periodOrder.indexOf(b[0]);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi) || a[0].localeCompare(b[0]);
+  });
+
+  orderedGroups.forEach(([period, periodItems]) => {
+    const section = document.createElement("section");
+    section.className = "period-section";
+    section.innerHTML = `
+      <div class="period-head">
+        <h3>${escapeHtml(period)}</h3>
+        <span>${periodItems.length} ${periodItems.length === 1 ? "record" : "records"}</span>
+      </div>
+      <div class="period-grid"></div>
+    `;
+    const periodGrid = section.querySelector(".period-grid");
+
+    periodItems.forEach((item) => {
+    const meta = primaryImageMeta(item);
+    const badge = confidenceLabel(item);
     const card = document.createElement("button");
     card.type = "button";
-    card.className = "art-card";
+    card.className = `art-card art-card-${meta.shape}`;
     card.innerHTML = `
-      <span class="card-image"><img src="${imagePath(item.images[0])}" alt="${item.title}" loading="lazy"></span>
+      <span class="card-image"><img src="${imagePath(meta.file)}" alt="${escapeHtml(item.title)}" loading="lazy"></span>
       <span class="card-body">
-        <span class="card-title">${item.title}</span>
-        <span class="card-meta">${item.school}</span>
-        <span class="view-count">${item.period} &middot; ${item.images.length} ${item.images.length === 1 ? "view" : "views"}</span>
+        <span class="card-title">${escapeHtml(item.title)}</span>
+        <span class="card-meta">${escapeHtml(item.artist)} &middot; ${escapeHtml(item.school)}</span>
+        <span class="view-count">${item.images.length} ${item.images.length === 1 ? "view" : "views"}${badge ? ` &middot; ${escapeHtml(badge)}` : ""}</span>
       </span>
     `;
     card.addEventListener("click", () => openDetail(item.id));
     wireTilt(card);
-    grid.append(card);
+    wireImageShape(card.querySelector("img"));
+    periodGrid.append(card);
+    });
+
+    grid.append(section);
   });
 }
 
@@ -178,6 +272,7 @@ function renderRoom(items) {
   roomView.querySelectorAll(".room-art").forEach((button) => {
     button.addEventListener("click", () => openDetail(button.dataset.id));
     wireTilt(button);
+    wireImageShape(button.querySelector("img"));
   });
 
   roomView.querySelectorAll(".room-scroll").forEach((button) => {
@@ -247,7 +342,7 @@ function openDetail(id) {
   detailPanel.innerHTML = `
     <div class="detail-media">
       <div class="detail-main-image">
-        <img id="mainDetailImage" src="${imagePath(item.images[0])}" alt="${item.title}">
+        <img id="mainDetailImage" src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}">
       </div>
       <div class="thumb-row">
         ${item.images.map((file, index) => `
@@ -259,22 +354,22 @@ function openDetail(id) {
     </div>
     <div class="detail-copy">
       <div class="detail-actions">
-        <span class="label">${item.period}</span>
+        <span class="label">${escapeHtml(item.period)}${confidenceLabel(item) ? ` / ${escapeHtml(confidenceLabel(item))}` : ""}</span>
         <button class="icon-button" id="closeDetail" type="button" aria-label="Close">&times;</button>
       </div>
-      <h2>${item.title}</h2>
+      <h2>${escapeHtml(item.title)}</h2>
       <dl class="metadata">
-        <div><dt>Artist</dt><dd>${item.artist || "Needs Review"}</dd></div>
-        <div><dt>School</dt><dd>${item.school}</dd></div>
-        <div><dt>Stage</dt><dd>${item.grade}</dd></div>
-        <div><dt>Medium</dt><dd>${item.type}</dd></div>
+        <div><dt>Artist</dt><dd>${escapeHtml(item.artist || "Needs Review")}</dd></div>
+        <div><dt>School</dt><dd>${escapeHtml(item.school)}</dd></div>
+        <div><dt>Stage</dt><dd>${escapeHtml(item.grade)}</dd></div>
+        <div><dt>Medium</dt><dd>${escapeHtml(item.type)}</dd></div>
       </dl>
-      <p class="record-note">${item.note}</p>
-      <div class="tag-row">${item.themes.map((tag) => `<span>${tag}</span>`).join("")}</div>
+      <p class="record-note">${escapeHtml(item.note)}</p>
+      <div class="tag-row">${item.themes.map((tag) => `<span>${escapeHtml(formatTheme(tag))}</span>`).join("")}</div>
 
       <section class="comments">
-        <h3>Comments</h3>
-        <p class="review-help">A single no-sign-in comment form will live here once storage is connected.</p>
+        <h3>Archive Notes</h3>
+        <p class="review-help">Use the title, artist, school, and tags above as the working catalog record for this piece.</p>
       </section>
     </div>
   `;
@@ -307,7 +402,12 @@ function syncRoomButtons() {
 function render() {
   buildThemeOptions();
   const items = filteredItems();
-  resultTitle.textContent = activeTheme === "all" ? "All pieces" : `${formatTheme(activeTheme)} works`;
+  const titleParts = [];
+  if (artistFilter.value !== "all") titleParts.push(artistFilter.value);
+  if (schoolFilter.value !== "all") titleParts.push(schoolFilter.value);
+  if (typeFilter.value !== "all") titleParts.push(typeFilter.value);
+  if (activeTheme !== "all") titleParts.push(`${formatTheme(activeTheme)} works`);
+  resultTitle.textContent = titleParts.length ? titleParts.join(" / ") : "All pieces";
   renderStats(items);
   renderGrid(items);
   renderRoom(items);
@@ -317,6 +417,7 @@ function render() {
 function resetFilters() {
   searchInput.value = "";
   schoolFilter.value = "all";
+  artistFilter.value = "all";
   typeFilter.value = "all";
   activeTheme = "all";
   themeFilter.value = "all";
@@ -331,11 +432,13 @@ function toggleRoomView() {
 }
 
 schools.forEach((school) => schoolFilter.append(option(school)));
+artists.forEach((artist) => artistFilter.append(option(artist)));
 types.forEach((type) => typeFilter.append(option(type)));
 
 schoolMarkup();
+renderCuratorStrip();
 
-[searchInput, schoolFilter, typeFilter].forEach((control) => {
+[searchInput, schoolFilter, artistFilter, typeFilter].forEach((control) => {
   control.addEventListener("input", render);
   control.addEventListener("change", render);
 });

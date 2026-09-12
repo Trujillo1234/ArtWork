@@ -4,12 +4,14 @@
   --paper-warm: #faf5ed;
   --panel: rgba(255, 255, 250, 0.88);
   --panel-strong: #fffffa;
+  --paper-fleck: #ece6d8;
   --ink: #181512;
   --soft-ink: #3f4543;
   --muted: #68706f;
   --line: rgba(24, 21, 18, 0.13);
   --accent: #a33e2f;
   --accent-deep: #153b4f;
+  --plum: #563953;
   --olive: #2e4038;
   --gold: #cfaa61;
   --steel: #496875;
@@ -510,7 +512,7 @@ select,
 textarea {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 10px;
   padding: 14px 16px;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.8);
@@ -576,6 +578,47 @@ textarea:focus {
 .collection-note {
   max-width: 360px;
   font-size: 0.94rem;
+}
+
+.curator-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.curator-card {
+  display: grid;
+  gap: 8px;
+  min-height: 118px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 250, 0.92), rgba(244, 238, 226, 0.8)),
+    var(--panel-strong);
+  color: var(--ink);
+  text-align: left;
+  box-shadow: 0 10px 24px rgba(19, 35, 42, 0.07);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.curator-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(163, 62, 47, 0.36);
+  box-shadow: 0 20px 36px rgba(19, 35, 42, 0.12);
+}
+
+.curator-card span {
+  font-family: var(--display);
+  font-size: 1.32rem;
+  line-height: 1.02;
+}
+
+.curator-card small {
+  color: var(--soft-ink);
+  font-size: 0.82rem;
+  line-height: 1.36;
 }
 
 .room-view {
@@ -762,6 +805,38 @@ textarea:focus {
 
 .art-grid {
   display: grid;
+  gap: 28px;
+}
+
+.period-section {
+  display: grid;
+  gap: 14px;
+}
+
+.period-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.period-head h3 {
+  color: var(--accent-deep);
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
+}
+
+.period-head span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.period-grid {
+  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 18px;
 }
@@ -772,8 +847,10 @@ textarea:focus {
   gap: 14px;
   padding: 14px;
   border: 1px solid var(--line);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 250, 0.98), rgba(248, 244, 235, 0.82)),
+    var(--panel-strong);
   text-align: left;
   overflow: hidden;
   transform: perspective(820px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
@@ -808,22 +885,34 @@ textarea:focus {
   display: block;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(46, 64, 56, 0.08), rgba(163, 62, 47, 0.08));
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(207, 170, 97, 0.16), transparent 32%),
+    linear-gradient(135deg, rgba(46, 64, 56, 0.08), rgba(163, 62, 47, 0.08)),
+    var(--paper-fleck);
   box-shadow: inset 0 0 0 1px rgba(21, 59, 79, 0.1);
 }
 
 .card-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transform: translateZ(36px) scale(1.035);
+  object-fit: contain;
+  padding: 8px;
+  transform: translateZ(36px) scale(1);
   transition: transform 220ms ease, filter 220ms ease;
 }
 
 .art-card:hover .card-image img {
   filter: saturate(1.08) contrast(1.04);
-  transform: translateZ(68px) scale(1.08);
+  transform: translateZ(68px) scale(1.025);
+}
+
+.art-card.is-wide-image .card-image {
+  aspect-ratio: 5 / 3.2;
+}
+
+.art-card.is-tall-image .card-image {
+  aspect-ratio: 3 / 4.4;
 }
 
 .card-body {
@@ -852,6 +941,10 @@ textarea:focus {
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.view-count {
+  color: var(--plum);
 }
 
 .detail-dialog {
@@ -1067,7 +1160,16 @@ textarea:focus {
   }
 
   .art-grid {
+    gap: 22px;
+  }
+
+  .period-grid,
+  .curator-strip {
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+
+  .curator-card {
+    min-height: auto;
   }
 
   .room-controls {
