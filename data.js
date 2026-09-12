@@ -233,7 +233,7 @@ const intakeMetadataByFirstImage = {
   "PXL_20260508_183030931.jpg": {title:"Jungle Cat Drawing",school:"Spanish School House",grade:"PreK-K",type:"Drawing",themes:["cats","animals","nature"],note:"Yellow cat drawing with a blank reverse side kept in the same group."},
   "PXL_20260508_183124772.jpg": {title:"Blue Dot Canvas with Back View",school:"Spanish School House",grade:"PreK-K",type:"Painting",themes:["canvas","blue","abstract"],note:"Blue-dot canvas photographed from the front and the back of the stretched frame."},
   "PXL_20260508_183148559.jpg": {title:"Spiderweb Drawing Study",school:"Esprit International School",grade:"Grade 1-2",type:"Drawing",themes:["spiderweb","pattern","study"],note:"Finished spiderweb drawing alongside a lighter sketch or planning version."},
-  "PXL_20260508_183217108.jpg": {title:"Penelope Name Canvas Back and Pencil Sketch",artist:"Penelope Trujillo",school:"Spanish School House",grade:"PreK-K",type:"Painting",themes:["canvas","name","sketch"],note:"Back view of a labeled Penelope canvas paired with a faint front sketch."},
+  "PXL_20260508_183217108.jpg": {title:"Penelope Name Canvas Sketch and Back Stamp",artist:"Penelope Trujillo",school:"Spanish School House",grade:"PreK-K",type:"Painting",themes:["canvas","name","sketch"],note:"Front pencil sketch with Penelope name lettering, paired with the stamped back of the canvas or paper."},
   "PXL_20260508_183248407.jpg": {title:"Early Worksheet Page",school:"Esprit International School",grade:"Grade 1-2",type:"Schoolwork",themes:["worksheet","writing"],note:"Single worksheet page preserved with the intake batch."},
   "PXL_20260508_183309679.jpg": {title:"Body Club Page",school:"Esprit International School",grade:"Grade 1-2",type:"Schoolwork",themes:["writing","school-life"],note:"Lined page titled 'Body Club' from the school papers set."},
   "PXL_20260508_183331569.jpg": {title:"Lined Writing Page",school:"Esprit International School",grade:"Grade 1-2",type:"Writing",themes:["writing","lined-paper"],note:"Dense lined writing page from the same paper stack."},
@@ -304,7 +304,7 @@ const intakeMetadataByFirstImage = {
   "PXL_20260508_194317919.jpg": {title:"Spanish Schoolhouse Packet",school:"Spanish School House",grade:"PreK-K",type:"School Memory",themes:["packet","school-year","report"],note:"School-year packet pages and written reflection from Spanish Schoolhouse."},
   "PXL_20260508_194351292.jpg": {title:"Mother's Day Handprint Print",school:"Spanish School House",grade:"PreK-K",type:"Keepsake",themes:["mother's-day","handprint","flowers"],note:"Handprint Mother's Day print with purple and pink paint."},
   "PXL_20260508_194403828.jpg": {title:"Pink Drink Drawing and Booklet",school:"Spanish School House",grade:"PreK-K",type:"School Memory",themes:["drink","booklet","school-year"],note:"Summer-drink drawing grouped with a preschool booklet cover."},
-  "PXL_20260508_194428374.jpg": {title:"Spanish Schoolhouse Report Spreads",school:"Spanish School House",grade:"PreK-K",type:"School Memory",themes:["booklet","report","school-year"],note:"Open report booklet spreads from the Spanish Schoolhouse school-year packet."},
+  "PXL_20260508_194428374.jpg": {title:"Spanish Schoolhouse Report Spreads",school:"Spanish School House",grade:"PreK-K",type:"Schoolwork",themes:["booklet","report","school-year"],note:"Open report booklet spreads from the Spanish Schoolhouse school-year packet."},
   "PXL_20260508_194450815.jpg": {title:"Emmy Graduation Seal",artist:"Emmy Trujillo",school:"Spanish School House",grade:"PreK-K",type:"Keepsake",themes:["graduation","seal","school-memory"],note:"Gold doily-style graduation seal with a cap, scroll, and Emmy name label. This was split out of an overbroad graduation/report batch."},
   "PXL_20260508_194459959.jpg": {title:"Emmy Soccer Shots Certificate",artist:"Emmy Trujillo",school:"Spanish School House",grade:"PreK-K",type:"Certificate",themes:["certificate","soccer","sports"],note:"Soccer Shots certificate of completion for Emmy Trujillo, signed by Coach Sean after a season of soccer skills and play."},
   "PXL_20260508_194507789.jpg": {title:"Emmy Spanish Schoolhouse Progress Report",artist:"Emmy Trujillo",school:"Spanish School House",grade:"4-year-old class",type:"Schoolwork",themes:["report","assessment","spanish","schoolwork"],note:"Cover and inside spreads from Emmy's 2023-2024 Spanish Schoolhouse progress report, including classroom development, literacy, math, colors, and shapes."},
@@ -536,11 +536,72 @@ const inferPeriod = (item) => {
   return "Family Archive";
 };
 
+const archiveReviewIssues = [
+  { file: "PXL_20260508_190249325.jpg", kind: "Orientation", issue: "Source photo is sideways.", action: "Rotate or recapture the certificate file." },
+  { file: "1000001840.jpg", kind: "Orientation", issue: "ExpoArte certificate is sideways.", action: "Rotate the source file after confirming direction." },
+  { file: "1000001623.jpg", kind: "Orientation", issue: "Spelling strip is sideways.", action: "Recapture or rotate at file level." },
+  { file: "PXL_20260509_144012616.jpg", kind: "Packet", issue: "Large spelling-test run is useful but dense.", action: "Split into shorter spelling practice and scored-test records." },
+  { file: "PXL_20260508_191547347.jpg", kind: "Packet", issue: "Emmy Name Day Set is still a storage batch.", action: "Split name labels, certificate, reading pages, and notes." },
+  { file: "PXL_20260508_190126665.jpg", kind: "Mixed packet", issue: "Program and spelling tests are bundled together.", action: "Separate event program from schoolwork evidence." },
+  { file: "1000001589.jpg", kind: "Orientation", issue: "Paper character photo may be sideways.", action: "Review against the physical object before rotating." },
+  { file: "1000001582.jpg", kind: "Orientation", issue: "Square/cubing study may need rotation.", action: "Check page direction and correct the file, not CSS." },
+  { file: "PXL_20260508_190303716.jpg", kind: "Mixed packet", issue: "Sweet treats and Father's Day items are too broad.", action: "Split by object or occasion." },
+  { file: "PXL_20260508_185826165.jpg", kind: "Mixed packet", issue: "Texas flag and craft cluster contains unrelated objects.", action: "Split flag, animal craft, and valentine material." }
+];
+
+const archiveImageRoles = {
+  "PXL_20260509_115819495.jpg": "front",
+  "PXL_20260509_115806764.jpg": "reverse",
+  "PXL_20260509_120136890.jpg": "diploma front",
+  "PXL_20260509_120124433.jpg": "backing",
+  "PXL_20260509_120149525.jpg": "artwork front",
+  "PXL_20260508_190249325.jpg": "certificate",
+  "PXL_20260508_194450815.jpg": "keepsake front",
+  "PXL_20260508_194459959.jpg": "certificate",
+  "PXL_20260508_194507789.jpg": "report cover",
+  "PXL_20260508_194519477.jpg": "report spread",
+  "PXL_20260508_194529605.jpg": "report spread",
+  "1000001840.jpg": "certificate",
+  "PXL_20260508_182921775.jpg": "note",
+  "1000001546.jpg": "backing page",
+  "1000001535.jpg": "context page",
+  "PXL_20260508_183217108.jpg": "front sketch",
+  "PXL_20260508_183226931.jpg": "back stamp"
+};
+
+const inferRecordKind = (item) => {
+  if (item.artist === "Needs Review") return "needs_review";
+  if (item.images.length > 6) return "series_packet";
+  if (item.type === "Certificate" || item.type === "Diploma" || /report|worksheet|spelling|schoolwork/i.test(`${item.title} ${item.type}`)) return "school_document";
+  if (item.artist === "Unknown" || /received/i.test(`${item.note} ${item.themes.join(" ")}`)) return "received_item";
+  if (item.school === "Family Archive" || item.artist === "Family Archive") return "family_context";
+  if (/keepsake|card|photo|letter/i.test(`${item.type} ${item.title}`)) return "keepsake";
+  return "artwork";
+};
+
+const inferDisplayMode = (item) => {
+  if (item.images.length > 6) return "series_timeline";
+  if (item.type === "Certificate" || item.type === "Diploma" || /report|worksheet|spelling|schoolwork/i.test(`${item.title} ${item.type}`)) return "document_reader";
+  if (/ceramic|keepsake|mask|puppet|3d|frame/i.test(`${item.type} ${item.themes.join(" ")}`)) return "object_views";
+  if (item.artist === "Needs Review") return "review_queue";
+  return "art_card";
+};
+
+const inferConfidence = (item) => ({
+  title: item.artist === "Needs Review" || /study|set|packet|pages/i.test(item.title) ? "inferred" : "confirmed",
+  artist: item.artist === "Needs Review" || item.artist === "Unknown" ? "needs_review" : "confirmed",
+  grouping: item.images.length > 6 || /set|packet|pages/i.test(item.title) ? "needs_review" : "inferred",
+  date: /\b20\d{2}\b|Pre-K|Grade|Q1|2025-2026/i.test(`${item.grade} ${item.note}`) ? "inferred" : "needs_review"
+});
+
 const archiveDefaults = (item) => ({
   ...item,
   artist: item.artist || "Penelope Trujillo",
   school: normalizeSchool(item.school),
-  period: item.period || inferPeriod(item)
+  period: item.period || inferPeriod(item),
+  recordKind: item.recordKind || inferRecordKind(item),
+  displayMode: item.displayMode || inferDisplayMode(item),
+  confidence: item.confidence || inferConfidence(item)
 });
 
 const artworks = [...baseArtworks, ...intakeArtworks].map(archiveDefaults);

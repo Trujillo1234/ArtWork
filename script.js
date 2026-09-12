@@ -1,5 +1,7 @@
 const grid = document.querySelector("#artGrid");
 const stats = document.querySelector("#stats");
+const milestonePanel = document.querySelector("#milestonePanel");
+const carePanel = document.querySelector("#carePanel");
 const schoolStrip = document.querySelector("#schoolStrip");
 const resultTitle = document.querySelector("#resultTitle");
 const searchInput = document.querySelector("#search");
@@ -13,6 +15,8 @@ const roomShortcut = document.querySelector("#roomShortcut");
 const roomView = document.querySelector("#roomView");
 const curatorStrip = document.querySelector("#curatorStrip");
 const storyView = document.querySelector("#storyView");
+const peopleView = document.querySelector("#peopleView");
+const schoolView = document.querySelector("#schoolView");
 const labView = document.querySelector("#labView");
 const viewButtons = [...document.querySelectorAll(".view-switcher button")];
 const dialog = document.querySelector("#detailDialog");
@@ -34,6 +38,9 @@ const curatedPaths = [
   { label: "Family Evidence", theme: "family", artist: "all", note: "Cards, letters, travel traces, photo boards, and objects with context attached." },
   { label: "Needs Review", theme: "all", artist: "Needs Review", note: "The honest workbench: good records whose artist or grouping still needs memory." }
 ];
+
+const manualIssues = archiveReviewIssues;
+const imageRoles = archiveImageRoles;
 
 function option(value) {
   const el = document.createElement("option");
@@ -79,6 +86,69 @@ function confidenceLabel(item) {
   if (item.artist === "Unknown") return "Received keepsake";
   if (item.images.length > 6) return "Packet";
   return "";
+}
+
+function findItemByFile(file) {
+  return artworks.find((item) => item.images.includes(file));
+}
+
+function imageRole(file, item, index) {
+  if (imageRoles[file]) return imageRoles[file];
+  if (index === 0 && item.images.length === 1) return "primary view";
+  if (index === 0) return "lead view";
+  if (/back|backing|reverse/i.test(`${item.title} ${item.note}`)) return "supporting view";
+  if (/report/i.test(`${item.title} ${item.type}`)) return "page";
+  return `view ${index + 1}`;
+}
+
+function groupingReason(item) {
+  if (item.images.length === 1) return "Single-photo record.";
+  const roles = item.images.map((file, index) => imageRole(file, item, index));
+  if (roles.some((role) => /back|reverse|backing|supporting/i.test(role))) {
+    return "Grouped because the secondary photos document the back, reverse, or physical context.";
+  }
+  if (item.images.length > 6) return "Grouped as an album-style packet until the pages can be split more carefully.";
+  if (/report|book|packet|test/i.test(`${item.title} ${item.type}`)) return "Grouped as ordered pages from the same school document or packet.";
+  return "Grouped as multiple views of the same object.";
+}
+
+function contextOnlyRecord(item) {
+  const title = item.title.toLowerCase();
+  return /\b(backing page|back view|reverse)\b/.test(title) && !/\bfront\b/.test(title);
+}
+
+function issuesForItem(item) {
+  const direct = manualIssues.filter((entry) => item.images.includes(entry.file));
+  const inferred = [];
+  if (item.artist === "Needs Review") {
+    inferred.push({ kind: "Attribution", issue: "Artist or grouping still needs a human memory check.", action: "Confirm who made it and whether this is one object or a storage batch." });
+  }
+  if (item.images.length > 6) {
+    inferred.push({ kind: "Packet", issue: "Large multi-photo packet.", action: "Split if the images are separate objects rather than views of one object." });
+  }
+  if (/back|backing|reverse/i.test(`${item.title} ${item.note}`)) {
+    inferred.push({ kind: "Context", issue: "Includes backside or support evidence.", action: "Confirm the front image leads and the reverse stays supporting." });
+  }
+  return [...direct, ...inferred];
+}
+
+function recordButton(item, className = "mini-record") {
+  const issueCount = issuesForItem(item).length;
+  return `
+    <button class="${className}" type="button" data-id="${escapeHtml(item.id)}">
+      <img src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
+      <span>
+        <strong>${escapeHtml(item.title)}</strong>
+        <small>${escapeHtml(item.artist)} / ${escapeHtml(item.type)}${issueCount ? ` / ${issueCount} checks` : ""}</small>
+      </span>
+    </button>
+  `;
+}
+
+function wireRecordButtons(root) {
+  root.querySelectorAll("[data-id]").forEach((button) => {
+    button.addEventListener("click", () => openDetail(button.dataset.id));
+  });
 }
 
 function itemScore(item) {
@@ -195,6 +265,52 @@ function renderStats(items) {
   `;
 }
 
+function renderHomeBoard(items) {
+  const milestones = items
+    .filter((item) => /certificate|diploma|report|letter|mom|dad|family/i.test(`${item.title} ${item.type} ${item.themes.join(" ")}`))
+    .filter((item) => !contextOnlyRecord(item))
+    .sort((a, b) => itemScore(b) - itemScore(a))
+    .slice(0, 6);
+  const careItems = [...new Set(manualIssues.map((issue) => findItemByFile(issue.file)).filter(Boolean))]
+    .filter((item) => items.includes(item))
+    .slice(0, 7);
+
+  milestonePanel.innerHTML = `
+    <div>
+      <span class="label">Milestones</span>
+      <h3>Documents, letters, and family anchors.</h3>
+    </div>
+    <div class="mini-record-grid">
+      ${milestones.map((item) => recordButton(item)).join("")}
+    </div>
+  `;
+
+  carePanel.innerHTML = `
+    <div>
+      <span class="label">Needs Care</span>
+      <h3>Not finished, not hidden.</h3>
+      <p>These are the records most likely to benefit from memory, a better crop, or a file-level photo fix.</p>
+    </div>
+    <div class="care-stack">
+      ${careItems.map((item) => {
+        const issue = issuesForItem(item)[0];
+        return `
+          <button class="care-row" type="button" data-id="${escapeHtml(item.id)}">
+            <img src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
+            <span>
+              <strong>${escapeHtml(item.title)}</strong>
+              <small>${escapeHtml(issue.kind)}: ${escapeHtml(issue.issue)}</small>
+            </span>
+          </button>
+        `;
+      }).join("")}
+    </div>
+  `;
+
+  wireRecordButtons(milestonePanel);
+  wireRecordButtons(carePanel);
+}
+
 function renderGrid(items) {
   grid.innerHTML = "";
   if (!items.length) {
@@ -253,7 +369,7 @@ function renderGrid(items) {
 }
 
 function renderRoom(items) {
-  const roomItems = [...items].sort((a, b) => itemScore(b) - itemScore(a)).slice(0, 48);
+  const roomItems = items.filter((item) => !contextOnlyRecord(item)).sort((a, b) => itemScore(b) - itemScore(a)).slice(0, 48);
   if (!roomItems.length) {
     roomView.innerHTML = `<div class="room-stage empty-room"><p class="empty">No works match the current filters.</p></div>`;
     return;
@@ -274,13 +390,14 @@ function renderRoom(items) {
       <div class="room-surface" aria-hidden="true"></div>
       <div class="gallery-track">
         ${roomItems.map((item, index) => {
+          const meta = primaryImageMeta(item);
           const hang = index % 6 === 0 ? "0px" : index % 6 === 1 ? "56px" : index % 6 === 2 ? "22px" : index % 6 === 3 ? "78px" : index % 6 === 4 ? "34px" : "96px";
           const width = item.images.length > 4 ? "310px" : index % 4 === 0 ? "270px" : "240px";
-          const tilt = index % 2 === 0 ? "-0.7deg" : "0.7deg";
           return `
-            <button class="room-art" style="--hang:${hang}; --frame-width:${width}; --tilt:${tilt};" type="button" data-id="${item.id}">
-              <img src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
+            <button class="room-art" style="--hang:${hang}; --frame-width:${width};" type="button" data-id="${item.id}">
+              <img src="${imagePath(meta.file)}" alt="${escapeHtml(item.title)}" loading="lazy">
               <span>${escapeHtml(item.title)}</span>
+              <small>${escapeHtml(imageRole(meta.file, item, 0))}</small>
             </button>
           `;
         }).join("")}
@@ -341,73 +458,156 @@ function renderStory(items) {
   });
 }
 
+function renderPeople(items) {
+  const people = [...groupedBy(items, "artist").entries()]
+    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+
+  peopleView.innerHTML = `
+    <section class="workflow-intro">
+      <span class="label">People</span>
+      <h3>Browse by maker, recipient, or family shelf.</h3>
+      <p>This view makes uncertainty visible. “Needs Review” is not a failure state; it is where memory can still improve the catalog.</p>
+    </section>
+    <div class="workflow-grid">
+      ${people.map(([person, personItems]) => {
+        const sample = [...personItems].sort((a, b) => itemScore(b) - itemScore(a)).slice(0, 4);
+        return `
+          <section class="workflow-panel">
+            <div class="workflow-panel-head">
+              <h3>${escapeHtml(person)}</h3>
+              <span>${personItems.length} records / ${personItems.reduce((sum, item) => sum + item.images.length, 0)} photos</span>
+            </div>
+            <div class="mini-record-grid">
+              ${sample.map((item) => recordButton(item)).join("")}
+            </div>
+          </section>
+        `;
+      }).join("")}
+    </div>
+  `;
+
+  wireRecordButtons(peopleView);
+}
+
+function renderSchoolYears(items) {
+  const bySchool = [...groupedBy(items, "school").entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]));
+
+  schoolView.innerHTML = `
+    <section class="workflow-intro">
+      <span class="label">School Years</span>
+      <h3>Institutions, stages, and classroom evidence separated from home keepsakes.</h3>
+      <p>The goal is not to make everything sound like art. Reports, certificates, spelling tests, handmade cards, and family objects need different handling.</p>
+    </section>
+    <div class="workflow-grid">
+      ${bySchool.map(([school, schoolItems]) => {
+        const byType = [...groupedBy(schoolItems, "type").entries()]
+          .sort((a, b) => b[1].length - a[1].length)
+          .slice(0, 6);
+        const sample = [...schoolItems].sort((a, b) => itemScore(b) - itemScore(a)).slice(0, 4);
+        return `
+          <section class="workflow-panel">
+            <div class="workflow-panel-head">
+              <h3>${escapeHtml(school)}</h3>
+              <span>${schoolItems.length} records</span>
+            </div>
+            <div class="type-bars">
+              ${byType.map(([type, typeItems]) => `
+                <button type="button" data-type="${escapeHtml(type)}">
+                  <span>${escapeHtml(type)}</span>
+                  <b>${typeItems.length}</b>
+                </button>
+              `).join("")}
+            </div>
+            <div class="mini-record-grid">
+              ${sample.map((item) => recordButton(item)).join("")}
+            </div>
+          </section>
+        `;
+      }).join("")}
+    </div>
+  `;
+
+  schoolView.querySelectorAll("[data-type]").forEach((button) => {
+    button.addEventListener("click", () => {
+      typeFilter.value = button.dataset.type;
+      activeView = "collection";
+      render();
+      document.querySelector("#collection").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+  wireRecordButtons(schoolView);
+}
+
 function renderLab(items) {
   const reviewItems = items.filter((item) => item.artist === "Needs Review");
-  const packets = items.filter((item) => item.images.length > 4).sort((a, b) => b.images.length - a.images.length);
-  const titleReviewIds = new Set([
-    "intake-batch-31",
-    "intake-batch-74",
-    "intake-batch-79",
-    "intake-batch-117",
-    "intake-batch-149"
-  ]);
-  const orientationFiles = new Set([
-    "PXL_20260508_190249325.jpg",
-    "1000001840.jpg",
-    "1000001623.jpg",
-    "PXL_20260509_144012616.jpg",
-    "PXL_20260509_144029935.jpg",
-    "PXL_20260509_144050060.jpg",
-    "PXL_20260509_144141430.jpg",
-    "PXL_20260509_144149450.jpg"
-  ]);
   const backsideWords = ["back", "backing", "reverse"];
-  const titleReviewItems = items.filter((item) => titleReviewIds.has(item.id) || /certificate|diploma|report/i.test(`${item.title} ${item.note}`));
-  const orientationItems = items.filter((item) => item.images.some((file) => orientationFiles.has(file)));
+  const titledIssues = manualIssues
+    .map((issue) => ({ issue, item: findItemByFile(issue.file) }))
+    .filter(({ item }) => item && items.includes(item));
+  const orientationItems = titledIssues.filter(({ issue }) => issue.kind === "Orientation");
+  const packetIssues = titledIssues.filter(({ issue }) => /packet/i.test(issue.kind));
+  const packetItems = packetIssues.map(({ item }) => item);
+  const titleReviewItems = items.filter((item) => /certificate|diploma|report/i.test(`${item.title} ${item.note} ${item.type}`));
   const contextItems = items.filter((item) => backsideWords.some((word) => `${item.title} ${item.note}`.toLowerCase().includes(word)));
   const possibleRepeats = [
     { kept: "Bird Branch Card", hidden: "duplicate intake scan", reason: "Exact duplicate photo removed while keeping the separate teacher note record." },
     { kept: "Planet Research: Earth", hidden: "Early Worksheet Page", reason: "Exact duplicate photo removed from the visible intake sequence." }
   ];
 
-  const issueList = (list, emptyText) => `
-    <div class="lab-list">
-      ${list.map((item) => `
-        <button type="button" data-id="${escapeHtml(item.id)}">
-          <span>${escapeHtml(item.title)}</span>
-          <small>${escapeHtml(item.school)} / ${escapeHtml(item.type)} / ${item.images.length} ${item.images.length === 1 ? "view" : "views"}</small>
+  const issueCards = (pairs, emptyText) => `
+    <div class="issue-grid">
+      ${pairs.map(({ item, issue }) => `
+        <button class="issue-card" type="button" data-id="${escapeHtml(item.id)}">
+          <img src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
+          <span>
+            <small>${escapeHtml(issue.kind)}</small>
+            <strong>${escapeHtml(item.title)}</strong>
+            <em>${escapeHtml(issue.issue)}</em>
+            <b>${escapeHtml(issue.action)}</b>
+          </span>
         </button>
       `).join("") || `<p class="empty">${emptyText}</p>`}
+    </div>
+  `;
+
+  const recordList = (list, emptyText) => `
+    <div class="issue-grid compact">
+      ${list.map((item) => recordButton(item, "issue-card")).join("") || `<p class="empty">${emptyText}</p>`}
     </div>
   `;
 
   labView.innerHTML = `
     <section class="lab-panel">
       <h3>Help Fix the Archive</h3>
-      <p>This is the honest workbench: records that may need a human memory check, a better title, a front-first grouping, or a fresh photo rather than a forced browser rotation.</p>
+      <p>This is the workbench: records that need memory, better grouping, cleaner source photos, or a more careful title. The public archive can be beautiful while still admitting what is unresolved.</p>
       <div class="lab-metrics">
         <div><strong>${reviewItems.length}</strong><span>records needing artist review</span></div>
         <div><strong>${titleReviewItems.length}</strong><span>title / certificate checks</span></div>
         <div><strong>${orientationItems.length}</strong><span>orientation checks</span></div>
         <div><strong>${contextItems.length}</strong><span>front / back context checks</span></div>
-        <div><strong>${possibleRepeats.length}</strong><span>exact duplicates suppressed</span></div>
+        <div><strong>${packetIssues.length}</strong><span>named packet splits</span></div>
       </div>
     </section>
     <section class="lab-panel">
-      <h3>Title and Certificate Checks</h3>
-      ${issueList(titleReviewItems.slice(0, 20), "No visible records are flagged for title review.")}
+      <h3>Known Fixes to Make Next</h3>
+      ${issueCards(titledIssues.slice(0, 12), "No named issues are visible under the current filters.")}
     </section>
     <section class="lab-panel">
-      <h3>Orientation Checks</h3>
-      ${issueList(orientationItems.slice(0, 20), "No visible records are flagged for orientation review.")}
+      <h3>Artist Review Queue</h3>
+      ${recordList(reviewItems.slice(0, 18), "No visible records need artist review.")}
+    </section>
+    <section class="lab-panel">
+      <h3>Milestone and Title Audit</h3>
+      ${recordList(titleReviewItems.slice(0, 18), "No visible records are flagged for title review.")}
     </section>
     <section class="lab-panel">
       <h3>Front and Back Context</h3>
-      ${issueList(contextItems.slice(0, 20), "No visible records mention reverse or backing context.")}
+      ${recordList(contextItems.slice(0, 18), "No visible records mention reverse or backing context.")}
     </section>
     <section class="lab-panel">
-      <h3>Large Packets to Split</h3>
-      ${issueList(packets.slice(0, 12), "No visible packets are large enough to split.")}
+      <h3>Packets to Split</h3>
+      ${recordList(packetItems.slice(0, 12), "No visible records are flagged for packet splitting.")}
     </section>
     <section class="lab-panel">
       <h3>Duplicate Decisions</h3>
@@ -424,9 +624,7 @@ function renderLab(items) {
     </section>
   `;
 
-  labView.querySelectorAll(".lab-list button").forEach((button) => {
-    button.addEventListener("click", () => openDetail(button.dataset.id));
-  });
+  wireRecordButtons(labView);
 }
 
 function syncRoomSurface() {
@@ -458,29 +656,13 @@ function wireAmbientArtifacts() {
 }
 
 function wireTilt(element) {
-  if (motionQuery.matches) return;
-
-  element.addEventListener("pointermove", (event) => {
-    const rect = element.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    element.style.setProperty("--tilt-x", `${(-y * 8).toFixed(2)}deg`);
-    element.style.setProperty("--tilt-y", `${(x * 10).toFixed(2)}deg`);
-    element.style.setProperty("--pointer-x", `${((x + 1) * 50).toFixed(2)}%`);
-    element.style.setProperty("--pointer-y", `${((y + 1) * 50).toFixed(2)}%`);
-  });
-
-  element.addEventListener("pointerleave", () => {
-    element.style.removeProperty("--tilt-x");
-    element.style.removeProperty("--tilt-y");
-    element.style.removeProperty("--pointer-x");
-    element.style.removeProperty("--pointer-y");
-  });
+  return element;
 }
 
 function openDetail(id) {
   const item = artworks.find((artwork) => artwork.id === id);
   if (!item) return;
+  const issues = issuesForItem(item);
 
   detailPanel.innerHTML = `
     <div class="detail-media">
@@ -489,8 +671,9 @@ function openDetail(id) {
       </div>
       <div class="thumb-row">
         ${item.images.map((file, index) => `
-          <button class="${index === 0 ? "active" : ""}" type="button" data-file="${file}" aria-label="View ${index + 1}">
+          <button class="${index === 0 ? "active" : ""}" type="button" data-file="${file}" data-role="${escapeHtml(imageRole(file, item, index))}" aria-label="${escapeHtml(imageRole(file, item, index))}">
             <img src="${imagePath(file)}" alt="">
+            <span>${escapeHtml(imageRole(file, item, index))}</span>
           </button>
         `).join("")}
       </div>
@@ -505,9 +688,19 @@ function openDetail(id) {
         <div><dt>Artist</dt><dd>${escapeHtml(item.artist || "Needs Review")}</dd></div>
         <div><dt>School</dt><dd>${escapeHtml(item.school)}</dd></div>
         <div><dt>Stage</dt><dd>${escapeHtml(item.grade)}</dd></div>
-        <div><dt>Medium</dt><dd>${escapeHtml(item.type)}</dd></div>
+        <div><dt>Record Type</dt><dd>${escapeHtml(item.type)}</dd></div>
       </dl>
       <p class="record-note">${escapeHtml(item.note)}</p>
+      <div class="evidence-note">
+        <strong>Why these photos are grouped</strong>
+        <span>${escapeHtml(groupingReason(item))}</span>
+      </div>
+      ${issues.length ? `
+        <div class="issue-note">
+          <strong>Open archive checks</strong>
+          ${issues.slice(0, 4).map((issue) => `<span>${escapeHtml(issue.kind)}: ${escapeHtml(issue.action)}</span>`).join("")}
+        </div>
+      ` : ""}
       <div class="tag-row">${item.themes.map((tag) => `<span>${escapeHtml(formatTheme(tag))}</span>`).join("")}</div>
 
       <section class="comments">
@@ -522,6 +715,7 @@ function openDetail(id) {
     button.addEventListener("click", () => {
       const img = detailPanel.querySelector("#mainDetailImage");
       img.src = imagePath(button.dataset.file);
+      img.alt = `${item.title} - ${button.dataset.role}`;
       detailPanel.querySelectorAll(".thumb-row button").forEach((thumb) => thumb.classList.remove("active"));
       button.classList.add("active");
     });
@@ -533,6 +727,7 @@ function openDetail(id) {
 }
 
 function syncRoomButtons() {
+  document.body.classList.toggle("room-mode", roomOpen);
   roomView.classList.toggle("open", roomOpen);
   roomView.setAttribute("aria-hidden", String(!roomOpen));
   syncViewVisibility();
@@ -545,9 +740,13 @@ function syncRoomButtons() {
 function syncViewVisibility() {
   grid.classList.toggle("is-hidden", roomOpen || activeView !== "collection");
   storyView.classList.toggle("open", !roomOpen && activeView === "story");
+  peopleView.classList.toggle("open", !roomOpen && activeView === "people");
+  schoolView.classList.toggle("open", !roomOpen && activeView === "schools");
   labView.classList.toggle("open", !roomOpen && activeView === "lab");
   grid.setAttribute("aria-hidden", String(roomOpen || activeView !== "collection"));
   storyView.setAttribute("aria-hidden", String(roomOpen || activeView !== "story"));
+  peopleView.setAttribute("aria-hidden", String(roomOpen || activeView !== "people"));
+  schoolView.setAttribute("aria-hidden", String(roomOpen || activeView !== "schools"));
   labView.setAttribute("aria-hidden", String(roomOpen || activeView !== "lab"));
   viewButtons.forEach((button) => button.classList.toggle("active", button.dataset.view === activeView));
 }
@@ -562,9 +761,12 @@ function render() {
   if (activeTheme !== "all") titleParts.push(`${formatTheme(activeTheme)} works`);
   resultTitle.textContent = titleParts.length ? titleParts.join(" / ") : "All pieces";
   renderStats(items);
+  renderHomeBoard(items);
   renderGrid(items);
   renderRoom(items);
   renderStory(items);
+  renderPeople(items);
+  renderSchoolYears(items);
   renderLab(items);
   syncRoomButtons();
 }

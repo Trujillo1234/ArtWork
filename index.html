@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trujillo Family Archive</title>
-    <link rel="stylesheet" href="styles.css?v=20260912b">
+    <link rel="stylesheet" href="styles.css?v=20260912f">
   </head>
   <body>
     <div class="page-shell">
@@ -15,10 +15,10 @@
             <span>Trujillo Family Archive</span>
           </a>
           <div class="top-links">
-            <a href="#salon">Salon View</a>
-            <a href="#collection">Collection</a>
-            <a href="#schoolStrip">School Notes</a>
-            <button id="roomShortcut" type="button">Gallery Wall</button>
+            <a href="#dashboard">Archive Desk</a>
+            <a href="#collection">Browse</a>
+            <a href="#schoolStrip">Schools</a>
+            <button id="roomShortcut" type="button">Walk Mode</button>
           </div>
         </nav>
 
@@ -30,15 +30,15 @@
             <img class="artifact-sprite sprite-string" src="assets/generated/fragments/red-string-loop.png" alt="" data-depth="-8">
           </div>
           <div class="hero-copy">
-            <p class="kicker">Private Collection</p>
+            <p class="kicker">Family archive in progress</p>
             <h1>Trujillo Family Archive</h1>
-            <p class="intro">A very serious museum for refrigerator-door masterpieces, school-folder artifacts, countertop photography, and the family paperwork nobody had the heart to throw away.</p>
+            <p class="intro">A working archive of school years, handmade gifts, classroom documents, family notes, and the pieces whose labels still need memory.</p>
           </div>
 
           <div class="hero-aside">
-            <p class="wall-label">School years, handmade gifts, family notes, classroom papers, and the pieces we still need help naming.</p>
+            <p class="wall-label">Built to browse like a family album, audit like a catalog, and open calmly on a headset when you want the collection to feel room-sized.</p>
             <div class="hero-actions">
-              <button class="ghost-button" id="toggleRoom" type="button">Walk Mode</button>
+              <button class="ghost-button" id="toggleRoom" type="button" aria-label="Open headset-friendly walk mode">Walk Mode</button>
               <a class="solid-link" href="#collection">Browse the Archive</a>
             </div>
           </div>
@@ -46,8 +46,17 @@
       </header>
 
       <main>
-        <section class="summary-band" aria-label="Archive summary">
-          <div class="stats" id="stats"></div>
+        <section class="archive-home" id="dashboard" aria-label="Archive desk">
+          <div class="home-lead">
+            <span class="label">Archive Desk</span>
+            <h2>Start with the records that carry the most context.</h2>
+            <p>Milestones, letters, packets, and uncertain records are separated so the site does not pretend every scan is equally finished.</p>
+            <div class="stats" id="stats"></div>
+          </div>
+          <div class="home-panels">
+            <section class="home-panel" id="milestonePanel" aria-label="Milestones"></section>
+            <section class="home-panel care-panel" id="carePanel" aria-label="Archive care queue"></section>
+          </div>
         </section>
 
         <section class="school-strip" id="schoolStrip" aria-label="School references"></section>
@@ -79,9 +88,9 @@
             </div>
 
             <div class="filter-block">
-              <label for="typeFilter">Medium</label>
+              <label for="typeFilter">Record Type</label>
               <select id="typeFilter">
-                <option value="all">All media</option>
+                <option value="all">All record types</option>
               </select>
             </div>
 
@@ -106,12 +115,16 @@
 
             <div class="curator-strip" id="curatorStrip" aria-label="Curated paths"></div>
             <div class="view-switcher" aria-label="Archive views">
-              <button class="active" type="button" data-view="collection">Collection</button>
-              <button type="button" data-view="story">Story</button>
-              <button type="button" data-view="lab">Archive Lab</button>
+              <button class="active" type="button" data-view="collection">Catalog</button>
+              <button type="button" data-view="story">Stories</button>
+              <button type="button" data-view="people">People</button>
+              <button type="button" data-view="schools">School Years</button>
+              <button type="button" data-view="lab">Help Fix Records</button>
             </div>
             <div class="room-view" id="roomView" aria-label="Gallery wall"></div>
             <div class="story-view" id="storyView"></div>
+            <div class="people-view" id="peopleView"></div>
+            <div class="school-view" id="schoolView"></div>
             <div class="lab-view" id="labView"></div>
             <div class="art-grid" id="artGrid"></div>
           </section>
@@ -123,7 +136,7 @@
       <article class="detail-panel" id="detailPanel"></article>
     </dialog>
 
-    <script src="data.js?v=20260912b"></script>
-    <script src="script.js?v=20260912b"></script>
+    <script src="data.js?v=20260912f"></script>
+    <script src="script.js?v=20260912f"></script>
   </body>
 </html>
