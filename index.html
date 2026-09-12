@@ -36,9 +36,9 @@
           </div>
 
           <div class="hero-aside">
-            <p class="wall-label">Filed under: hearts, spelling tests, mysterious backsides, ceramic proof, folded notes, and the long-running exhibition of Penelope made this.</p>
+            <p class="wall-label">A living catalog of schoolwork, handmade objects, family evidence, uncertain labels, duplicate traces, and the small archive logic that keeps memory from turning into a box of loose paper.</p>
             <div class="hero-actions">
-              <button class="ghost-button" id="toggleRoom" type="button">Gallery Wall</button>
+              <button class="ghost-button" id="toggleRoom" type="button">Walk Mode</button>
               <a class="solid-link" href="#collection">Browse the Archive</a>
             </div>
           </div>
@@ -105,7 +105,14 @@
             </div>
 
             <div class="curator-strip" id="curatorStrip" aria-label="Curated paths"></div>
+            <div class="view-switcher" aria-label="Archive views">
+              <button class="active" type="button" data-view="collection">Collection</button>
+              <button type="button" data-view="story">Story</button>
+              <button type="button" data-view="lab">Archive Lab</button>
+            </div>
             <div class="room-view" id="roomView" aria-label="Gallery wall"></div>
+            <div class="story-view" id="storyView"></div>
+            <div class="lab-view" id="labView"></div>
             <div class="art-grid" id="artGrid"></div>
           </section>
         </section>

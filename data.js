@@ -56,7 +56,7 @@ const baseArtworks = [
 ];
 
 const intakeGroups = [
-  ["PXL_20260508_182915449.jpg", "PXL_20260508_182921775.jpg"],
+  ["PXL_20260508_182921775.jpg"],
   ["PXL_20260508_182940615.jpg"],
   ["PXL_20260508_183013402.jpg"],
   ["PXL_20260508_183030931.jpg", "PXL_20260508_183039578.jpg"],
@@ -225,7 +225,7 @@ const firstPassIntakeMetadata = [
 ];
 
 const intakeMetadataByFirstImage = {
-  "PXL_20260508_182915449.jpg": {title:"Teacher Thank-You Note and Floral Card",artist:"Penelope Trujillo",school:"Spanish School House",grade:"PreK-K",type:"School Memory",themes:["teacher","note","flowers"],note:"Folded floral note and a handwritten thank-you from a teacher saved with the early school keepsakes."},
+  "PXL_20260508_182921775.jpg": {title:"Teacher Thank-You Note",artist:"Penelope Trujillo",school:"Spanish School House",grade:"PreK-K",type:"School Memory",themes:["teacher","note","school-life"],note:"Handwritten thank-you note from a teacher saved with the early school keepsakes."},
   "PXL_20260508_182940615.jpg": {title:"Sea Bands Study",school:"Spanish School House",grade:"PreK-K",type:"Painting",themes:["ocean","animals","color"],note:"Small blue-and-yellow painting with simple sea-life silhouettes and dot details."},
   "PXL_20260508_183013402.jpg": {title:"Color-Block Cat Drawing",school:"Spanish School House",grade:"PreK-K",type:"Drawing",themes:["cats","animals","color"],note:"Bright cat portrait divided into bold color blocks."},
   "PXL_20260508_183030931.jpg": {title:"Jungle Cat Drawing",school:"Spanish School House",grade:"PreK-K",type:"Drawing",themes:["cats","animals","nature"],note:"Yellow cat drawing with a blank reverse side kept in the same group."},
@@ -506,6 +506,8 @@ const emmyIntakeFirstImages = new Set([
   "PXL_20260508_194601578.jpg"
 ]);
 
+const duplicateIntakeFirstImages = new Set(["PXL_20260508_183248407.jpg"]);
+
 const intakeArtworks = allIntakeGroups.map((images, index) => {
   const count = String(index + 1).padStart(2, "0");
   const meta = allIntakeMetadataByFirstImage[images[0]] || firstPassIntakeMetadata[index];
@@ -515,7 +517,7 @@ const intakeArtworks = allIntakeGroups.map((images, index) => {
     ...meta,
     images
   };
-});
+}).filter((item) => !duplicateIntakeFirstImages.has(item.images[0]));
 
 const normalizeSchool = (school) => {
   if (school === "Spanish School House") return "Spanish Schoolhouse Tomball";

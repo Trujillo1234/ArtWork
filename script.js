@@ -12,12 +12,17 @@ const toggleRoom = document.querySelector("#toggleRoom");
 const roomShortcut = document.querySelector("#roomShortcut");
 const roomView = document.querySelector("#roomView");
 const curatorStrip = document.querySelector("#curatorStrip");
+const storyView = document.querySelector("#storyView");
+const labView = document.querySelector("#labView");
+const viewButtons = [...document.querySelectorAll(".view-switcher button")];
 const dialog = document.querySelector("#detailDialog");
 const detailPanel = document.querySelector("#detailPanel");
 const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 let activeTheme = "all";
 let roomOpen = false;
+let activeView = "collection";
+let detailRotation = 0;
 
 const schools = [...new Set(artworks.map((item) => item.school))].sort();
 const artists = [...new Set(artworks.map((item) => item.artist))].sort();
@@ -25,11 +30,29 @@ const types = [...new Set(artworks.map((item) => item.type))].sort();
 const themes = [...new Set(artworks.flatMap((item) => item.themes))].sort();
 const featuredThemes = ["family", "hearts", "animals", "writing", "schoolwork", "painting", "collage", "keepsake"];
 const curatedPaths = [
-  { label: "Penelope", theme: "all", artist: "Penelope Trujillo", note: "A chronological-feeling walk through her schoolwork, artwork, notes, and objects." },
-  { label: "Emmy", theme: "all", artist: "Emmy Trujillo", note: "Early Spanish Schoolhouse pieces, classroom artifacts, and a few small keepsakes." },
-  { label: "Love Notes", theme: "family", artist: "all", note: "Cards, letters, family drawings, and the pieces that explain why this archive exists." },
-  { label: "Schoolwork", theme: "schoolwork", artist: "all", note: "Worksheets, spelling tests, reports, charts, and the paper trail of growing up." }
+  { label: "Penelope", theme: "all", artist: "Penelope Trujillo", note: "A long arc from early marks to schoolwork, characters, notes, and keepsakes." },
+  { label: "Emmy", theme: "all", artist: "Emmy Trujillo", note: "Preschool work, classroom identity pieces, certificates, and family fragments." },
+  { label: "Family Evidence", theme: "family", artist: "all", note: "Cards, letters, travel traces, photo boards, and objects with context attached." },
+  { label: "Needs Review", theme: "all", artist: "Needs Review", note: "The honest workbench: good records whose artist or grouping still needs memory." }
 ];
+
+const imageRotations = {
+  "1000001582.jpg": 90,
+  "1000001583.jpg": 90,
+  "1000001585.jpg": 90,
+  "1000001586.jpg": 90,
+  "1000001589.jpg": 90,
+  "1000001623.jpg": 90,
+  "1000001840.jpg": 90,
+  "1000001865.jpg": 90,
+  "PXL_20260508_191645420.jpg": 90,
+  "PXL_20260508_194317919.jpg": 90,
+  "PXL_20260509_144012616.jpg": 90,
+  "PXL_20260509_144029935.jpg": 90,
+  "PXL_20260509_144050060.jpg": 90,
+  "PXL_20260509_144141430.jpg": 90,
+  "PXL_20260509_144149450.jpg": 90
+};
 
 function option(value) {
   const el = document.createElement("option");
@@ -40,6 +63,17 @@ function option(value) {
 
 function imagePath(file) {
   return `assets/artwork/${file}`;
+}
+
+function imageRotation(file) {
+  return imageRotations[file] || 0;
+}
+
+function imageAttrs(file, extraClass = "") {
+  const rotation = imageRotation(file);
+  const rotatedClass = rotation % 180 !== 0 ? " is-rotated-quarter" : "";
+  const classes = `oriented-image${rotatedClass}${extraClass ? ` ${extraClass}` : ""}`;
+  return `class="${classes}" style="--image-rotation:${rotation}deg"`;
 }
 
 function escapeHtml(value) {
@@ -75,6 +109,22 @@ function confidenceLabel(item) {
   if (item.artist === "Unknown") return "Received keepsake";
   if (item.images.length > 6) return "Packet";
   return "";
+}
+
+function itemScore(item) {
+  let score = item.images.length > 1 ? 2 : 0;
+  if (item.artist !== "Needs Review") score += 1;
+  if (item.themes.some((theme) => ["family", "mom", "dad", "writing", "schoolwork", "keepsake"].includes(theme))) score += 1;
+  return score;
+}
+
+function groupedBy(items, key) {
+  return items.reduce((groups, item) => {
+    const value = item[key] || "Unsorted";
+    if (!groups.has(value)) groups.set(value, []);
+    groups.get(value).push(item);
+    return groups;
+  }, new Map());
 }
 
 function themeList() {
@@ -165,14 +215,14 @@ function filteredItems() {
 function renderStats(items) {
   const imageCount = artworks.reduce((sum, item) => sum + item.images.length, 0);
   const groupedCount = artworks.filter((item) => item.images.length > 1).length;
-  const periods = new Set(artworks.map((item) => item.period)).size;
+  const needsReview = artworks.filter((item) => item.artist === "Needs Review").length;
   stats.innerHTML = `
     <div><strong>${artworks.length}</strong><span>records</span></div>
     <div><strong>${imageCount}</strong><span>photos</span></div>
-    <div><strong>${groupedCount}</strong><span>multi-view works</span></div>
+    <div><strong>${groupedCount}</strong><span>packets / multi-view</span></div>
+    <div><strong>${needsReview}</strong><span>need label review</span></div>
     <div><strong>${items.length}</strong><span>currently visible</span></div>
   `;
-  stats.dataset.periods = periods;
 }
 
 function renderGrid(items) {
@@ -215,7 +265,7 @@ function renderGrid(items) {
     card.type = "button";
     card.className = `art-card art-card-${meta.shape}`;
     card.innerHTML = `
-      <span class="card-image"><img src="${imagePath(meta.file)}" alt="${escapeHtml(item.title)}" loading="lazy"></span>
+      <span class="card-image"><img ${imageAttrs(meta.file)} src="${imagePath(meta.file)}" alt="${escapeHtml(item.title)}" loading="lazy"></span>
       <span class="card-body">
         <span class="card-title">${escapeHtml(item.title)}</span>
         <span class="card-meta">${escapeHtml(item.artist)} &middot; ${escapeHtml(item.school)}</span>
@@ -233,7 +283,7 @@ function renderGrid(items) {
 }
 
 function renderRoom(items) {
-  const roomItems = items.slice(0, 28);
+  const roomItems = [...items].sort((a, b) => itemScore(b) - itemScore(a)).slice(0, 48);
   if (!roomItems.length) {
     roomView.innerHTML = `<div class="room-stage empty-room"><p class="empty">No works match the current filters.</p></div>`;
     return;
@@ -242,6 +292,7 @@ function renderRoom(items) {
   roomView.innerHTML = `
     <div class="room-controls" aria-label="Gallery wall scrolling">
       <button class="room-scroll" type="button" data-dir="-1" aria-label="Scroll gallery wall left">&lsaquo;</button>
+      <span>Wide wall for headset browsers: larger targets, fewer controls, horizontal movement.</span>
       <button class="room-scroll" type="button" data-dir="1" aria-label="Scroll gallery wall right">&rsaquo;</button>
     </div>
     <div class="room-stage" tabindex="0">
@@ -253,13 +304,13 @@ function renderRoom(items) {
       <div class="room-surface" aria-hidden="true"></div>
       <div class="gallery-track">
         ${roomItems.map((item, index) => {
-          const hang = index % 5 === 0 ? "0px" : index % 5 === 1 ? "34px" : index % 5 === 2 ? "14px" : index % 5 === 3 ? "52px" : "24px";
-          const width = index % 6 === 0 ? "230px" : index % 4 === 0 ? "188px" : "210px";
-          const tilt = index % 2 === 0 ? "-0.9deg" : "0.8deg";
+          const hang = index % 6 === 0 ? "0px" : index % 6 === 1 ? "56px" : index % 6 === 2 ? "22px" : index % 6 === 3 ? "78px" : index % 6 === 4 ? "34px" : "96px";
+          const width = item.images.length > 4 ? "310px" : index % 4 === 0 ? "270px" : "240px";
+          const tilt = index % 2 === 0 ? "-0.7deg" : "0.7deg";
           return `
             <button class="room-art" style="--hang:${hang}; --frame-width:${width}; --tilt:${tilt};" type="button" data-id="${item.id}">
-              <img src="${imagePath(item.images[0])}" alt="${item.title}" loading="lazy">
-              <span>${item.title}</span>
+              <img ${imageAttrs(item.images[0])} src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
+              <span>${escapeHtml(item.title)}</span>
             </button>
           `;
         }).join("")}
@@ -283,6 +334,89 @@ function renderRoom(items) {
         behavior: "smooth"
       });
     });
+  });
+}
+
+function renderStory(items) {
+  const periods = groupedBy(items, "period");
+  const order = ["Early Childhood", "Elementary Years", "Family Archive"];
+  storyView.innerHTML = order
+    .filter((period) => periods.has(period))
+    .map((period) => {
+      const periodItems = periods.get(period);
+      const featured = [...periodItems].sort((a, b) => itemScore(b) - itemScore(a)).slice(0, 5);
+      const artists = [...new Set(periodItems.map((item) => item.artist).filter((artist) => artist !== "Needs Review"))];
+      return `
+        <section class="story-chapter">
+          <div class="chapter-copy">
+            <span class="label">${escapeHtml(period)}</span>
+            <h3>${escapeHtml(period === "Early Childhood" ? "First marks, classroom rituals, and family gifts" : period === "Elementary Years" ? "Reading, writing, reports, characters, and confidence" : "Home evidence, inherited artifacts, and the wider family shelf")}</h3>
+            <p>${periodItems.length} records, ${periodItems.reduce((sum, item) => sum + item.images.length, 0)} photos, ${artists.length || 1} cataloged ${artists.length === 1 ? "artist" : "artists"}.</p>
+          </div>
+          <div class="chapter-strip">
+            ${featured.map((item) => `
+              <button type="button" class="chapter-piece" data-id="${escapeHtml(item.id)}">
+                <img ${imageAttrs(item.images[0])} src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}" loading="lazy">
+                <span>${escapeHtml(item.title)}</span>
+              </button>
+            `).join("")}
+          </div>
+        </section>
+      `;
+    }).join("");
+
+  storyView.querySelectorAll(".chapter-piece").forEach((button) => {
+    button.addEventListener("click", () => openDetail(button.dataset.id));
+    wireImageShape(button.querySelector("img"));
+  });
+}
+
+function renderLab(items) {
+  const reviewItems = items.filter((item) => item.artist === "Needs Review");
+  const packets = items.filter((item) => item.images.length > 4);
+  const rotatedVisible = items.filter((item) => item.images.some((file) => imageRotation(file)));
+  const possibleRepeats = [
+    { kept: "Bird Branch Card", hidden: "duplicate intake scan", reason: "Exact duplicate photo removed while keeping the separate teacher note record." },
+    { kept: "Planet Research: Earth", hidden: "Early Worksheet Page", reason: "Exact duplicate photo removed from the visible intake sequence." }
+  ];
+
+  labView.innerHTML = `
+    <section class="lab-panel">
+      <h3>Catalog Health</h3>
+      <div class="lab-metrics">
+        <div><strong>${reviewItems.length}</strong><span>records needing artist review</span></div>
+        <div><strong>${packets.length}</strong><span>large packets</span></div>
+        <div><strong>${rotatedVisible.length}</strong><span>records with display rotation</span></div>
+      </div>
+    </section>
+    <section class="lab-panel">
+      <h3>Review Queue</h3>
+      <div class="lab-list">
+        ${reviewItems.slice(0, 24).map((item) => `
+          <button type="button" data-id="${escapeHtml(item.id)}">
+            <span>${escapeHtml(item.title)}</span>
+            <small>${escapeHtml(item.school)} / ${escapeHtml(item.type)} / ${item.images.length} ${item.images.length === 1 ? "view" : "views"}</small>
+          </button>
+        `).join("") || `<p class="empty">No visible records need review.</p>`}
+      </div>
+    </section>
+    <section class="lab-panel">
+      <h3>Duplicate Decisions</h3>
+      <p>${possibleRepeats.length} exact duplicate scans are suppressed from the visible collection.</p>
+      <div class="decision-list">
+        ${possibleRepeats.map((repeat) => `
+          <div>
+            <strong>${escapeHtml(repeat.kept)}</strong>
+            <span>Folded in: ${escapeHtml(repeat.hidden)}</span>
+            <small>${escapeHtml(repeat.reason)}</small>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+  `;
+
+  labView.querySelectorAll(".lab-list button").forEach((button) => {
+    button.addEventListener("click", () => openDetail(button.dataset.id));
   });
 }
 
@@ -338,16 +472,17 @@ function wireTilt(element) {
 function openDetail(id) {
   const item = artworks.find((artwork) => artwork.id === id);
   if (!item) return;
+  detailRotation = 0;
 
   detailPanel.innerHTML = `
     <div class="detail-media">
       <div class="detail-main-image">
-        <img id="mainDetailImage" src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}">
+        <img ${imageAttrs(item.images[0])} id="mainDetailImage" src="${imagePath(item.images[0])}" alt="${escapeHtml(item.title)}">
       </div>
       <div class="thumb-row">
         ${item.images.map((file, index) => `
           <button class="${index === 0 ? "active" : ""}" type="button" data-file="${file}" aria-label="View ${index + 1}">
-            <img src="${imagePath(file)}" alt="">
+            <img ${imageAttrs(file)} src="${imagePath(file)}" alt="">
           </button>
         `).join("")}
       </div>
@@ -358,6 +493,11 @@ function openDetail(id) {
         <button class="icon-button" id="closeDetail" type="button" aria-label="Close">&times;</button>
       </div>
       <h2>${escapeHtml(item.title)}</h2>
+      <div class="viewer-tools" aria-label="Image tools">
+        <button type="button" data-rotate="-90">Rotate left</button>
+        <button type="button" data-rotate="90">Rotate right</button>
+        <button type="button" data-rotate="0">Reset</button>
+      </div>
       <dl class="metadata">
         <div><dt>Artist</dt><dd>${escapeHtml(item.artist || "Needs Review")}</dd></div>
         <div><dt>School</dt><dd>${escapeHtml(item.school)}</dd></div>
@@ -375,9 +515,20 @@ function openDetail(id) {
   `;
 
   detailPanel.querySelector("#closeDetail").addEventListener("click", () => dialog.close());
+  detailPanel.querySelectorAll(".viewer-tools button").forEach((button) => {
+    button.addEventListener("click", () => {
+      detailRotation = button.dataset.rotate === "0" ? 0 : detailRotation + Number(button.dataset.rotate);
+      detailPanel.querySelector("#mainDetailImage").style.setProperty("--detail-rotation", `${detailRotation}deg`);
+    });
+  });
   detailPanel.querySelectorAll(".thumb-row button").forEach((button) => {
     button.addEventListener("click", () => {
-      detailPanel.querySelector("#mainDetailImage").src = imagePath(button.dataset.file);
+      const img = detailPanel.querySelector("#mainDetailImage");
+      img.src = imagePath(button.dataset.file);
+      detailRotation = 0;
+      img.style.setProperty("--image-rotation", `${imageRotation(button.dataset.file)}deg`);
+      img.classList.toggle("is-rotated-quarter", imageRotation(button.dataset.file) % 180 !== 0);
+      img.style.removeProperty("--detail-rotation");
       detailPanel.querySelectorAll(".thumb-row button").forEach((thumb) => thumb.classList.remove("active"));
       button.classList.add("active");
     });
@@ -391,12 +542,21 @@ function openDetail(id) {
 function syncRoomButtons() {
   roomView.classList.toggle("open", roomOpen);
   roomView.setAttribute("aria-hidden", String(!roomOpen));
-  grid.classList.toggle("is-hidden", roomOpen);
-  grid.setAttribute("aria-hidden", String(roomOpen));
-  toggleRoom.textContent = roomOpen ? "Return to Grid" : "Gallery Wall";
-  roomShortcut.textContent = roomOpen ? "Return to Grid" : "Gallery Wall";
+  syncViewVisibility();
+  toggleRoom.textContent = roomOpen ? "Return to Collection" : "Walk Mode";
+  roomShortcut.textContent = roomOpen ? "Return to Collection" : "Walk Mode";
   toggleRoom.setAttribute("aria-expanded", String(roomOpen));
   roomShortcut.setAttribute("aria-expanded", String(roomOpen));
+}
+
+function syncViewVisibility() {
+  grid.classList.toggle("is-hidden", roomOpen || activeView !== "collection");
+  storyView.classList.toggle("open", !roomOpen && activeView === "story");
+  labView.classList.toggle("open", !roomOpen && activeView === "lab");
+  grid.setAttribute("aria-hidden", String(roomOpen || activeView !== "collection"));
+  storyView.setAttribute("aria-hidden", String(roomOpen || activeView !== "story"));
+  labView.setAttribute("aria-hidden", String(roomOpen || activeView !== "lab"));
+  viewButtons.forEach((button) => button.classList.toggle("active", button.dataset.view === activeView));
 }
 
 function render() {
@@ -411,6 +571,8 @@ function render() {
   renderStats(items);
   renderGrid(items);
   renderRoom(items);
+  renderStory(items);
+  renderLab(items);
   syncRoomButtons();
 }
 
@@ -426,6 +588,7 @@ function resetFilters() {
 
 function toggleRoomView() {
   roomOpen = !roomOpen;
+  if (roomOpen) activeView = "collection";
   syncRoomButtons();
   syncRoomSurface();
   document.querySelector("#collection").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -446,6 +609,15 @@ renderCuratorStrip();
 themeFilter.addEventListener("change", () => {
   activeTheme = themeFilter.value;
   render();
+});
+
+viewButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    activeView = button.dataset.view;
+    roomOpen = false;
+    syncViewVisibility();
+    syncRoomButtons();
+  });
 });
 
 clearFilters.addEventListener("click", resetFilters);
