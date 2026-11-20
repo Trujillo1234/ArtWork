@@ -1,5 +1,6 @@
 import * as T from "three";
 import {architecture} from "./architecture.js";
+import {createDistance} from "./distance.js";
 const host=document.getElementById("scene");
 const fallback=document.getElementById("fallback");
 function launch(){
@@ -36,40 +37,8 @@ function launch(){
   }
   const wood=surface("#915b37",[4,1],true);
   const bronze=material(0x363f36),matte=material(0xece6d7),edge=material(0x593e2b);
-  const landscape=new T.Group();scene.add(landscape);
-  box(landscape,0,-.38,0,160,.25,112,material(0x647c59));
-  box(landscape,0,-.22,-14,144,.14,18,material(0x839f91));
-  // Broad crowns and open trunks leave a view through the pines to the water.
-  const bark=[],needles=[],twigs=[],tufts=[],ripples=[],dummy=new T.Object3D();
-  function part(list,x,y,z,sx,sy,sz,rx,ry,rz,color){
-    dummy.position.set(x,y,z);dummy.scale.set(sx,sy,sz);dummy.rotation.set(rx,ry,rz);dummy.updateMatrix();
-    list.push([dummy.matrix.clone(),new T.Color(color)]);
-  }
-  for(let i=0;i<255;i++){
-    const x=i<10?-10-random()*14:random()*175-68,z=i<10?-5-random()*15:-24-random()*45,h=7+random()*13;
-    part(bark,x,h*.45,z,.12+random()*.13,h,.14,0,0,0,0x564c38);
-    for(let j=0;j<10;j++){
-      const t=j/10,a=random()*6.28,r=(1-t*.7)*(1.4+random()*1.3);
-      const by=h*(.58+.4*t), dx=Math.cos(a)*r,dz=Math.sin(a)*r;
-      const v=new T.Vector3(dx,1.1,dz);
-      dummy.position.set(x+dx/2,by+.55,z+dz/2);
-      dummy.scale.set(.075,v.length(),.075);
-      dummy.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),v.normalize());dummy.updateMatrix();
-      twigs.push([dummy.matrix.clone(),new T.Color(0x564c38)]);
-      for(let k=0;k<6;k++){
-        const angle=random()*6.28,dist=random()*1.45;
-        part(tufts,x+dx+Math.cos(angle)*dist,by+.95+random()*.75,z+dz+Math.sin(angle)*dist,.36+random()*.65,.42+random()*.62,.34+random()*.6,random()*.3,angle,random()*.3,[0x325038,0x3d5c39,0x607a4d][k%3]);
-      }
-      part(needles,x+Math.cos(a)*r,h*(.63+.36*t),z+Math.sin(a)*r,1+r*.26, .42+random()*.34,1+random()*.36,random()*.14,a,random()*.13,[0x304e37,0x3b5d3c,0x486643,0x577647][j%4]);
-    }
-  }
-  function instance(geom,list){const mesh=new T.InstancedMesh(geom,material(0xffffff),list.length);list.forEach(([m,c],i)=>{mesh.setMatrixAt(i,m);mesh.setColorAt(i,c)});landscape.add(mesh)}
-  instance(new T.CylinderGeometry(.69,1,1,6),bark);instance(new T.IcosahedronGeometry(1,1),needles);
-  instance(new T.CylinderGeometry(.55,1,1,5),twigs);instance(new T.IcosahedronGeometry(1,0),tufts);
-  for(let j=0;j<1450;j++){
-    part(ripples,random()*140-47,-.139+random()*.006,-5-random()*17,.14+random()*1.9,.004,.018+random()*.065,0,random()*.15,0,[0x9cae9c,0x8caa9e,0x78948b,0xb2c2ac][j%4]);
-  }
-  instance(cube,ripples);
+  const distance=createDistance(scene,draw);
+  const dummy=new T.Object3D();
   const museum=window.museumGallery;
   const spacing=21;
   const frameGeometry=new T.PlaneGeometry(1,1);
@@ -86,7 +55,6 @@ function launch(){
   const copper=material(0x57756c),white=material(0xe2e4de),orange=material(0xb95b38);
   const dock=surface("#957a55",[9,4],true),tile=surface("#b08d70",[6,4]),deck=surface("#889398",[5,3]);
   const cityGlass=material(0x455e70),asphalt=material(0x414d56);
-  const windowLight=new T.MeshStandardMaterial({color:0xc3d4d3,emissive:0xffce84});
   const tube=new T.CylinderGeometry(1,1,1,12),tip=new T.ConeGeometry(1,1,24),hoop=new T.TorusGeometry(1,.045,8,80);
   const arch=new T.TorusGeometry(1,.09,8,40,Math.PI);
   const globeShape=new T.SphereGeometry(1,16,12);
@@ -101,6 +69,7 @@ function launch(){
   // The three places use different structures to carry the frames.
   function buildSetting(group,place){
     if(place===0){
+      distance.addWater(group);
       box(group,0,-.16,1,20,.32,13,dock);
       for(let z=-5;z<8;z+=.42)box(group,0,.005,z,20,.009,.014,bronze);
       for(const x of [-9.4,-5.4,5.4,9.4]){
@@ -144,11 +113,6 @@ function launch(){
       shape(group,tube,white,-3.65,4.4,-9,.85,7.7,.85);shape(group,tip,white,-3.65,9.05,-9,.85,1.6,.85);
       for(const y of [1.4,4.6,7.1])shape(group,tube,steel,-3.65,y,-9,.86,.38,.86);
       for(const x of [-4.56,-2.74]){shape(group,tube,orange,x,2.05,-9,.31,3.65,.31);shape(group,tip,white,x,4.22,-9,.32,.7,.32)}
-      for(let j=0;j<11;j++){
-        const x=(j-5)*2.5,h=3+(j*7%9)*.67;
-        box(group,x,h/2,-17-j%3,1.95,h,2.0,cityGlass);
-        for(let y=.7;y<h-.2;y+=.92)box(group,x,y,-15.98-j%3,1.65,.12,.02,windowLight);
-      }
     }
   }
   const addDetail=architecture();
@@ -288,15 +252,6 @@ function launch(){
     const light=new T.SpotLight(0xffd198,0,14,1.06,.65,1.25);
     scene.add(light,light.target);return light;
   });
-  const skyPoints=[];
-  for(let i=0;i<700;i++){
-    const a=random()*Math.PI*2,b=.06+random()*1.45;
-    skyPoints.push(89*Math.cos(b)*Math.sin(a),89*Math.sin(b),89*Math.cos(b)*Math.cos(a));
-  }
-  const starGeo=new T.BufferGeometry();starGeo.setAttribute("position",new T.Float32BufferAttribute(skyPoints,3));
-  const stars=new T.Points(starGeo,new T.PointsMaterial({color:0xf6e7bf,size:.105,fog:false}));
-  scene.add(stars);
-  const moon=new T.Mesh(new T.SphereGeometry(1.9,16,12),new T.MeshBasicMaterial({color:0xffe7bb,fog:false}));scene.add(moon);
   let camX=0,destination=0,heading=0,aimHeading=0,pitch=0,frame=0,active=-1,wall=-1,ready=false;
   let walkX=0,walkZ=7.6,crossing=false,lastTime=0;
   const held=new Set();
@@ -305,8 +260,8 @@ function launch(){
     if(!ready)return;
     camera.position.set(camX+walkX,1.78,walkZ);
     camera.lookAt(camera.position.x+Math.sin(heading)*8,2.46+pitch,walkZ-Math.cos(heading)*8);
-    landscape.position.x=camX;
-    sunlight.position.x=camX-12;sunlight.target.position.x=camX;stars.position.x=camX;moon.position.set(camX-33,15,-52);
+    distance.position(camera,reduced?0:performance.now()/1000);
+    sunlight.position.x=camX-12;sunlight.target.position.x=camX;
     renderer.render(scene,camera);
   }
   function animate(){
@@ -338,9 +293,8 @@ function launch(){
     sunlight.color.set(night?0x95b5ff:0xfff0cf);sunlight.intensity=night?.42:2.6;
     ambient.intensity=night?.45:1.9;ambient.color.set(night?0xa7badc:0xfff8eb);
     for(const bay of suite.values())for(const item of bay.holiday)item.visible=night;
-    landscape.visible=museum.galleries[active].theme!==2;
-    windowLight.emissiveIntensity=night?1.1:.05;
-    globe.emissiveIntensity=night?3:.25;stars.visible=moon.visible=night;
+    distance.select(museum.galleries[active].theme,night);
+    globe.emissiveIntensity=night?3:.25;
     suite.get(active).lamps.forEach(([x,y,z,tx,ty,tz],j)=>{
       const light=fixtures[j];light.position.set(destination+x,y,z);light.target.position.set(destination+tx,ty,tz);light.intensity=night?25:1.5;
     });
@@ -384,6 +338,11 @@ function launch(){
     button.onlostpointercapture=()=>held.delete(button.dataset.step);
     button.onclick=e=>{if(e.detail===0){begin(button.dataset.step);setTimeout(()=>held.delete(button.dataset.step),200)}};
   }
+  let showing=false;
+  new IntersectionObserver(([entry])=>{showing=entry.isIntersecting}).observe(host);
+  if(!reduced)setInterval(()=>{
+    if(showing&&!document.hidden&&!frame&&museum.galleries[active]?.theme===0&&!document.querySelector("dialog[open]"))draw();
+  },120);
   let down=null,moved=false;
   host.addEventListener("pointerdown",e=>{host.focus({preventScroll:true});down=[e.clientX,e.clientY,heading,pitch];moved=false;host.setPointerCapture(e.pointerId)});
   host.addEventListener("pointermove",e=>{

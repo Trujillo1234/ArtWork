@@ -8,3 +8,5 @@
 .walk-pad button:active{background:#97603a}
 .schools{padding:24px 5vw;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}.schools a{color:inherit;text-underline-offset:4px}
 #scene{touch-action:none;cursor:grab}#scene:active{cursor:grabbing}
+
+.landscape-credits{margin:0 5vw 1.5rem;max-width:82ch;font-size:.92rem}.landscape-credits summary{cursor:pointer}.landscape-credits a{color:inherit}
