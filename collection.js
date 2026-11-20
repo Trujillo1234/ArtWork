@@ -409,19 +409,11 @@ const MUSEUM = {
           "title": "Nine pencil panels of animals and weather",
           "src": "assets/artwork/1000001537.jpg",
           "thumb": "thumb/1000001537.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w6",
-      "title": "White sheet with a small pencil inscription",
-      "room": "Studio",
-      "artist": null,
-      "views": [
+        },
         {
           "file": "1000001538.jpg",
           "aliases": [],
-          "title": "White sheet with a small pencil inscription",
+          "title": "Back of Nine pencil panels of animals and weather — White sheet with a small pencil inscription",
           "src": "assets/artwork/1000001538.jpg",
           "thumb": "thumb/1000001538.jpg"
         }
@@ -1237,19 +1229,11 @@ const MUSEUM = {
           "title": "Blue wash with a green border",
           "src": "assets/artwork/1000001854.jpg",
           "thumb": "thumb/1000001854.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w58",
-      "title": "White sheet with painted edges",
-      "room": "Studio",
-      "artist": null,
-      "views": [
+        },
         {
           "file": "1000001855.jpg",
           "aliases": [],
-          "title": "White sheet with painted edges",
+          "title": "Back of Blue wash with a green border — White sheet with painted edges",
           "src": "assets/artwork/1000001855.jpg",
           "thumb": "thumb/1000001855.jpg"
         }
@@ -1297,28 +1281,11 @@ const MUSEUM = {
           "title": "Black-and-white spotted animal",
           "src": "assets/artwork/1000001858.jpg",
           "thumb": "thumb/1000001858.jpg"
-        }
-      ],
-      "relatedViews": [
+        },
         {
           "file": "1000001859.jpg",
           "aliases": [],
-          "title": "Probable reverse, labeled Penelope",
-          "src": "assets/artwork/1000001859.jpg",
-          "thumb": "thumb/1000001859.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w62",
-      "title": "White sheet with ink marks and a penciled name",
-      "room": "Studio",
-      "artist": null,
-      "views": [
-        {
-          "file": "1000001859.jpg",
-          "aliases": [],
-          "title": "White sheet with ink marks and a penciled name",
+          "title": "Back of Black-and-white spotted animal — Ink marks and the name Penelope",
           "src": "assets/artwork/1000001859.jpg",
           "thumb": "thumb/1000001859.jpg"
         }
@@ -1658,19 +1625,11 @@ const MUSEUM = {
           "title": "Yellow cat beneath pink branches",
           "src": "assets/artwork/PXL_20260508_183030931.jpg",
           "thumb": "thumb/PXL_20260508_183030931.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w82",
-      "title": "Pale sheet with traces of blue paint",
-      "room": "Studio",
-      "artist": null,
-      "views": [
+        },
         {
           "file": "PXL_20260508_183039578.jpg",
           "aliases": [],
-          "title": "Pale sheet with traces of blue paint",
+          "title": "Back of Yellow cat beneath pink branches — Pale sheet with traces of blue paint",
           "src": "assets/artwork/PXL_20260508_183039578.jpg",
           "thumb": "thumb/PXL_20260508_183039578.jpg"
         }
@@ -1799,7 +1758,7 @@ const MUSEUM = {
       "id": "w90",
       "title": "Orange wash with a row of circles",
       "room": "Studio",
-      "artist": "Possibly Claudia",
+      "artist": "Claudia",
       "views": [
         {
           "file": "PXL_20260508_183413728.jpg",
@@ -1807,34 +1766,16 @@ const MUSEUM = {
           "title": "Orange wash with a row of circles",
           "src": "assets/artwork/PXL_20260508_183413728.jpg",
           "thumb": "thumb/PXL_20260508_183413728.jpg"
-        }
-      ],
-      "note": "The next photograph in the camera sequence, taken seven seconds later, shows the name Claudia. The family identified Claudia as Penelope’s best friend in third grade. The front and back pairing is provisional.",
-      "relatedViews": [
+        },
         {
           "file": "PXL_20260508_183420032.jpg",
           "aliases": [],
-          "title": "Possible reverse bearing the name Claudia",
-          "src": "assets/artwork/PXL_20260508_183420032.jpg",
-          "thumb": "thumb/PXL_20260508_183420032.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w91",
-      "title": "Paint-marked sheet with pencil lettering",
-      "room": "Studio",
-      "artist": null,
-      "views": [
-        {
-          "file": "PXL_20260508_183420032.jpg",
-          "aliases": [],
-          "title": "Paint-marked sheet with pencil lettering",
+          "title": "Back of Orange wash with a row of circles — Paint marks and the name Claudia",
           "src": "assets/artwork/PXL_20260508_183420032.jpg",
           "thumb": "thumb/PXL_20260508_183420032.jpg"
         }
       ],
-      "note": "Possible reverse of “Orange wash with a row of circles”. The two photographs were taken seven seconds apart."
+      "note": "Claudia was Penelope’s best friend in third grade. Her name appears on the back."
     },
     {
       "id": "w92",
@@ -2477,23 +2418,16 @@ const MUSEUM = {
           "title": "Blue vase with pink flowers and stars",
           "src": "assets/artwork/PXL_20260508_190603951.jpg",
           "thumb": "thumb/PXL_20260508_190603951.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w130",
-      "title": "Pencil lettering on white paper",
-      "room": "Studio",
-      "artist": null,
-      "views": [
+        },
         {
           "file": "PXL_20260508_190611232.jpg",
           "aliases": [],
-          "title": "Pencil lettering on white paper",
+          "title": "Back of Blue vase with pink flowers and stars — Pencil inscription that appears to read Emmy",
           "src": "assets/artwork/PXL_20260508_190611232.jpg",
           "thumb": "thumb/PXL_20260508_190611232.jpg"
         }
-      ]
+      ],
+      "note": "The family identified this painting as Penelope’s. The pencil inscription on the back appears to read “Emmy.”"
     },
     {
       "id": "w131",
@@ -2956,7 +2890,7 @@ const MUSEUM = {
       "id": "w159",
       "title": "An animal hanging from a tree branch",
       "room": "Studio",
-      "artist": "Possibly Emilia",
+      "artist": "Emilia",
       "views": [
         {
           "file": "PXL_20260508_192048743.jpg",
@@ -2964,34 +2898,16 @@ const MUSEUM = {
           "title": "An animal hanging from a tree branch",
           "src": "assets/artwork/PXL_20260508_192048743.jpg",
           "thumb": "thumb/PXL_20260508_192048743.jpg"
-        }
-      ],
-      "note": "The next photograph in the camera sequence, taken seven seconds later, shows the name Emilia. The family identified Emilia as Penelope’s best friend at Spanish Schoolhouse. The front and back pairing is provisional.",
-      "relatedViews": [
+        },
         {
           "file": "PXL_20260508_192055351.jpg",
           "aliases": [],
-          "title": "Possible reverse bearing the name Emilia",
-          "src": "assets/artwork/PXL_20260508_192055351.jpg",
-          "thumb": "thumb/PXL_20260508_192055351.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w160",
-      "title": "White panel marked “Emilia” with a heart",
-      "room": "Objects",
-      "artist": null,
-      "views": [
-        {
-          "file": "PXL_20260508_192055351.jpg",
-          "aliases": [],
-          "title": "White panel marked “Emilia” with a heart",
+          "title": "Back of An animal hanging from a tree branch — Name Emilia and a heart",
           "src": "assets/artwork/PXL_20260508_192055351.jpg",
           "thumb": "thumb/PXL_20260508_192055351.jpg"
         }
       ],
-      "note": "Possible reverse of “An animal hanging from a tree branch”. The two photographs were taken seven seconds apart."
+      "note": "Emilia was Penelope’s best friend at Spanish Schoolhouse. Her name appears on the back."
     },
     {
       "id": "w161",
@@ -3875,19 +3791,11 @@ const MUSEUM = {
           "title": "Portrait assembled from strips of photographs",
           "src": "assets/artwork/PXL_20260509_120105276.jpg",
           "thumb": "thumb/PXL_20260509_120105276.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w212",
-      "title": "Brown paper marked “Family”",
-      "room": "Family",
-      "artist": null,
-      "views": [
+        },
         {
           "file": "PXL_20260509_120124433.jpg",
           "aliases": [],
-          "title": "Brown paper marked “Family”",
+          "title": "Back of Portrait assembled from strips of photographs — Brown paper marked “Family”",
           "src": "assets/artwork/PXL_20260509_120124433.jpg",
           "thumb": "thumb/PXL_20260509_120124433.jpg"
         }
