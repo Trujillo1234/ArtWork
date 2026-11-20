@@ -4,7 +4,7 @@ const MUSEUM = {
       "id": "w126",
       "title": "Striped vase against blocks of color",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190513645.jpg",
@@ -763,7 +763,7 @@ const MUSEUM = {
           "thumb": "thumb/1000001566.jpg"
         }
       ],
-      "note": "Penelope made this family photo poster for her Student of the Week celebration at Spanish Schoolhouse."
+      "note": "Penelope made this family photo poster for Estrella de la Semana (Student of the Week) at Spanish Schoolhouse."
     },
     {
       "id": "w25",
@@ -824,7 +824,7 @@ const MUSEUM = {
           "thumb": "thumb/1000001571.jpg"
         }
       ],
-      "note": "Penelope made this family photo poster for her Student of the Week celebration at Spanish Schoolhouse."
+      "note": "Penelope made this family photo poster for Estrella de la Semana (Student of the Week) at Spanish Schoolhouse."
     },
     {
       "id": "w30",
@@ -1694,7 +1694,7 @@ const MUSEUM = {
       "id": "w84",
       "title": "Black-and-green spiderweb",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183148559.jpg",
@@ -1709,7 +1709,7 @@ const MUSEUM = {
       "id": "w85",
       "title": "Spiderweb in pencil",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183159085.jpg",
@@ -1739,7 +1739,7 @@ const MUSEUM = {
       "id": "w87",
       "title": "Penelope Hypatia Trujillo in stamped letters",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183226931.jpg",
@@ -1754,7 +1754,7 @@ const MUSEUM = {
       "id": "w88",
       "title": "Body Club sign-up sheet",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183309679.jpg",
@@ -1832,7 +1832,7 @@ const MUSEUM = {
       "id": "w92",
       "title": "Three painted flowers on a folded sheet",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183438545.jpg",
@@ -1884,7 +1884,7 @@ const MUSEUM = {
       "id": "w95",
       "title": "Two heart balloons tied with a bow",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183553362.jpg",
@@ -1899,7 +1899,7 @@ const MUSEUM = {
       "id": "w96",
       "title": "Tissue-paper wreath with a heart labeled Penelope",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183621220.jpg",
@@ -1914,7 +1914,7 @@ const MUSEUM = {
       "id": "w97",
       "title": "Gray dog wearing orange flowers",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183659908.jpg",
@@ -2153,7 +2153,7 @@ const MUSEUM = {
       "id": "w109",
       "title": "Plant assembled from pressed leaves",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190102422.jpg",
@@ -2183,7 +2183,7 @@ const MUSEUM = {
       "id": "w111",
       "title": "Family love list on purple paper",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190126665.jpg",
@@ -2258,7 +2258,7 @@ const MUSEUM = {
       "id": "w116",
       "title": "Rainbow-colored bands of handwritten words",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190219715.jpg",
@@ -2310,7 +2310,7 @@ const MUSEUM = {
       "id": "w119",
       "title": "Mermaid-tail cupcake",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190320087.jpg",
@@ -2347,7 +2347,7 @@ const MUSEUM = {
       "id": "w121",
       "title": "“I love mom” in bands of colored pencil",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190355347.jpg",
@@ -2377,7 +2377,7 @@ const MUSEUM = {
       "id": "w123",
       "title": "Painted rocket with a photograph in the window",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190420540.jpg",
@@ -2386,13 +2386,14 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_190420540.jpg",
           "thumb": "thumb/PXL_20260508_190420540.jpg"
         }
-      ]
+      ],
+      "note": "Emmy made this rocket in first grade at Esprit International School."
     },
     {
       "id": "w124",
       "title": "Multicolored paint impressions on paper",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190432089.jpg",
@@ -2407,7 +2408,7 @@ const MUSEUM = {
       "id": "w125",
       "title": "Gold squirrel silhouette with white spots",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190448174.jpg",
@@ -2489,7 +2490,7 @@ const MUSEUM = {
       "id": "w131",
       "title": "Striped and crosshatched pumpkin",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190621637.jpg",
@@ -2519,7 +2520,7 @@ const MUSEUM = {
       "id": "w133",
       "title": "Ribbon-trimmed craft-stick tree with a photograph",
       "room": "Objects",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190656706.jpg",
@@ -2661,7 +2662,7 @@ const MUSEUM = {
       "id": "w142",
       "title": "Yellow family photo board with heart stickers",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191217368.jpg",
@@ -2670,7 +2671,8 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_191217368.jpg",
           "thumb": "thumb/PXL_20260508_191217368.jpg"
         }
-      ]
+      ],
+      "note": "Emmy made this family photo poster for Estrella de la Semana (Student of the Week) at Spanish Schoolhouse."
     },
     {
       "id": "w143",
