@@ -1026,7 +1026,7 @@ const MUSEUM = {
       "id": "w44",
       "title": "Emmy at ExpoArte, 2024",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "1000001840.jpg",
@@ -1039,9 +1039,9 @@ const MUSEUM = {
     },
     {
       "id": "w45",
-      "title": "All the Joy!",
+      "title": "Birthday card from Mila to Penelope",
       "room": "Family",
-      "artist": null,
+      "artist": "Mila (letter writer)",
       "views": [
         {
           "file": "1000001841.jpg",
@@ -1057,7 +1057,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001842.jpg",
           "thumb": "thumb/1000001842.jpg"
         }
-      ]
+      ],
+      "note": "Mila was Emmy’s best friend at Spanish Schoolhouse. The family associates this card with Emmy’s keepsakes. Inside, Mila addressed the birthday message to Penelope and signed it with love."
     },
     {
       "id": "w46",
@@ -2006,7 +2007,7 @@ const MUSEUM = {
       "id": "w101",
       "title": "Red and blue paint along two edges",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_185826165.jpg",
@@ -2176,7 +2177,7 @@ const MUSEUM = {
       "id": "w110",
       "title": "Large pencil letters on white paper",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190110502.jpg",
@@ -2281,7 +2282,7 @@ const MUSEUM = {
       "id": "w117",
       "title": "Emmy’s certificate for persistence and dedication",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_190249325.jpg",
@@ -2431,7 +2432,7 @@ const MUSEUM = {
       "id": "w127",
       "title": "Pale pencil marks on paint-edged paper",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190525249.jpg",
@@ -2792,7 +2793,7 @@ const MUSEUM = {
       "id": "w149",
       "title": "Emmy’s classroom name strip",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_191611814.jpg",
@@ -2829,7 +2830,7 @@ const MUSEUM = {
       "id": "w151",
       "title": "Emmy’s Soccer Shots certificate, spring 2025",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_191635658.jpg",
@@ -3212,7 +3213,7 @@ const MUSEUM = {
       "id": "w175",
       "title": "A classroom note celebrating Emmy’s enthusiasm",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194133153.jpg",
@@ -3227,7 +3228,7 @@ const MUSEUM = {
       "id": "w176",
       "title": "Emmy’s Spanish Schoolhouse diploma",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194149995.jpg",
@@ -3258,7 +3259,7 @@ const MUSEUM = {
       "id": "w178",
       "title": "Emmy’s kindergarten progress report, 2024–2025",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194221054.jpg",
@@ -3308,7 +3309,7 @@ const MUSEUM = {
       "id": "w179",
       "title": "Emmy’s Spanish progress report, 2020–2021",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194317919.jpg",
@@ -3367,7 +3368,7 @@ const MUSEUM = {
       "id": "w182",
       "title": "Emmy’s English progress report, 2023–2024",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194415177.jpg",
@@ -3411,7 +3412,7 @@ const MUSEUM = {
       "id": "w184",
       "title": "Emmy’s Soccer Shots certificate of completion",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194459959.jpg",
@@ -3426,7 +3427,7 @@ const MUSEUM = {
       "id": "w185",
       "title": "Emmy’s Spanish progress report, 2023–2024",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194507789.jpg",
@@ -3732,24 +3733,25 @@ const MUSEUM = {
     },
     {
       "id": "w203",
-      "title": "Handwritten airline luggage tag",
+      "title": "Airline luggage tag from the trip to Spain and Paris",
       "room": "Family",
-      "artist": null,
+      "artist": "Family travel keepsake",
       "views": [
         {
           "file": "PXL_20260509_115836182.jpg",
           "aliases": [],
-          "title": "Handwritten airline luggage tag",
+          "title": "Airline luggage tag from the trip to Spain and Paris",
           "src": "assets/artwork/PXL_20260509_115836182.jpg",
           "thumb": "thumb/PXL_20260509_115836182.jpg"
         }
-      ]
+      ],
+      "note": "The family kept this tag from their trip to Spain and Paris."
     },
     {
       "id": "w204",
       "title": "Classroom job application",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115905651.jpg",
@@ -3765,22 +3767,26 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260509_115921618.jpg",
           "thumb": "thumb/PXL_20260509_115921618.jpg"
         }
-      ]
+      ],
+      "note": "Penelope applied for a classroom job at Esprit International School. Claudia wrote her recommendation.",
+      "relatedWork": "w205"
     },
     {
       "id": "w205",
-      "title": "Handwritten letter recommending Penelope",
+      "title": "Claudia’s recommendation for Penelope",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Claudia (letter writer)",
       "views": [
         {
           "file": "PXL_20260509_115931035.jpg",
           "aliases": [],
-          "title": "Handwritten letter recommending Penelope",
+          "title": "Claudia’s recommendation for Penelope",
           "src": "assets/artwork/PXL_20260509_115931035.jpg",
           "thumb": "thumb/PXL_20260509_115931035.jpg"
         }
-      ]
+      ],
+      "note": "Claudia wrote this recommendation for Penelope at Esprit International School.",
+      "relatedWork": "w204"
     },
     {
       "id": "w206",
@@ -3891,7 +3897,7 @@ const MUSEUM = {
       "id": "w213",
       "title": "Penelope’s Spanish immersion Pre-K diploma, May 2021",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260509_120136890.jpg",
@@ -3921,7 +3927,7 @@ const MUSEUM = {
       "id": "w215",
       "title": "Penelope’s Spanish progress report, 2020–2021",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260509_120205302.jpg",
