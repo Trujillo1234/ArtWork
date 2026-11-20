@@ -121,6 +121,11 @@ visit(0);setLighting();render();
 const pavilion=$("pavilion"),fullButton=$("full");
 function fullState(){
   const on=document.fullscreenElement===pavilion||pavilion.classList.contains("expanded");
+  const wasOn=fullButton.getAttribute("aria-pressed")==="true";
+  if(wasOn&&!on){
+    pavilion.scrollIntoView({block:"start",behavior:"instant"});
+    $("scene").focus({preventScroll:true});
+  }
   fullButton.textContent=on?"Exit full screen":"Full screen";fullButton.setAttribute("aria-pressed",String(on));
 }
 fullButton.onclick=async()=>{
