@@ -10,3 +10,13 @@
 #scene{touch-action:none;cursor:grab}#scene:active{cursor:grabbing}
 
 .landscape-credits{margin:0 5vw 1.5rem;max-width:82ch;font-size:.92rem}.landscape-credits summary{cursor:pointer}.landscape-credits a{color:inherit}
+
+#pavilion:is(:fullscreen,.expanded){display:flex;flex-direction:column;background:#18332b;width:100%;height:100%;overflow:hidden}
+#pavilion.expanded{position:fixed;inset:0;z-index:1000;height:100dvh}
+body:has(#pavilion.expanded){overflow:hidden}
+#pavilion:is(:fullscreen,.expanded) #scene{flex:1 1 0;height:auto;min-height:0;max-height:none}
+#pavilion:is(:fullscreen,.expanded) :is(.guide,.hanging,#vrHelp){display:none}
+#pavilion:is(:fullscreen,.expanded) .walk-pad{flex:none}
+#pavilion:is(:fullscreen,.expanded) .gallery-controls{flex:none}
+.schools div b{display:block;font-weight:600}.schools div a{font-size:.92em}
+#vrHelp{margin:0;padding:.55rem 5vw}.gallery-controls [hidden],#vrHelp[hidden]{display:none}

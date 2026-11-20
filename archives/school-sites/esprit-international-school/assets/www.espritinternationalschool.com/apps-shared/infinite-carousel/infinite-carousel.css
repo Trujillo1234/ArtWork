@@ -1,0 +1,135 @@
+/*
+@font-face {
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-weight: 900;
+    font-display: auto;
+    src: url(../fonts/fa-solid-900.woff) format('woff2');
+}
+*/
+@import url(../fonts/font-awesome.min.4.0.css);
+
+.en-infinite-carousel {
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+
+.en-infinite-carousel > .en-infinite-carousel-track {
+    display: flex;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+@-moz-keyframes -moz-en-infinite-carousel {
+    0% {
+        -webkit-transform: translateX(0);
+    }
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes -webkit-en-infinite-carousel {
+    0% {
+        -webkit-transform: translateX(0);
+    }
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@keyframes en-infinite-carousel {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+.en-infinite-carousel > .en-infinite-carousel-track {
+    animation-name: en-infinite-carousel;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    -webkit-animation-name: -webkit-en-infinite-carousel;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: -moz-en-infinite-carousel;
+    -moz-animation-duration: 20s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+}
+
+.en-infinite-carousel[paused-animation] > .en-infinite-carousel-track {
+    animation-play-state: paused;
+}
+
+.en-infinite-carousel[debug-mode] {
+    align-items: center;
+    gap: 20px;
+    padding-block: 10px;
+    width: 100%;
+    height: 80px;
+}
+
+.en-infinite-carousel[debug-mode] > .en-infinite-carousel-track {
+    gap: 20px;
+}
+
+.en-infinite-carousel[debug-mode] > .en-infinite-carousel-track > * {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    box-shadow: 3px 3px 3px 2px rgb(0 0 0 / 35%);
+}
+
+
+.en-infinite-carousel[debug-mode] > .en-infinite-carousel-track  img {
+    max-height: 100%;
+}
+
+.en-infinite-carousel.paused > .en-infinite-carousel-track,
+.en-infinite-carousel[stop-animation-on-hover]:hover > .en-infinite-carousel-track {
+    animation-play-state: paused;
+}
+
+.en-ic-control-buttons {
+
+}
+
+button.default-style.en-ic-toggle-button {
+    width: clamp(27px, 40vw / 12, 40px);
+    height: clamp(27px, 40vw / 12, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "FontAwesome", serif;
+    font-size: clamp(14px, 20vw / 12, 20px);
+
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+
+}
+button.default-style.en-ic-toggle-button.carousel-paused:before,
+button.default-style.en-ic-toggle-button.paused:before {
+    content: "\f04b";
+    margin-left: 10%; /* center the arrow icon */
+}
+
+button.default-style.en-ic-toggle-button:before {
+    content: "\f28b";
+}
+

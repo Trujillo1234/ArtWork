@@ -117,3 +117,21 @@ $("viewer").onclick=e=>{if(e.target===$("viewer")){const r=e.target.getBoundingC
 $("back").onclick=()=>visit(roomIndex-1);$("next").onclick=()=>visit(roomIndex+1);
 window.museumGallery={current,galleries,visit,openWork,byId};
 visit(0);setLighting();render();
+
+const pavilion=$("pavilion"),fullButton=$("full");
+function fullState(){
+  const on=document.fullscreenElement===pavilion||pavilion.classList.contains("expanded");
+  fullButton.textContent=on?"Exit full screen":"Full screen";fullButton.setAttribute("aria-pressed",String(on));
+}
+fullButton.onclick=async()=>{
+  if(document.fullscreenElement===pavilion)await document.exitFullscreen();
+  else if(pavilion.classList.contains("expanded"))pavilion.classList.remove("expanded");
+  else{
+    try{await pavilion.requestFullscreen()}
+    catch{pavilion.classList.add("expanded")}
+    $("scene").focus({preventScroll:true});
+  }
+  fullState();
+};
+document.addEventListener("fullscreenchange",fullState);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&pavilion.classList.contains("expanded")&&!$("viewer").open){pavilion.classList.remove("expanded");fullState()}});

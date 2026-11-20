@@ -1,6 +1,7 @@
 import * as T from "three";
 import {architecture} from "./architecture.js";
 import {createDistance} from "./distance.js";
+import {enableHeadset} from "./headset.js";
 const host=document.getElementById("scene");
 const fallback=document.getElementById("fallback");
 function launch(){
@@ -141,6 +142,24 @@ function launch(){
     panel.add(bulbs);holiday.push(bulbs);owned.push(bulbs);
   }
   const festiveMat=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false});
+  const backings=[0xa7ac9a,0xc5b99e,0xa3aeb3,0xb6b9ae,0xc8bda4].map(material);
+  function batchStructure(group,owned,frames){
+    group.updateMatrixWorld(true);
+    const inverse=group.matrixWorld.clone().invert(),batches=new Map();
+    const targets=new Set(frames);
+    group.traverse(mesh=>{
+      if(!mesh.isMesh||mesh.isInstancedMesh||targets.has(mesh)||mesh.material.isShaderMaterial)return;
+      const key=[mesh.geometry.id,mesh.material.id,mesh.castShadow,mesh.receiveShadow].join("/");
+      if(!batches.has(key))batches.set(key,[]);
+      batches.get(key).push(mesh);
+    });
+    for(const meshes of batches.values()){
+      if(meshes.length<3)continue;
+      const first=meshes[0],batch=new T.InstancedMesh(first.geometry,first.material,meshes.length);
+      meshes.forEach((mesh,j)=>{batch.setMatrixAt(j,new T.Matrix4().multiplyMatrices(inverse,mesh.matrixWorld));mesh.removeFromParent()});
+      batch.castShadow=first.castShadow;batch.receiveShadow=first.receiveShadow;group.add(batch);owned.push(batch);
+    }
+  }
   function buildRoom(i){
     const description=museum.galleries[i],group=new T.Group(),frames=[];
     group.position.x=i*spacing;scene.add(group);
@@ -154,6 +173,7 @@ function launch(){
       const [x,z,angle]=wallPositions[wall],panel=new T.Group();
       panel.rotation.y=angle;panel.position.set(x,0,z);group.add(panel);
       const width=wall===0?10:8.2;
+      if(entries.length)box(panel,0,2.45,-.10,width-.24,4.14,.14,backings[place]);
       if(place===0){
         box(panel,0,4.94,0,width+.3,.20,.24,wood);
         for(const end of [-1,1])box(panel,end*width/2,2.45,0,.20,4.9,.22,wood);
@@ -229,16 +249,22 @@ function launch(){
         target.userData.entry={id:trolleyWork.id,index:0};group.add(target);frames.push(target);
       }
     }
+    batchStructure(group,owned,frames);
     const bay={group,frames,lamps,holiday,owned};suite.set(i,bay);return bay;
   }
   const hitOnly=new T.MeshBasicMaterial({visible:false});
   const loader=new T.TextureLoader();
+  let photoRefresh=0;
+  function refreshPictures(){
+    if(photoRefresh||renderer.xr.isPresenting)return;
+    photoRefresh=requestAnimationFrame(()=>{photoRefresh=0;draw()});
+  }
   function loadPictures(bay){
     if(bay.loaded)return;
     bay.loaded=true;
     for(const face of bay.frames){
       const view=face.userData.entry.view;if(!view)continue;
-      const tex=loader.load(window.localFrames?.[view.file]||view.thumb,()=>{if(!bay.retired)draw()});
+      const tex=loader.load(window.localFrames?.[view.file]||view.thumb,()=>{if(!bay.retired)refreshPictures()});
       tex.colorSpace=T.SRGBColorSpace;
       face.material.map=tex;face.material.emissiveMap=tex;face.material.needsUpdate=true;
     }
@@ -257,7 +283,7 @@ function launch(){
   const held=new Set();
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   function draw(){
-    if(!ready)return;
+    if(!ready||renderer.xr.isPresenting)return;
     camera.position.set(camX+walkX,1.78,walkZ);
     camera.lookAt(camera.position.x+Math.sin(heading)*8,2.46+pitch,walkZ-Math.cos(heading)*8);
     distance.position(camera,reduced?0:performance.now()/1000);
@@ -272,6 +298,7 @@ function launch(){
     movePlayer();draw();if(held.size||camX!==destination||heading!==aimHeading)frame=requestAnimationFrame(animate);
   }
   function resize(){
+    if(renderer.xr.isPresenting)return;
     const w=host.clientWidth,h=host.clientHeight;camera.aspect=w/h;
     camera.fov=T.MathUtils.radToDeg(2*Math.atan(Math.max(.49,.81/camera.aspect)));
     camera.updateProjectionMatrix();renderer.setSize(w,h,false);draw();
@@ -319,8 +346,11 @@ function launch(){
     if(!held.size)return;
     const f=Number(held.has("w"))-Number(held.has("s")),r=Number(held.has("d"))-Number(held.has("a"));
     heading=aimHeading+=dt*1.55*(Number(held.has("e"))-Number(held.has("q")));
-    const distance=dt*3.35/Math.max(1,Math.hypot(f,r)),x=camX+walkX;
-    const nx=x+distance*(Math.sin(heading)*f+Math.cos(heading)*r),nz=walkZ+distance*(-Math.cos(heading)*f+Math.sin(heading)*r);
+    translate(f,r,heading,dt*3.35);
+  }
+  function translate(f,r,angle,step){
+    const distance=step/Math.max(1,Math.hypot(f,r)),x=camX+walkX;
+    const nx=x+distance*(Math.sin(angle)*f+Math.cos(angle)*r),nz=walkZ+distance*(-Math.cos(angle)*f+Math.sin(angle)*r);
     if(available(nx,walkZ))walkX=nx-camX;
     if(available(camX+walkX,nz))walkZ=nz;
     const absolute=camX+walkX,next=Math.round(absolute/spacing);
@@ -361,6 +391,8 @@ function launch(){
     if(hit){const {id,index}=hit.object.userData.entry;museum.openWork(id,index)}
   });
   window.addEventListener("pavilion-view",e=>update(e.detail));
+  enableHeadset({renderer,scene,camera,pose:()=>({x:camX+walkX,z:walkZ,angle:heading}),
+    walk:translate,drawFlat:draw,resize,frames:()=>Array.from(suite.values()).flatMap(b=>b.frames),museum,distance});
   ready=true;fallback.hidden=true;resize();update(museum.current());new ResizeObserver(resize).observe(host);
 }
 try{launch()}catch(error){console.error(error);host.querySelector("canvas")?.remove();fallback.hidden=false;document.getElementById("sceneHelp").textContent="Choose a photograph from the wall list to open it."}

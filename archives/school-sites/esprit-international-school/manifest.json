@@ -1,0 +1,836 @@
+{
+  "name": "Esprit International School",
+  "source": "https://www.espritinternationalschool.com/",
+  "finalUrl": "https://www.espritinternationalschool.com/",
+  "capturedAt": "2026-05-09T11:42:24.054487+00:00",
+  "archiveType": "one-page-html-with-downloaded-assets",
+  "assetCount": 134,
+  "errorCount": 3,
+  "files": [
+    "index.html",
+    "source.html",
+    "live-url.txt",
+    "manifest.json",
+    "assets/"
+  ],
+  "assets": [
+    {
+      "url": "https://www.espritinternationalschool.com/favicon.ico",
+      "path": "assets\\www.espritinternationalschool.com\\favicon.ico",
+      "contentType": "image/vnd.microsoft.icon",
+      "size": 100598
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/shared/main.css?acn=231482",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\shared\\main.5548f66b00.css",
+      "contentType": "text/css",
+      "size": 13444
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/en-commons.css?acn=231482",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\en-commons.5548f66b00.css",
+      "contentType": "text/css",
+      "size": 9250
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/en-commons.js?acn=231482",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\en-commons.5548f66b00.js",
+      "contentType": "application/javascript",
+      "size": 52265
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/encms/encms-public.css?acn=231482",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\encms\\encms-public.5548f66b00.css",
+      "contentType": "text/css",
+      "size": 5822
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/shared/main.css",
+      "path": "assets\\www.espritinternationalschool.com\\shared\\main.css",
+      "contentType": "text/css",
+      "size": 59766
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/encms/en.js?acn=231482",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\encms\\en.5548f66b00.js",
+      "contentType": "application/javascript",
+      "size": 7277
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700;800&family=Karla:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite",
+      "path": "assets\\fonts.googleapis.com\\css2.aa19fa2baf.css",
+      "contentType": "text/css",
+      "size": 11118
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/shared/inner-pages.css",
+      "path": "assets\\www.espritinternationalschool.com\\shared\\inner-pages.css",
+      "contentType": "text/css",
+      "size": 32184
+    },
+    {
+      "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js",
+      "path": "assets\\ajax.googleapis.com\\ajax\\libs\\jquery\\1.6.4\\jquery.min.js",
+      "contentType": "text/javascript",
+      "size": 91668
+    },
+    {
+      "url": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js",
+      "path": "assets\\ajax.googleapis.com\\ajax\\libs\\jqueryui\\1.8.16\\jquery-ui.min.js",
+      "contentType": "text/javascript",
+      "size": 201875
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/shared/js/scripts.js",
+      "path": "assets\\www.espritinternationalschool.com\\shared\\js\\scripts.js",
+      "contentType": "application/javascript",
+      "size": 5002
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/js?id=G-ZJFE1GZB0W",
+      "path": "assets\\www.googletagmanager.com\\gtag\\js.55a858fe2f.js",
+      "contentType": "application/javascript",
+      "size": 552336
+    },
+    {
+      "url": "https://www.googletagmanager.com/ns.html?id=GTM-5SDJMNNR",
+      "path": "assets\\www.googletagmanager.com\\ns.690d825041.html",
+      "contentType": "text/html",
+      "size": 266
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/header_logo.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\header_logo.png",
+      "contentType": "image/png",
+      "size": 3211
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/search_button.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\search_button.png",
+      "contentType": "image/png",
+      "size": 404
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/navigation/v1/nav_desktop_core.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\navigation\\v1\\nav_desktop_core.css",
+      "contentType": "text/css",
+      "size": 1462
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/shared/css/nav_desktop.css",
+      "path": "assets\\www.espritinternationalschool.com\\shared\\css\\nav_desktop.css",
+      "contentType": "text/css",
+      "size": 0
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/navigation/v1/nav_mobile_core.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\navigation\\v1\\nav_mobile_core.css",
+      "contentType": "text/css",
+      "size": 5894
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/shared/css/nav_mobile.css",
+      "path": "assets\\www.espritinternationalschool.com\\shared\\css\\nav_mobile.css",
+      "contentType": "text/css",
+      "size": 0
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/navigation/navigation.js?acn=231482",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\navigation\\navigation.5548f66b00.js",
+      "contentType": "application/javascript",
+      "size": 7393
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/navigation/mega-menu/mega-menu-loader.js?acn=231482",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\navigation\\mega-menu\\mega-menu-loader.5548f66b00.js",
+      "contentType": "application/javascript",
+      "size": 1857
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/css/skip_links-pack.css?20190607",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\css\\skip_links-pack.da4b206868.css",
+      "contentType": "text/css",
+      "size": 999
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/js/jquery/3.7.1/jquery-pack.js",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\js\\jquery\\3.7.1\\jquery-pack.js",
+      "contentType": "application/javascript",
+      "size": 136040
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/js/keyboard/mmAccess.js?20190322",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\js\\keyboard\\mmAccess.c1bfa940fd.js",
+      "contentType": "application/javascript",
+      "size": 22303
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/js/skip_links-pack.js?20250917",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\js\\skip_links-pack.848f4453cb.js",
+      "contentType": "application/javascript",
+      "size": 7274
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/js/keyboard/shortcut-dom-order.js?20250917",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\js\\keyboard\\shortcut-dom-order.848f4453cb.js",
+      "contentType": "application/javascript",
+      "size": 1050
+    },
+    {
+      "url": "https://counter.educationalnetworks.net/servlet/count?b=Mozilla/5.0%20%28Windows%20NT%2010.0%3b%20Win64%3b%20x64%29%20AppleWebKit/537.36%20%28KHTML%2c%20like%20Gecko%29%20Chrome/125%20Safari/537.36&d=www.espritinternationalschool.com&h=172.7.3.152&i=ESPRIT&p=443&q=&r=&rn=9832&t=w8a&u=/index.jsp&w=6462",
+      "path": "assets\\counter.educationalnetworks.net\\servlet\\count.ff92c123ac.gif",
+      "contentType": "image/gif",
+      "size": 43
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/rotating_images/embed.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\rotating_images\\embed.css",
+      "contentType": "text/css",
+      "size": 65
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/js/jquery/1.4.2/jquery-pack.js",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\js\\jquery\\1.4.2\\jquery-pack.js",
+      "contentType": "application/javascript",
+      "size": 79228
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/js/rotating_images/player-pack.js?20191216",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\js\\rotating_images\\player-pack.5f8766c706.js",
+      "contentType": "application/javascript",
+      "size": 10006
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/js/rotating_images/player-pack.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\js\\rotating_images\\player-pack.css",
+      "contentType": "text/css",
+      "size": 1287
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/ib-logo.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\ib-logo.png",
+      "contentType": "image/png",
+      "size": 5339
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/nhs-logo.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\nhs-logo.png",
+      "contentType": "image/png",
+      "size": 4057
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/advance-logo.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\advance-logo.png",
+      "contentType": "image/png",
+      "size": 3992
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/tpsa-logo.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\tpsa-logo.png",
+      "contentType": "image/png",
+      "size": 21909
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/sevp-logo.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\sevp-logo.png",
+      "contentType": "image/png",
+      "size": 28618
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/ams-logo.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\ams-logo.png",
+      "contentType": "image/png",
+      "size": 5101
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/greenTree-logo.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\greenTree-logo.png",
+      "contentType": "image/png",
+      "size": 22678
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/news/news_en_card_slider.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\news\\news_en_card_slider.css",
+      "contentType": "text/css",
+      "size": 3694
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/js/en_card_slider.js",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\js\\en_card_slider.js",
+      "contentType": "application/javascript",
+      "size": 8690
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/default-news-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\default-news-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 11372
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/ourpages/auto/2023/10/3/56080514/forrest%20and%20carlota.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\ourpages\\auto\\2023\\10\\3\\56080514\\forrest_and_carlota.jpg",
+      "contentType": "image/jpeg",
+      "size": 91000
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/ourpages/auto/2023/9/26/56126519/scholastic20spring20book20fair-1024x544-213096815.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\ourpages\\auto\\2023\\9\\26\\56126519\\scholastic20spring20book20fair-1024x544-213096815.jpg",
+      "contentType": "image/jpeg",
+      "size": 51520
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/ourpages/auto/2023/9/5/41028921/2.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\ourpages\\auto\\2023\\9\\5\\41028921\\2.jpg",
+      "contentType": "image/jpeg",
+      "size": 23149
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/simple.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\simple.css",
+      "contentType": "text/css",
+      "size": 5908
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/js/EN/loader/public_loader_20211204.js",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\js\\EN\\loader\\public_loader_20211204.js",
+      "contentType": "application/javascript",
+      "size": 13840
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/edunet_white.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\edunet_white.png",
+      "contentType": "image/png",
+      "size": 708
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/rotating_images/6723/6723_2_1386_93_0.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\rotating_images\\6723\\6723_2_1386_93_0.jpg",
+      "contentType": "image/jpeg",
+      "size": 72996
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/rotating_images/6723/6723_3_1386_93_0.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\rotating_images\\6723\\6723_3_1386_93_0.jpg",
+      "contentType": "image/jpeg",
+      "size": 77288
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/pdf_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\pdf_icon.gif",
+      "contentType": "image/gif",
+      "size": 340
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/doc_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\doc_icon.gif",
+      "contentType": "image/gif",
+      "size": 654
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/xls_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\xls_icon.gif",
+      "contentType": "image/gif",
+      "size": 654
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/ppt_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\ppt_icon.gif",
+      "contentType": "image/gif",
+      "size": 648
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/txt_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\txt_icon.gif",
+      "contentType": "image/gif",
+      "size": 605
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/wav_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\wav_icon.gif",
+      "contentType": "image/gif",
+      "size": 616
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/mp3_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\mp3_icon.gif",
+      "contentType": "image/gif",
+      "size": 600
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/wmv_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\wmv_icon.gif",
+      "contentType": "image/gif",
+      "size": 630
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/mov_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\mov_icon.gif",
+      "contentType": "image/gif",
+      "size": 590
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/file_icon.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\file_icon.gif",
+      "contentType": "image/gif",
+      "size": 320
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/marquee/marquee.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\marquee\\marquee.css",
+      "contentType": "text/css",
+      "size": 5940
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/infinite-carousel/infinite-carousel.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\infinite-carousel\\infinite-carousel.css",
+      "contentType": "text/css",
+      "size": 3112
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/sidelinks/sidelinks.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\sidelinks\\sidelinks.css",
+      "contentType": "text/css",
+      "size": 2126
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/powered-by/powered-by.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\powered-by\\powered-by.css",
+      "contentType": "text/css",
+      "size": 681
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/facebook.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\facebook.png",
+      "contentType": "image/png",
+      "size": 208
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/instagram.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\instagram.png",
+      "contentType": "image/png",
+      "size": 287
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/youtube.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\youtube.png",
+      "contentType": "image/png",
+      "size": 288
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/snapchat.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\snapchat.png",
+      "contentType": "image/png",
+      "size": 337
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/twitter.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\twitter.png",
+      "contentType": "image/png",
+      "size": 1361
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/caret.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\caret.png",
+      "contentType": "image/png",
+      "size": 166
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/dropdown-bg.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\dropdown-bg.png",
+      "contentType": "image/png",
+      "size": 95
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/mission-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\mission-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 40432
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/parallax-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\parallax-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 244530
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/beginnings-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\beginnings-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 32929
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/pri-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\pri-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 9581
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/lower-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\lower-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 11018
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/upper-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\upper-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 31143
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/mid-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\mid-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 9837
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/high-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\high-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 8837
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/beginnings-school-img_hover.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\beginnings-school-img_hover.jpg",
+      "contentType": "image/jpeg",
+      "size": 110182
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/pri-hover-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\pri-hover-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 82180
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/lower-hover-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\lower-hover-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 80933
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/upper-hover-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\upper-hover-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 127348
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/mid-hover-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\mid-hover-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 52287
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/high-hover-school-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\high-hover-school-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 51827
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/leftArrow.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\leftArrow.png",
+      "contentType": "image/png",
+      "size": 773
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/rightArrow.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\rightArrow.png",
+      "contentType": "image/png",
+      "size": 809
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/event-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\event-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 56730
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/event-date-bg.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\event-date-bg.png",
+      "contentType": "image/png",
+      "size": 851
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/list-1-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\list-1-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 49193
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/list-2-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\list-2-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 52010
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/list-3-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\list-3-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 51440
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/list-4-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\list-4-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 38255
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/list-5-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\list-5-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 42800
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/college-gradient.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\college-gradient.png",
+      "contentType": "image/png",
+      "size": 432
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/footer-bg.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\footer-bg.jpg",
+      "contentType": "image/jpeg",
+      "size": 370
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/footer-facebook.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\footer-facebook.png",
+      "contentType": "image/png",
+      "size": 208
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/footer-instagram.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\footer-instagram.png",
+      "contentType": "image/png",
+      "size": 287
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/footer-youtube.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\footer-youtube.png",
+      "contentType": "image/png",
+      "size": 299
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/footer-snapchat.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\footer-snapchat.png",
+      "contentType": "image/png",
+      "size": 333
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/footer-twitter.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\footer-twitter.png",
+      "contentType": "image/png",
+      "size": 408
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dosis/v34/HhyaU5sn9vOmLzlnC_W6EQ.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\dosis\\v34\\HhyaU5sn9vOmLzlnC_W6EQ.woff2",
+      "contentType": "font/woff2",
+      "size": 7544
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dosis/v34/HhyaU5sn9vOmLzlmC_W6EQ.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\dosis\\v34\\HhyaU5sn9vOmLzlmC_W6EQ.woff2",
+      "contentType": "font/woff2",
+      "size": 16412
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dosis/v34/HhyaU5sn9vOmLzloC_U.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\dosis\\v34\\HhyaU5sn9vOmLzloC_U.woff2",
+      "contentType": "font/woff2",
+      "size": 30744
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/karla/v33/qkB_XvYC6trAT7RQNNK2EG7SIwPWMNlCVytER0IPh7KX59Z0CnSKYmkvnHE.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\karla\\v33\\qkB_XvYC6trAT7RQNNK2EG7SIwPWMNlCVytER0IPh7KX59Z0CnSKYmkvnHE.woff2",
+      "contentType": "font/woff2",
+      "size": 12668
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/karla/v33/qkB_XvYC6trAT7RQNNK2EG7SIwPWMNlCVytER0IPh7KX59Z0CnSKbGkv.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\karla\\v33\\qkB_XvYC6trAT7RQNNK2EG7SIwPWMNlCVytER0IPh7KX59Z0CnSKbGkv.woff2",
+      "contentType": "font/woff2",
+      "size": 24628
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/karla/v33/qkB9XvYC6trAT55ZBi1ueQVIjQTD-JrIH2G7nytkHRyQ8p4wUjm6bnEr.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\karla\\v33\\qkB9XvYC6trAT55ZBi1ueQVIjQTD-JrIH2G7nytkHRyQ8p4wUjm6bnEr.woff2",
+      "contentType": "font/woff2",
+      "size": 11956
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/karla/v33/qkB9XvYC6trAT55ZBi1ueQVIjQTD-JrIH2G7nytkHRyQ8p4wUje6bg.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\karla\\v33\\qkB9XvYC6trAT55ZBi1ueQVIjQTD-JrIH2G7nytkHRyQ8p4wUje6bg.woff2",
+      "contentType": "font/woff2",
+      "size": 24320
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/specialelite/v20/XLYgIZbkc4JPUL5CVArUVL0ntn4OSEFt.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\specialelite\\v20\\XLYgIZbkc4JPUL5CVArUVL0ntn4OSEFt.woff2",
+      "contentType": "font/woff2",
+      "size": 25196
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/specialelite/v20/XLYgIZbkc4JPUL5CVArUVL0ntnAOSA.woff2",
+      "path": "assets\\fonts.gstatic.com\\s\\specialelite\\v20\\XLYgIZbkc4JPUL5CVArUVL0ntnAOSA.woff2",
+      "contentType": "font/woff2",
+      "size": 53296
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/footer-img.jpg",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\footer-img.jpg",
+      "contentType": "image/jpeg",
+      "size": 41454
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/pics/dropdown_white.png",
+      "path": "assets\\www.espritinternationalschool.com\\pics\\dropdown_white.png",
+      "contentType": "image/png",
+      "size": 1492
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/b/continue_p18.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\b\\continue_p18.png",
+      "contentType": "image/png",
+      "size": 1902
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/rotating_images/player/loading.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\rotating_images\\player\\loading.gif",
+      "contentType": "image/gif",
+      "size": 404
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/rotating_images/player/prev.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\rotating_images\\player\\prev.png",
+      "contentType": "image/png",
+      "size": 1615
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/rotating_images/player/next.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\rotating_images\\player\\next.png",
+      "contentType": "image/png",
+      "size": 1619
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/pics/rotating_images/player/play.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\pics\\rotating_images\\player\\play.png",
+      "contentType": "image/png",
+      "size": 2207
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/bullets2.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\bullets2.png",
+      "contentType": "image/png",
+      "size": 1281
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/backward.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\backward.png",
+      "contentType": "image/png",
+      "size": 1462
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/forward.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\forward.png",
+      "contentType": "image/png",
+      "size": 1481
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/caret_active_black.gif",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\caret_active_black.gif",
+      "contentType": "image/gif",
+      "size": 1296
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/up.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\up.png",
+      "contentType": "image/png",
+      "size": 1502
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/down.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\down.png",
+      "contentType": "image/png",
+      "size": 1505
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/trans_bg.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\trans_bg.png",
+      "contentType": "image/png",
+      "size": 932
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/arrow.png",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\arrow.png",
+      "contentType": "image/png",
+      "size": 1012
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/spotlight/skins/simple/iepngfix.htc",
+      "path": "assets\\www.espritinternationalschool.com\\apps\\spotlight\\skins\\simple\\iepngfix.htc",
+      "contentType": "text/plain",
+      "size": 5029
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/fonts/fa-solid-900.woff",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\fonts\\fa-solid-900.woff",
+      "contentType": "application/font-woff",
+      "size": 96256
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/fonts/font-awesome.min.4.0.css",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\fonts\\font-awesome.min.4.0.css",
+      "contentType": "text/css",
+      "size": 31060
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/fonts/fontawesome-webfont.eot?v=4.7.0",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\fonts\\fontawesome-webfont.dc19594184.eot",
+      "contentType": "application/vnd.ms-fontobject",
+      "size": 37405
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/fonts/fontawesome-webfont.eot",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\fonts\\fontawesome-webfont.eot",
+      "contentType": "application/vnd.ms-fontobject",
+      "size": 37405
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/fonts/fontawesome-webfont.woff2?v=4.7.0",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\fonts\\fontawesome-webfont.dc19594184.woff2",
+      "contentType": "",
+      "size": 77160
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/fonts/fontawesome-webfont.woff?v=4.7.0",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\fonts\\fontawesome-webfont.dc19594184.woff",
+      "contentType": "application/font-woff",
+      "size": 43572
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/fonts/fontawesome-webfont.ttf?v=4.7.0",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\fonts\\fontawesome-webfont.dc19594184.ttf",
+      "contentType": "application/font-sfnt",
+      "size": 79076
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps-shared/fonts/fontawesome-webfont.svg?v=4.7.0",
+      "path": "assets\\www.espritinternationalschool.com\\apps-shared\\fonts\\fontawesome-webfont.dc19594184.svg",
+      "contentType": "image/svg+xml",
+      "size": 197829
+    }
+  ],
+  "errors": [
+    {
+      "url": "https://www.espritinternationalschool.com/apps/shared/iepngfix.htc",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/shared/pie.htc",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://www.espritinternationalschool.com/apps/shared/PIE.htc",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ]
+}
