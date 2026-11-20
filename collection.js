@@ -104,7 +104,7 @@ const MUSEUM = {
       "id": "w64",
       "title": "The Woodlands trolley",
       "room": "Objects",
-      "artist": null,
+      "artist": "Emmy and Penelope (shared keepsake)",
       "views": [
         {
           "file": "1000001861.jpg",
@@ -127,7 +127,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001863.jpg",
           "thumb": "thumb/1000001863.jpg"
         }
-      ]
+      ],
+      "note": "The Woodlands Township gave this model trolley to Emmy and Penelope."
     },
     {
       "id": "w35",
@@ -254,9 +255,9 @@ const MUSEUM = {
     },
     {
       "id": "w217",
-      "title": "“DAD MAN” birthday card",
+      "title": "“DAD MAN” — Penelope’s 2025 birthday letter to Dad",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_120300299.jpg",
@@ -272,13 +273,14 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260509_120313282.jpg",
           "thumb": "thumb/PXL_20260509_120313282.jpg"
         }
-      ]
+      ],
+      "note": "Penelope wrote this birthday letter to Dad in 2025."
     },
     {
       "id": "w220",
       "title": "Thread-bound leaf booklet",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142640360.jpg",
@@ -308,7 +310,8 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260509_142709533.jpg",
           "thumb": "thumb/PXL_20260509_142709533.jpg"
         }
-      ]
+      ],
+      "note": "Emmy made this thread-bound book of leaf drawings and rubbings at Esprit International School."
     },
     {
       "id": "w0",
@@ -563,7 +566,7 @@ const MUSEUM = {
       "id": "w16",
       "title": "Summer Song",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001548.jpg",
@@ -579,7 +582,9 @@ const MUSEUM = {
           "src": "assets/artwork/1000001549.jpg",
           "thumb": "thumb/1000001549.jpg"
         }
-      ]
+      ],
+      "note": "Penelope wrote Summer Song while visiting her grandpa in Spain during the summer between first and second grade. That same summer, she made a paper bag in an art class at MACA in Alicante.",
+      "relatedWork": "w225"
     },
     {
       "id": "w17",
@@ -830,7 +835,7 @@ const MUSEUM = {
       "id": "w30",
       "title": "Pizza Friday order form",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy and Penelope (shared keepsake)",
       "views": [
         {
           "file": "1000001575.jpg",
@@ -839,7 +844,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001575.jpg",
           "thumb": "thumb/1000001575.jpg"
         }
-      ]
+      ],
+      "note": "Emmy and Penelope packed their own lunches at Esprit International School. They loved Pizza Friday."
     },
     {
       "id": "w31",
@@ -905,7 +911,7 @@ const MUSEUM = {
       "id": "w34",
       "title": "Square and Cubing",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001582.jpg",
@@ -928,7 +934,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001584.jpg",
           "thumb": "thumb/1000001584.jpg"
         }
-      ]
+      ],
+      "note": "Penelope’s math work on squaring and cubing."
     },
     {
       "id": "w37",
@@ -1950,9 +1957,9 @@ const MUSEUM = {
     },
     {
       "id": "w99",
-      "title": "My Spelling Words booklet",
+      "title": "Penelope’s spelling test",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183803253.jpg",
@@ -1970,7 +1977,8 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_183813500.jpg",
           "thumb": "thumb/PXL_20260508_183813500.jpg"
         }
-      ]
+      ],
+      "note": "Penelope’s spelling test."
     },
     {
       "id": "w100",
@@ -2079,7 +2087,7 @@ const MUSEUM = {
       "id": "w105",
       "title": "Red paper pop-up surrounded by hearts",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_185936380.jpg",
@@ -2131,7 +2139,7 @@ const MUSEUM = {
       "id": "w108",
       "title": "Green felt ornament with a photograph",
       "room": "Objects",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190041756.jpg",
@@ -2288,7 +2296,7 @@ const MUSEUM = {
       "id": "w118",
       "title": "Pink unicorn cake with a flower crown",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190303716.jpg",
@@ -2570,18 +2578,19 @@ const MUSEUM = {
     },
     {
       "id": "w136",
-      "title": "Pencil grid with circles and crosses",
+      "title": "Dodgeball from The Heart of Mathematics",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190823615.jpg",
           "aliases": [],
-          "title": "Pencil grid with circles and crosses",
+          "title": "Dodgeball from The Heart of Mathematics",
           "src": "assets/artwork/PXL_20260508_190823615.jpg",
           "thumb": "thumb/PXL_20260508_190823615.jpg"
         }
-      ]
+      ],
+      "note": "Emmy drew this game of Dodgeball from the book The Heart of Mathematics."
     },
     {
       "id": "w137",
@@ -2631,7 +2640,7 @@ const MUSEUM = {
       "id": "w139",
       "title": "Pencil outline of a hand",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190917488.jpg",
@@ -3231,18 +3240,19 @@ const MUSEUM = {
     },
     {
       "id": "w177",
-      "title": "Black-and-white portrait of a smiling child",
+      "title": "Emmy at Chuck E. Cheese in The Woodlands",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194208596.jpg",
           "aliases": [],
-          "title": "Black-and-white portrait of a smiling child",
+          "title": "Emmy at Chuck E. Cheese in The Woodlands",
           "src": "assets/artwork/PXL_20260508_194208596.jpg",
           "thumb": "thumb/PXL_20260508_194208596.jpg"
         }
-      ]
+      ],
+      "note": "A portrait of Emmy from a trip to Chuck E. Cheese in The Woodlands, Texas."
     },
     {
       "id": "w178",
@@ -3963,7 +3973,7 @@ const MUSEUM = {
       "id": "w219",
       "title": "Pencil story about a secret in the library",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142549332.jpg",
@@ -4000,7 +4010,7 @@ const MUSEUM = {
       "id": "w222",
       "title": "Penelope lettering, a mermaid, and hearts",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142741002.jpg",
@@ -4015,7 +4025,7 @@ const MUSEUM = {
       "id": "w223",
       "title": "Broad pink and green painted shapes",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142752076.jpg",
@@ -4043,9 +4053,9 @@ const MUSEUM = {
     },
     {
       "id": "w225",
-      "title": "Brown paper bag with a Spanish reminder",
+      "title": "Penelope’s paper bag from MACA in Alicante",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142811959.jpg",
@@ -4061,13 +4071,15 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260509_142820770.jpg",
           "thumb": "thumb/PXL_20260509_142820770.jpg"
         }
-      ]
+      ],
+      "note": "Penelope made this bag in a class at MACA in Alicante, Spain, where anything could be art. She loved the class. It was the same summer she visited her grandpa and wrote Summer Song, between first and second grade.",
+      "relatedWork": "w16"
     },
     {
       "id": "w226",
       "title": "Yellow bear and honey pot",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142838951.jpg",
@@ -4097,7 +4109,7 @@ const MUSEUM = {
       "id": "w228",
       "title": "Class survey of favorite colors and shapes",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142922828.jpg",
@@ -4254,7 +4266,7 @@ const MUSEUM = {
       "id": "w238",
       "title": "Spelling test with “twirl” and “first”",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_144132069.jpg",

@@ -22,6 +22,10 @@ function openWork(id,index=0){
   $("large").src=view.src;$("large").alt=view.title;
   $("credit").textContent=work.artist||"Artist unconfirmed";
   $("objectNote").textContent=work.note||"";
+  if(work.relatedWork){
+    const related=byId.get(work.relatedWork);
+    $("objectNote").append(document.createElement("br"),button("View "+related.title,()=>openWork(related.id)));
+  }
   if(work.website){
     const link=document.createElement("a");
     link.href=work.website.url;
