@@ -20,3 +20,12 @@ body:has(#pavilion.expanded){overflow:hidden}
 #pavilion:is(:fullscreen,.expanded) .gallery-controls{flex:none}
 .schools div b{display:block;font-weight:600}.schools div a{font-size:.92em}
 #vrHelp{margin:0;padding:.55rem 5vw}.gallery-controls [hidden],#vrHelp[hidden]{display:none}
+
+#gardenMap{width:min(920px,96vw);max-height:90dvh;padding:18px 24px;background:#f5f2e9;color:#194235}
+#gardenMap h2,#gardenMap h3{font-family:Georgia,serif;margin:.25em 0}#gardenMap p{margin:8px 0 14px}
+#gardenCourts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:"pine . magnolia" ". pavilion ." "cypress . oak";gap:4px}
+#gardenCourts section{border:1px solid #aab3a3;padding:8px;background:#eeecdf}
+#gardenCourts section:nth-child(1){grid-area:pavilion}#gardenCourts section:nth-child(2){grid-area:pine}#gardenCourts section:nth-child(3){grid-area:magnolia}#gardenCourts section:nth-child(4){grid-area:cypress}#gardenCourts section:nth-child(5){grid-area:oak}
+#gardenCourts button{display:block;width:100%;text-align:left;border:0;background:transparent;color:#204535;padding:3px 4px;font-size:.85rem}
+#gardenCourts button:hover,#gardenCourts button[aria-current=true]{background:#d2ddcc}
+@media(max-width:650px){#gardenCourts{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"pavilion pavilion" "pine magnolia" "cypress oak"}}

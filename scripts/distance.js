@@ -43,7 +43,7 @@ export function createDistance(scene, redraw) {
   async function select(place,isNight){
     const type=place===2?"houston":place===0||place===3?"pines":"meadow";
     const key=type+(isNight?"-night":"");
-    uniforms.night.value=Number(isNight);
+    uniforms.night.value=Number(isNight);sky.material.color.setScalar(isNight?1.3:.76);
     if(key===activeKey)return;
     activeKey=key;
     const token=++generation;
@@ -66,7 +66,7 @@ export function createDistance(scene, redraw) {
     water.rotation.x=-Math.PI/2;water.position.set(0,-.27,-15.1);group.add(water);
   }
   function position(camera,seconds){
-    sky.position.x=camera.position.x;
+    sky.position.x=camera.position.x;sky.position.z=camera.position.z;
     uniforms.time.value=seconds;
   }
   return {select,addWater,position};

@@ -22,7 +22,7 @@ export function architecture() {
     const mesh=new T.Mesh(signPlane,labels.get(key));mesh.scale.set(width,height,1);mesh.position.set(x,y,z);mesh.rotation.y=angle;group.add(mesh);
   }
   const signPlane=new T.PlaneGeometry();
-  return function detail(group,place,owned) {
+  return function detail(group,place,owned,courtName) {
     const bins=new Map(), obj=new T.Object3D();
     function add(kind,color,x,y,z,w,h,d,rx=0,ry=0,rz=0){
       obj.position.set(x,y,z);obj.rotation.set(rx,ry,rz);obj.scale.set(w,h,d);obj.updateMatrix();
@@ -125,18 +125,10 @@ export function architecture() {
       ball(ebony,4.25,3.81,-6.13,.16,.15,.12);ball(ivory,4.14,3.94,-6.08,.085,.085,.05);ball(ebony,4.15,3.94,-6.03,.041,.041,.02);
       add("leaf",blue,3.88,2.74,-6.40,.16,.59,.14,0,0,-.19);
     }
-    // Facing back toward the promenade, visitors can read both adjoining destinations.
-    const stops=["Waterway boardwalk","Courthouse square","Space hangar","Montessori courtyard","Estrella patio"];
-    const room=Math.round(group.position.x/21), destinations=window.museumGallery.galleries;
-    const board=place===2?blue:pine;
-    for(const side of [-1,1]){
-      const next=destinations[room+side];
-      if(!next)continue;
-      const px=side*5.8;
-      b(oak,px,1.44,10.12,.15,2.88,.16);
-      b(board,px,2.72,10.12,3.5,.60,.13);
-      sign(group,side===1?"‹  "+stops[next.theme]:stops[next.theme]+"  ›",px,2.72,10.045,3.43,.54,"#29463b","#fff0ce",Math.PI);
-    }
+    // The marker faces visitors leaving the artwork for the garden.
+    b(oak,5.8,1.44,10.12,.15,2.88,.16);
+    b(pine,5.8,2.72,10.12,3.5,.60,.13);
+    sign(group,courtName,5.8,2.72,10.045,3.43,.54,"#29463b","#fff0ce",Math.PI);
     for(const px of [-3,3]){
       for(const end of [-.78,.78])b(ebony,px+end,.25,10.55,.12,.50,.43);
       for(let j=0;j<4;j++)b(oak,px,.52,10.32+j*.13,2.05,.085,.10);

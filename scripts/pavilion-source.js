@@ -2,6 +2,7 @@ import * as T from "three";
 import {architecture} from "./architecture.js";
 import {createDistance} from "./distance.js";
 import {enableHeadset} from "./headset.js";
+import {courts,rooms as positions,world,local,nearestRoom,onGardenPath} from "./garden-plan.js";
 const host=document.getElementById("scene");
 const fallback=document.getElementById("fallback");
 function launch(){
@@ -41,7 +42,14 @@ function launch(){
   const distance=createDistance(scene,draw);
   const dummy=new T.Object3D();
   const museum=window.museumGallery;
-  const spacing=21;
+  const paving=surface("#ae9e82",[6,6]);
+  for(const court of courts){
+    box(scene,court.x,-.18,court.z,24.4,.27,24.4,paving);
+    if(court.x){
+      const path=box(scene,court.x/2,-.21,court.z/2,5,.27,Math.hypot(court.x,court.z),paving);
+      path.rotation.y=Math.atan2(court.x,court.z);
+    }
+  }
   const frameGeometry=new T.PlaneGeometry(1,1);
   const hitTest=new T.Raycaster(),pointer=new T.Vector2();
   const shadeGeometry=new T.ConeGeometry(.4,.33,24,1,true);
@@ -162,12 +170,12 @@ function launch(){
   }
   function buildRoom(i){
     const description=museum.galleries[i],group=new T.Group(),frames=[];
-    group.position.x=i*spacing;scene.add(group);
+    const spot=positions[i];group.position.set(spot.x,0,spot.z);group.rotation.y=spot.angle;scene.add(group);
     const place=description.theme,holiday=[],owned=[];
     buildSetting(group,place);
     if(place>=3)box(group,0,-.18,1,21,.36,19,place===3?deck:tile);
     box(group,0,-.12,8.55,21,.24,3.2,place===0?dock:place===1||place===4?tile:deck);
-    addDetail(group,place,owned);
+    addDetail(group,place,owned,courts[spot.court].name);
     const lamps=[];
     description.walls.forEach((entries,wall)=>{
       const [x,z,angle]=wallPositions[wall],panel=new T.Group();
@@ -225,7 +233,7 @@ function launch(){
         const px=(j%cols-(count-1)/2)*(width-.7)/3;
         const py=entries.length===1?2.45:row===0?3.44:1.45;
         const ratio=FRAME_RATIOS[entry.view.file]||1;
-        const w=Math.min((width-.8)/3-.22,1.53*ratio),h=w/ratio;
+        const w=Math.min((width-.64)/3-.18,1.77*ratio),h=w/ratio;
         if(place===0){
           for(const dx of [-w*.34,w*.34])beam(panel,[px+dx,4.85,.10],[px+dx,py+h/2,.10],.018,bronze);
         }else if(place===1){
@@ -235,7 +243,7 @@ function launch(){
         }
         box(panel,px,py,.18,w+.2,h+.2,.11,edge);
         box(panel,px,py,.25,w+.13,h+.13,.045,matte);
-        const picture=new T.MeshStandardMaterial({color:0xffffff,roughness:.94,emissive:0xffffff,emissiveIntensity:.22});
+        const picture=new T.MeshBasicMaterial({color:0xffffff,toneMapped:false,fog:false});
         const face=new T.Mesh(frameGeometry,picture);
         face.scale.set(w,h,1);face.position.set(px,py,.282);face.userData.entry=entry;panel.add(face);frames.push(face);
         box(panel,px+w*.35,py-h*.5-.17,.175,.26,.075,.025,matte);
@@ -266,7 +274,7 @@ function launch(){
       const view=face.userData.entry.view;if(!view)continue;
       const tex=loader.load(window.localFrames?.[view.file]||view.thumb,()=>{if(!bay.retired)refreshPictures()});
       tex.colorSpace=T.SRGBColorSpace;
-      face.material.map=tex;face.material.emissiveMap=tex;face.material.needsUpdate=true;
+      face.material.map=tex;face.material.needsUpdate=true;
     }
   }
   function retire(bay){
@@ -278,24 +286,23 @@ function launch(){
     const light=new T.SpotLight(0xffd198,0,14,1.06,.65,1.25);
     scene.add(light,light.target);return light;
   });
-  let camX=0,destination=0,heading=0,aimHeading=0,pitch=0,frame=0,active=-1,wall=-1,ready=false;
-  let walkX=0,walkZ=7.6,crossing=false,lastTime=0;
+  let heading=0,aimHeading=0,pitch=0,frame=0,active=-1,wall=-1,ready=false;
+  let walkX=0,walkZ=2.8,crossing=false,lastTime=0;
   const held=new Set();
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   function draw(){
     if(!ready||renderer.xr.isPresenting)return;
-    camera.position.set(camX+walkX,1.78,walkZ);
+    camera.position.set(walkX,1.78,walkZ);
     camera.lookAt(camera.position.x+Math.sin(heading)*8,2.46+pitch,walkZ-Math.cos(heading)*8);
     distance.position(camera,reduced?0:performance.now()/1000);
-    sunlight.position.x=camX-12;sunlight.target.position.x=camX;
+
     renderer.render(scene,camera);
   }
   function animate(){
     frame=0;
-    camX+=(destination-camX)*.16;heading+=(aimHeading-heading)*.19;
-    if(Math.abs(destination-camX)<.018)camX=destination;
+    heading+=(aimHeading-heading)*.19;
     if(Math.abs(aimHeading-heading)<.002)heading=aimHeading;
-    movePlayer();draw();if(held.size||camX!==destination||heading!==aimHeading)frame=requestAnimationFrame(animate);
+    movePlayer();draw();if(held.size||heading!==aimHeading)frame=requestAnimationFrame(animate);
   }
   function resize(){
     if(renderer.xr.isPresenting)return;
@@ -305,39 +312,46 @@ function launch(){
   }
   function update({roomIndex,wallIndex,night}){
     if(active!==roomIndex){
-      const jump=Math.abs(roomIndex-active)>1;
-      for(const [i,bay] of suite)if(Math.abs(i-roomIndex)>1){retire(bay);suite.delete(i)}
-      for(let i=Math.max(0,roomIndex-1);i<=Math.min(museum.galleries.length-1,roomIndex+1);i++){
-        const bay=suite.get(i)||buildRoom(i);loadPictures(bay);
-      }
-      destination=roomIndex*spacing;camX=destination;
+      const spot=positions[roomIndex];
+      const nearby=positions.map((p,i)=>({i,d:Math.hypot(p.x-spot.x,p.z-spot.z)}))
+        .filter(({i,d})=>positions[i].court===spot.court||d<43);
+      const keep=new Set(nearby.map(item=>item.i));
+      for(const [i,bay] of suite)if(!keep.has(i)){retire(bay);suite.delete(i)}
+      for(const {i} of nearby){const bay=suite.get(i)||buildRoom(i);loadPictures(bay)}
     }
+    const spot=positions[roomIndex];
     if(!crossing && (active!==roomIndex||wall!==wallIndex||museum.visiting)){
-      walkX=0;walkZ=7.6;const [x,z]=wallPositions[wallIndex];heading=aimHeading=Math.atan2(x,walkZ-z);pitch=0;
+      const [x,z,a]=wallPositions[wallIndex];
+      const setback=wallIndex===0?5.65:4.9;
+      [walkX,walkZ]=world(spot,x+Math.sin(a)*setback,z+Math.cos(a)*setback);
+      heading=aimHeading=-a-spot.angle;pitch=.30;
     }
+    sunlight.target.position.set(spot.x,0,spot.z);sunlight.position.set(spot.x-12,18,spot.z+12);
+    document.getElementById("placeName").textContent=courts[spot.court].name+" · "+museum.galleries[roomIndex].venue.name;
     active=roomIndex;wall=wallIndex;
     scene.background.set(night?0x10203a:0xdce5d7);scene.fog.color.set(night?0x182d40:0xd8dfcc);
-    sunlight.color.set(night?0x95b5ff:0xfff0cf);sunlight.intensity=night?.42:2.6;
-    ambient.intensity=night?.45:1.9;ambient.color.set(night?0xa7badc:0xfff8eb);
+    sunlight.color.set(night?0x95b5ff:0xfff0cf);sunlight.intensity=night?.95:2.1;
+    ambient.intensity=night?1.48:1.8;ambient.color.set(night?0xc5cfe0:0xfff8eb);
     for(const bay of suite.values())for(const item of bay.holiday)item.visible=night;
     distance.select(museum.galleries[active].theme,night);
     globe.emissiveIntensity=night?3:.25;
     suite.get(active).lamps.forEach(([x,y,z,tx,ty,tz],j)=>{
-      const light=fixtures[j];light.position.set(destination+x,y,z);light.target.position.set(destination+tx,ty,tz);light.intensity=night?25:1.5;
+      const light=fixtures[j];const [lx,lz]=world(spot,x,z),[ax,az]=world(spot,tx,tz);light.position.set(lx,y,lz);light.target.position.set(ax,ty,az);light.intensity=night?13:1.2;
     });
     if(reduced)heading=aimHeading;
     if(!frame && !crossing)frame=requestAnimationFrame(animate);
   }
   function available(x,z){
-    if(z < -6.95 || z>9.75 || x< -10.15 || x>(museum.galleries.length-1)*spacing+10.15)return false;
-    const nearest=Math.max(0,Math.min(museum.galleries.length-1,Math.round(x/spacing)));
-    const local=x-nearest*spacing,place=museum.galleries[nearest].theme;
-    if(Math.abs(local)>9.95 && z<7.1)return false;
-    if(place===0 && Math.abs(local-4.05)<1.19 && Math.abs(z-4.65)<2.40)return false;
-    if(place===3 && local>5.1 && local<7 && z< -2.2)return false;
-    if(place===4 && Math.abs(Math.abs(local)-5.8)<1.6 && Math.abs(z+5.5)<.86)return false;
+    const i=nearestRoom(x,z),place=museum.galleries[i].theme;
+    const [roomX,roomZ]=local(positions[i],x,z);
+    if(onGardenPath(x,z) && (Math.abs(roomX)>9.95||roomZ>7.1))return true;
+    if(Math.abs(roomX)>10||roomZ < -6.95||roomZ>10.5)return false;
+    z=roomZ;
+    if(place===0 && Math.abs(roomX-4.05)<1.19 && Math.abs(z-4.65)<2.40)return false;
+    if(place===3 && roomX>5.1 && roomX<7 && z< -2.2)return false;
+    if(place===4 && Math.abs(Math.abs(roomX)-5.8)<1.6 && Math.abs(z+5.5)<.86)return false;
     return wallPositions.every(([cx,cz,a],i)=>{
-      const dx=local-cx,dz=z-cz;
+      const dx=roomX-cx,dz=z-cz;
       return Math.abs(dx*Math.cos(a)-dz*Math.sin(a))>(i?4.1:5)+.2 || Math.abs(dx*Math.sin(a)+dz*Math.cos(a))>.47;
     });
   }
@@ -349,12 +363,12 @@ function launch(){
     translate(f,r,heading,dt*3.35);
   }
   function translate(f,r,angle,step){
-    const distance=step/Math.max(1,Math.hypot(f,r)),x=camX+walkX;
+    const distance=step/Math.max(1,Math.hypot(f,r)),x=walkX;
     const nx=x+distance*(Math.sin(angle)*f+Math.cos(angle)*r),nz=walkZ+distance*(-Math.cos(angle)*f+Math.sin(angle)*r);
-    if(available(nx,walkZ))walkX=nx-camX;
-    if(available(camX+walkX,nz))walkZ=nz;
-    const absolute=camX+walkX,next=Math.round(absolute/spacing);
-    if(next!==active){crossing=true;walkX=absolute-next*spacing;museum.visit(next,0);crossing=false;}
+    if(available(nx,walkZ))walkX=nx;
+    if(available(walkX,nz))walkZ=nz;
+    const next=nearestRoom(walkX,walkZ);
+    if(next!==active){crossing=true;museum.visit(next,0);crossing=false}
   }
   function begin(key){held.add(key);if(!frame){lastTime=performance.now();frame=requestAnimationFrame(animate)}}
   const keyMap={arrowup:"w",arrowdown:"s",arrowleft:"a",arrowright:"d"};
@@ -391,8 +405,24 @@ function launch(){
     if(hit){const {id,index}=hit.object.userData.entry;museum.openWork(id,index)}
   });
   window.addEventListener("pavilion-view",e=>update(e.detail));
-  enableHeadset({renderer,scene,camera,pose:()=>({x:camX+walkX,z:walkZ,angle:heading}),
+  enableHeadset({renderer,scene,camera,pose:()=>({x:walkX,z:walkZ,angle:heading}),
     walk:translate,drawFlat:draw,resize,frames:()=>Array.from(suite.values()).flatMap(b=>b.frames),museum,distance});
+  const map=document.getElementById("gardenMap"),list=document.getElementById("gardenCourts");
+  for(const [c,court] of courts.entries()){
+    const section=document.createElement("section"),title=document.createElement("h3");
+    title.textContent=court.name;section.append(title);
+    for(let side=0;side<4;side++){
+      const i=c*4+side,room=museum.galleries[i],button=document.createElement("button");
+      button.textContent=(i+1)+" · "+room.venue.name;button.dataset.room=i;
+      button.onclick=()=>{map.close();museum.visit(i,0);host.focus({preventScroll:true})};section.append(button);
+    }
+    list.append(section);
+  }
+  document.getElementById("showMap").onclick=()=>{
+    for(const b of list.querySelectorAll("button"))b.setAttribute("aria-current",String(+b.dataset.room===active));
+    map.showModal();
+  };
+  document.getElementById("closeMap").onclick=()=>map.close();
   ready=true;fallback.hidden=true;resize();update(museum.current());new ResizeObserver(resize).observe(host);
 }
 try{launch()}catch(error){console.error(error);host.querySelector("canvas")?.remove();fallback.hidden=false;document.getElementById("sceneHelp").textContent="Choose a photograph from the wall list to open it."}
