@@ -4,7 +4,11 @@ const rooms = ["Studio", "Objects", "Family", "Schoolroom"];
 const byId = new Map(MUSEUM.works.map(w=>[w.id,w]));
 const wings = {Studio:"Studio",Objects:"Object gallery",Family:"Family gallery",Schoolroom:"Schoolroom"};
 const galleries=[];
-const wallNames=["Center wall","Left wall","Right wall"];
+const venues=[
+  {place:"The Woodlands",name:"Waterway boardwalk",stops:["Dockside easels","Left landing","Right landing"]},
+  {place:"Huntsville",name:"Courthouse square",stops:["Clock arcade","West arcade","East arcade"]},
+  {place:"Houston",name:"Space hangar",stops:["Launch deck","Port gantry","Starboard gantry"]}
+];
 const locations=new Map();
 for(const wing of rooms){
   const works=MUSEUM.works.filter(work=>work.room===wing);
@@ -19,7 +23,8 @@ for(const wing of rooms){
     frames.sort((a,b)=>Number(a.index>0)-Number(b.index>0));
     const n=Math.ceil(frames.length/3),left=Math.ceil((frames.length-n)/2);
     const walls=[frames.slice(0,n),frames.slice(n,n+left),frames.slice(n+left)];
-    const room={wing,title:wings[wing]+" "+(i+1),walls};
+    const theme=galleries.length%venues.length;
+    const room={wing,theme,venue:venues[theme],title:wings[wing]+" "+(i+1),walls};
     for(const [wall,entries] of walls.entries()){
       for(const entry of entries)locations.set(entry.view.file,{room:galleries.length,wall});
     }
@@ -35,17 +40,18 @@ function visit(index,wall=0){
   const room=galleries[roomIndex];
   wallIndex=room.walls[wall]?.length?wall:0;
   const entries=room.walls[wallIndex];
-  $("roomCount").textContent="Room "+(roomIndex+1)+" of "+galleries.length+" · "+wallNames[wallIndex];
-  $("roomName").textContent=room.title;
+  $("roomCount").textContent="Room "+(roomIndex+1)+" of "+galleries.length+" · "+room.venue.stops[wallIndex];
+  $("roomName").textContent=room.venue.name;
+  $("placeName").textContent=room.venue.place+" · "+room.title;
   $("roomPicker").value=String(roomIndex);
   for(const b of document.querySelectorAll("[data-wall]")){
-    const i=Number(b.dataset.wall);b.disabled=!room.walls[i].length;b.setAttribute("aria-pressed",String(i===wallIndex));
+    const i=Number(b.dataset.wall);b.textContent=room.venue.stops[i];b.disabled=!room.walls[i].length;b.setAttribute("aria-pressed",String(i===wallIndex));
   }
   $("wallList").replaceChildren(...entries.map(e=>button(e.view.title,()=>openWork(e.id,e.index))));
   $("fallback").src=entries[0].view.thumb;$("fallback").alt=entries[0].view.title;
   emitView();
 }
-for(const [index,room] of galleries.entries())$("roomPicker").add(new Option(room.title,String(index)));
+for(const [index,room] of galleries.entries())$("roomPicker").add(new Option(room.title+" · "+room.venue.place,String(index)));
 $("roomPicker").onchange=()=>visit(Number($("roomPicker").value));
 for(const b of document.querySelectorAll("[data-wall]"))b.onclick=()=>visit(roomIndex,Number(b.dataset.wall));
 function setLighting(){
