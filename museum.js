@@ -31,7 +31,7 @@ function openWork(id,index=0){
 function render(){
   const q=$("search").value.trim().toLowerCase();
   const matches=MUSEUM.works.filter(w=>(filter==="All"||w.room===filter)&&
-    [w.title,w.artist,w.note,...w.views.flatMap(v=>[v.file,...v.aliases,v.title])].join(" ").toLowerCase().includes(q));
+    [w.title,w.artist,...(MUSEUM.artistAliases?.[w.artist]||[]),w.note,...w.views.flatMap(v=>[v.file,...v.aliases,v.title])].join(" ").toLowerCase().includes(q));
   $("count").textContent=matches.length?Math.min(limit,matches.length)+" of "+matches.length+" works":"No matching works";
   $("grid").replaceChildren(...matches.slice(0,limit).map(w=>{
     const b=button("",()=>openWork(w.id));b.className="card";

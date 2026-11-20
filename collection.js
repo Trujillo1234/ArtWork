@@ -314,7 +314,7 @@ const MUSEUM = {
       "id": "w0",
       "title": "Spider-Man in red and blue",
       "room": "Studio",
-      "artist": "Opie",
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001531.jpg",
@@ -330,7 +330,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001532.jpg",
           "thumb": "thumb/1000001532.jpg"
         }
-      ]
+      ],
+      "note": "Signed Opie, the nickname her family uses for Penelope."
     },
     {
       "id": "w1",
@@ -352,7 +353,7 @@ const MUSEUM = {
       "id": "w2",
       "title": "Hearts and the name Opie Trujillo",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001534.jpg",
@@ -442,7 +443,7 @@ const MUSEUM = {
       "id": "w8",
       "title": "Penelope and 4th on black paper",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001540.jpg",
@@ -457,7 +458,7 @@ const MUSEUM = {
       "id": "w9",
       "title": "Family names in patterned block letters",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001541.jpg",
@@ -532,7 +533,7 @@ const MUSEUM = {
       "id": "w14",
       "title": "Happy Mother's Day, Mom",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001546.jpg",
@@ -651,7 +652,7 @@ const MUSEUM = {
       "id": "w21",
       "title": "Lettering on reused printed paper",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001555.jpg",
@@ -666,7 +667,7 @@ const MUSEUM = {
       "id": "w22",
       "title": "Carry My Heart With You and a heart key ring",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001556.jpg",
@@ -752,7 +753,7 @@ const MUSEUM = {
       "id": "w24",
       "title": "Family photographs on a handprint collage",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001566.jpg",
@@ -761,7 +762,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001566.jpg",
           "thumb": "thumb/1000001566.jpg"
         }
-      ]
+      ],
+      "note": "Penelope made this family photo poster for her Student of the Week celebration at Spanish Schoolhouse."
     },
     {
       "id": "w25",
@@ -812,7 +814,7 @@ const MUSEUM = {
       "id": "w28",
       "title": "Family photographs inside a gold border",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001571.jpg",
@@ -821,7 +823,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001571.jpg",
           "thumb": "thumb/1000001571.jpg"
         }
-      ]
+      ],
+      "note": "Penelope made this family photo poster for her Student of the Week celebration at Spanish Schoolhouse."
     },
     {
       "id": "w30",
@@ -842,7 +845,7 @@ const MUSEUM = {
       "id": "w31",
       "title": "I Love You, Mom and Dad plate",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001576.jpg",
@@ -851,7 +854,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001576.jpg",
           "thumb": "thumb/1000001576.jpg"
         }
-      ]
+      ],
+      "note": "Penelope made this plate in fourth grade at Esprit International School. Emmy made a plate of her own."
     },
     {
       "id": "w32",
@@ -930,7 +934,7 @@ const MUSEUM = {
       "id": "w37",
       "title": "Paper cutout with hearts and pencil lettering",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001589.jpg",
@@ -964,13 +968,13 @@ const MUSEUM = {
           "thumb": "thumb/PXL_20260508_182921775.jpg"
         }
       ],
-      "note": "Ms. Michele thanks Penelope for the picture, the note, and the candy, and tells her she loves being her teacher."
+      "note": "Ms. Michele thanks Penelope for the picture, the note, and the candy, and tells her she loves being her teacher. Ms. Michele was Penelope’s favorite teacher at Spanish Schoolhouse."
     },
     {
       "id": "w41",
       "title": "Flower frame around a photograph with a dog",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001627.jpg",
@@ -1052,7 +1056,7 @@ const MUSEUM = {
       "id": "w46",
       "title": "Classroom friendship map",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001843.jpg",
@@ -1067,7 +1071,7 @@ const MUSEUM = {
       "id": "w47",
       "title": "Pencil letter to Mom",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001844.jpg",
@@ -1097,7 +1101,7 @@ const MUSEUM = {
       "id": "w49",
       "title": "Hello Emmy with a dog photograph",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "1000001846.jpg",
@@ -1112,7 +1116,7 @@ const MUSEUM = {
       "id": "w50",
       "title": "Handwritten to-do list",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001847.jpg",
@@ -1127,7 +1131,7 @@ const MUSEUM = {
       "id": "w51",
       "title": "Penelope in a lattice of colored bands",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001848.jpg",
@@ -1262,7 +1266,7 @@ const MUSEUM = {
       "id": "w60",
       "title": "Looped black line on blocks of watercolor",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001857.jpg",
@@ -1623,7 +1627,7 @@ const MUSEUM = {
       "id": "w80",
       "title": "Fish beside a yellow shore",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_182940615.jpg",
@@ -1797,7 +1801,7 @@ const MUSEUM = {
           "thumb": "thumb/PXL_20260508_183413728.jpg"
         }
       ],
-      "note": "The next photograph in the camera sequence, taken seven seconds later, shows the name Claudia. The family identified Claudia as a friend of Penelope. The front and back pairing is provisional.",
+      "note": "The next photograph in the camera sequence, taken seven seconds later, shows the name Claudia. The family identified Claudia as Penelope’s best friend in third grade. The front and back pairing is provisional.",
       "relatedViews": [
         {
           "file": "PXL_20260508_183420032.jpg",
@@ -1843,7 +1847,7 @@ const MUSEUM = {
       "id": "w93",
       "title": "Gray rat on a green ground",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183458119.jpg",
@@ -1925,7 +1929,7 @@ const MUSEUM = {
       "id": "w98",
       "title": "Colorado Girl handprint painting",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183726845.jpg",
@@ -1941,7 +1945,8 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_183741985.jpg",
           "thumb": "thumb/PXL_20260508_183741985.jpg"
         }
-      ]
+      ],
+      "note": "Penelope made Colorado Girl in fourth grade when she learned she would be moving away. The back bears her family nickname, Opie, as well as Emmy’s name."
     },
     {
       "id": "w99",
@@ -2649,7 +2654,8 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_190931552.jpg",
           "thumb": "thumb/PXL_20260508_190931552.jpg"
         }
-      ]
+      ],
+      "note": "Emmy made her own Mom and Dad plate. Penelope’s fourth-grade plate is also in the collection."
     },
     {
       "id": "w142",
@@ -2933,7 +2939,7 @@ const MUSEUM = {
           "thumb": "thumb/PXL_20260508_192048743.jpg"
         }
       ],
-      "note": "The next photograph in the camera sequence, taken seven seconds later, shows the name Emilia. The family identified Emilia as a friend of Penelope. The front and back pairing is provisional.",
+      "note": "The next photograph in the camera sequence, taken seven seconds later, shows the name Emilia. The family identified Emilia as Penelope’s best friend at Spanish Schoolhouse. The front and back pairing is provisional.",
       "relatedViews": [
         {
           "file": "PXL_20260508_192055351.jpg",
@@ -4320,6 +4326,11 @@ const MUSEUM = {
       "w40",
       "w154",
       "w220"
+    ]
+  },
+  "artistAliases": {
+    "Penelope Trujillo": [
+      "Opie"
     ]
   }
 };
