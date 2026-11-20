@@ -14,7 +14,8 @@ function launch(){
   sunlight.position.set(-12,18,12);sunlight.castShadow=true;
   sunlight.shadow.mapSize.set(2048,2048);
   Object.assign(sunlight.shadow.camera,{left:-23,right:23,top:21,bottom:-20,far:70});
-  sunlight.shadow.normalBias=.022;scene.add(sunlight,sunlight.target,new T.HemisphereLight(0xfff8eb,0x99a591,1.9));
+  const ambient=new T.HemisphereLight(0xfff8eb,0x99a591,1.9);
+  sunlight.shadow.normalBias=.022;scene.add(sunlight,sunlight.target,ambient);
   const cube=new T.BoxGeometry(1,1,1);
   const material=color=>new T.MeshStandardMaterial({color,roughness:.88});
   function box(parent,x,y,z,w,h,d,mat){
@@ -34,11 +35,9 @@ function launch(){
   }
   const plaster=surface("#decfb9",[3,1]),floor=surface("#a49d8e",[14,6]),wood=surface("#915b37",[4,1],true);
   const bronze=material(0x363f36),matte=material(0xece6d7),edge=material(0x593e2b);
-  box(scene,24,-.16,2,78,.32,14,floor);
-  box(scene,24,-.38,0,160,.25,112,material(0x647c59));
-  box(scene,25,-.22,-14,144,.14,18,material(0x839f91));
-  for(let x=-15;x<69;x+=3.8)box(scene,x,.004,2,.014,.009,14,material(0x817b6e));
-  for(let z=-4;z<9;z+=3.4)box(scene,24,.005,z,78,.009,.014,material(0x817b6e));
+  const landscape=new T.Group();scene.add(landscape);
+  box(landscape,0,-.38,0,160,.25,112,material(0x647c59));
+  box(landscape,0,-.22,-14,144,.14,18,material(0x839f91));
   // Broad crowns and open trunks leave a view through the pines to the water.
   const bark=[],needles=[],twigs=[],tufts=[],ripples=[],dummy=new T.Object3D();
   function part(list,x,y,z,sx,sy,sz,rx,ry,rz,color){
@@ -63,58 +62,174 @@ function launch(){
       part(needles,x+Math.cos(a)*r,h*(.63+.36*t),z+Math.sin(a)*r,1+r*.26, .42+random()*.34,1+random()*.36,random()*.14,a,random()*.13,[0x304e37,0x3b5d3c,0x486643,0x577647][j%4]);
     }
   }
-  function instance(geom,list){const mesh=new T.InstancedMesh(geom,material(0xffffff),list.length);list.forEach(([m,c],i)=>{mesh.setMatrixAt(i,m);mesh.setColorAt(i,c)});scene.add(mesh)}
+  function instance(geom,list){const mesh=new T.InstancedMesh(geom,material(0xffffff),list.length);list.forEach(([m,c],i)=>{mesh.setMatrixAt(i,m);mesh.setColorAt(i,c)});landscape.add(mesh)}
   instance(new T.CylinderGeometry(.69,1,1,6),bark);instance(new T.IcosahedronGeometry(1,1),needles);
   instance(new T.CylinderGeometry(.55,1,1,5),twigs);instance(new T.IcosahedronGeometry(1,0),tufts);
   for(let j=0;j<1450;j++){
     part(ripples,random()*140-47,-.139+random()*.006,-5-random()*17,.14+random()*1.9,.004,.018+random()*.065,0,random()*.15,0,[0x9cae9c,0x8caa9e,0x78948b,0xb2c2ac][j%4]);
   }
   instance(cube,ripples);
-  const slots=[],ray=new T.Raycaster(),point=new T.Vector2(),textureLoader=new T.TextureLoader();
-  const order=["Studio","Objects","Family","Schoolroom"];
-  const matBoard=surface("#eee8d9",[1,1]);
-  for(let station=0;station<4;station++){
-    const x=station*18,room=order[station];
-    const wall=station===2?surface("#b49d80",[3,1]):plaster;
-    box(scene,x,2.47,-2.65,9.9,4.94,.38,wall);
-    box(scene,x,.085,-2.425,9.9,.17,.055,bronze);
-    for(let k=-2;k<=2;k++)box(scene,x+k*3.35,2.98,-3.42,.095,5.98,.11,bronze);
-    box(scene,x,5.5,-2.7,18,.19,.34,wood);
-    for(let j=-4;j<=4;j++)box(scene,x+j*1.94,5.85,1,.14,.32,10.5,wood);
-    box(scene,x,5.98,5.75,18,.25,.3,wood);
-    box(scene,x+1.65,.64,1.78,3.5,.17,.84,wood);
-    for(const dx of [-1.18,1.18])box(scene,x+1.65+dx,.29,1.78,.17,.58,.59,bronze);
-    MUSEUM.walls[room].forEach((id,i)=>{
-      const art=MUSEUM.textures[id],ratio=art.w/art.h;
-      const w=Math.min(2.52,2.18*ratio),h=w/ratio,px=x+(i-1)*3.13,py=2.56;
-      box(scene,px,py,-2.38,w+.26,h+.26,.17,edge);
-      box(scene,px,py,-2.28,w+.18,h+.18,.05,matBoard);
-      const tex=textureLoader.load(art.url,draw);tex.colorSpace=T.SRGBColorSpace;
-      const face=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({map:tex}));
-      face.position.set(px,py,-2.244);face.userData.id=id;scene.add(face);slots.push(face);
-      box(scene,px+w*.4,py-h/2-.32,-2.42,.33,.13,.02,matte);
+  const museum=window.museumGallery;
+  const spacing=21;
+  const wingFinishes={
+    Studio:plaster,
+    Objects:surface("#ad9178",[3,1]),
+    Family:surface("#c0c5aa",[3,1]),
+    Schoolroom:surface("#bec8c3",[3,1])
+  };
+  const frameGeometry=new T.PlaneGeometry(1,1);
+  const hitTest=new T.Raycaster(),pointer=new T.Vector2();
+  const shadeGeometry=new T.ConeGeometry(.4,.33,24,1,true);
+  const bulbGeometry=new T.SphereGeometry(.12,12,8);
+  const shade=material(0x37453c);shade.side=T.DoubleSide;
+  const globe=new T.MeshStandardMaterial({color:0xffefd6,emissive:0xffc680,emissiveIntensity:.2});
+  const suite=new Map();
+  // Each bay has an uninterrupted view to the pines between three freestanding walls.
+  const wallPositions=[[0,-2.9,0],[-7.55,.55,1.06],[7.55,.55,-1.06]];
+  const aims=wallPositions.map(([x,z])=>Math.atan2(x,4.45-z));
+  function buildRoom(i){
+    const description=museum.galleries[i],group=new T.Group(),frames=[];
+    group.position.x=i*spacing;scene.add(group);
+    const finish=wingFinishes[description.wing];
+    box(group,0,-.16,2,spacing,.32,15,floor);
+    for(let j=-2;j<=2;j++)box(group,j*4,.005,2,.012,.008,15,bronze);
+    for(let j=-4;j<=4;j++)box(group,j*2.22,6.38,1.2,.16,.32,11.5,wood);
+    for(const z of [-3.9,.8,6.4])box(group,0,6.13,z,spacing,.18,.24,wood);
+    for(const x of [-9.6,9.6]){
+      box(group,x,3.02,-3.9,.16,6.04,.16,bronze);
+      box(group,x,3.02,6.4,.16,6.04,.16,bronze);
+    }
+    box(group,2.35,.49,2.25,2.5,.13,.58,wood);
+    for(const x of [1.45,3.25])box(group,x,.22,2.25,.12,.44,.46,bronze);
+    const lamps=[];
+    description.walls.forEach((entries,wall)=>{
+      const [x,z,angle]=wallPositions[wall],panel=new T.Group();
+      panel.rotation.y=angle;panel.position.set(x,0,z);group.add(panel);
+      const width=wall===0?10:8.2;
+      box(panel,0,2.45,0,width,4.9,.26,finish);
+      box(panel,0,.1,.14,width,.2,.04,bronze);
+      const lampX=x+Math.sin(angle)*1.25, lampZ=z+Math.cos(angle)*1.25;
+      // A narrow crossbar carries the pendant cord between the timber rafters.
+      box(group,lampX,6.14,lampZ,2.3,.11,.13,wood);
+      box(group,lampX,5.52,lampZ,.025,1.22,.025,bronze);
+      const hood=new T.Mesh(shadeGeometry,shade);hood.position.set(lampX,4.79,lampZ);group.add(hood);
+      const bulb=new T.Mesh(bulbGeometry,globe);bulb.position.set(lampX,4.60,lampZ);group.add(bulb);
+      for(const side of [-1,1]){
+        const offset=side*(width*.30);
+        const px=lampX+Math.cos(angle)*offset,pz=lampZ-Math.sin(angle)*offset;
+        box(group,px,6.14,pz,2.3,.11,.13,wood);
+        box(group,px,5.48,pz,.018,1.28,.018,bronze);
+        const pendant=new T.Mesh(shadeGeometry,shade);pendant.scale.setScalar(.72);pendant.position.set(px,4.76,pz);group.add(pendant);
+        const lamp=new T.Mesh(bulbGeometry,globe);lamp.scale.setScalar(.76);lamp.position.set(px,4.63,pz);group.add(lamp);
+      }
+      lamps.push([lampX,4.50,lampZ,x,2.1,z]);
+      const cols=Math.min(3,Math.ceil(entries.length/2));
+      entries.forEach((entry,j)=>{
+        const row=Math.floor(j/cols),count=Math.min(cols,entries.length-row*cols);
+        const px=(j%cols-(count-1)/2)*(width-.7)/3;
+        const py=entries.length===1?2.45:row===0?3.44:1.45;
+        const ratio=FRAME_RATIOS[entry.view.file]||1;
+        const w=Math.min((width-.8)/3-.22,1.53*ratio),h=w/ratio;
+        box(panel,px,py,.18,w+.2,h+.2,.11,edge);
+        box(panel,px,py,.25,w+.13,h+.13,.045,matte);
+        const picture=new T.MeshStandardMaterial({color:0xffffff,roughness:.94,emissive:0xffffff,emissiveIntensity:.22});
+        const face=new T.Mesh(frameGeometry,picture);
+        face.scale.set(w,h,1);face.position.set(px,py,.282);face.userData.entry=entry;panel.add(face);frames.push(face);
+        box(panel,px+w*.35,py-h*.5-.17,.175,.26,.075,.025,matte);
+      });
     });
+    const bay={group,frames,lamps};suite.set(i,bay);return bay;
   }
-  let aim=0,camX=0,yaw=0,pitch=0,frame=0,ready=false;
+  const loader=new T.TextureLoader();
+  function loadPictures(bay){
+    if(bay.loaded)return;
+    bay.loaded=true;
+    for(const face of bay.frames){
+      const view=face.userData.entry.view;
+      const tex=loader.load(window.localFrames?.[view.file]||view.thumb,()=>{if(!bay.retired)draw()});
+      tex.colorSpace=T.SRGBColorSpace;
+      face.material.map=tex;face.material.emissiveMap=tex;face.material.needsUpdate=true;
+    }
+  }
+  function retire(bay){
+    bay.retired=true;scene.remove(bay.group);
+    for(const f of bay.frames){f.material.map?.dispose();f.material.dispose()}
+  }
+  const fixtures=wallPositions.map(()=>{
+    const light=new T.SpotLight(0xffd198,0,14,1.06,.65,1.25);
+    scene.add(light,light.target);return light;
+  });
+  const skyPoints=[];
+  for(let i=0;i<700;i++){
+    const a=random()*Math.PI*2,b=.06+random()*1.45;
+    skyPoints.push(89*Math.cos(b)*Math.sin(a),89*Math.sin(b),89*Math.cos(b)*Math.cos(a));
+  }
+  const starGeo=new T.BufferGeometry();starGeo.setAttribute("position",new T.Float32BufferAttribute(skyPoints,3));
+  const stars=new T.Points(starGeo,new T.PointsMaterial({color:0xf6e7bf,size:.105,fog:false}));
+  scene.add(stars);
+  const moon=new T.Mesh(new T.SphereGeometry(1.9,16,12),new T.MeshBasicMaterial({color:0xffe7bb,fog:false}));scene.add(moon);
+  let camX=0,destination=0,heading=0,aimHeading=0,pitch=0,frame=0,active=-1,wall=-1,ready=false;
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   function draw(){
     if(!ready)return;
-    const aspect=camera.aspect;
-    const depth=Math.max(7.6,5.55/Math.tan(camera.fov*Math.PI/360)/aspect);
-    camera.position.set(camX+2.5,2.12,depth-2.5);
-    camera.lookAt(camX-.22+yaw,2.62+pitch,-2.6);
-    sunlight.position.x=camX-12;sunlight.target.position.x=camX;
+    camera.position.set(camX+.18,2.38,4.45);
+    camera.lookAt(camX+.18+Math.sin(heading)*8,2.50+pitch,4.45-Math.cos(heading)*8);
+    landscape.position.x=camX;
+    sunlight.position.x=camX-12;sunlight.target.position.x=camX;stars.position.x=camX;moon.position.set(camX-33,15,-52);
     renderer.render(scene,camera);
   }
-  function step(){frame=0;camX+=(aim-camX)*.14;if(Math.abs(aim-camX)<.01)camX=aim;draw();if(camX!==aim)frame=requestAnimationFrame(step)}
-  function resize(){let w=host.clientWidth,h=host.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false);draw()}
-  function update(room){aim=order.indexOf(room)*18;yaw=pitch=0;if(reduced)camX=aim;if(!frame)step()}
-  let start=null,moved=false;
-  host.addEventListener("pointerdown",e=>{start=[e.clientX,e.clientY,yaw,pitch];moved=false;host.setPointerCapture(e.pointerId)});
-  host.addEventListener("pointermove",e=>{if(!start)return;const dx=e.clientX-start[0],dy=e.clientY-start[1];if(Math.abs(dx)+Math.abs(dy)>6)moved=true;if(moved){yaw=T.MathUtils.clamp(start[2]-dx*.017,-4,4);pitch=T.MathUtils.clamp(start[3]+dy*.011,-1.1,1.8);draw()}});
-  host.addEventListener("pointercancel",()=>{start=null});
-  host.addEventListener("pointerup",e=>{if(!start)return;start=null;if(moved)return;const r=host.getBoundingClientRect();point.set((e.clientX-r.left)/r.width*2-1,1-(e.clientY-r.top)/r.height*2);ray.setFromCamera(point,camera);const hit=ray.intersectObjects(slots,false)[0];if(hit)window.museumGallery.openWork(hit.object.userData.id)});
-  window.addEventListener("hang-gallery",e=>update(e.detail));ready=true;fallback.hidden=true;resize();new ResizeObserver(resize).observe(host);
-  update(window.museumGallery.current());
+  function animate(){
+    frame=0;
+    camX+=(destination-camX)*.16;heading+=(aimHeading-heading)*.19;
+    if(Math.abs(destination-camX)<.018)camX=destination;
+    if(Math.abs(aimHeading-heading)<.002)heading=aimHeading;
+    draw();if(camX!==destination||heading!==aimHeading)frame=requestAnimationFrame(animate);
+  }
+  function resize(){
+    const w=host.clientWidth,h=host.clientHeight;camera.aspect=w/h;
+    camera.fov=T.MathUtils.radToDeg(2*Math.atan(Math.max(.43,.72/camera.aspect)));
+    camera.updateProjectionMatrix();renderer.setSize(w,h,false);draw();
+  }
+  function update({roomIndex,wallIndex,night}){
+    if(active!==roomIndex){
+      const jump=Math.abs(roomIndex-active)>1;
+      for(const [i,bay] of suite)if(Math.abs(i-roomIndex)>1){retire(bay);suite.delete(i)}
+      for(let i=Math.max(0,roomIndex-1);i<=Math.min(museum.galleries.length-1,roomIndex+1);i++){
+        const bay=suite.get(i)||buildRoom(i);loadPictures(bay);
+      }
+      destination=roomIndex*spacing;if(jump||reduced)camX=destination;
+    }
+    if(active!==roomIndex||wall!==wallIndex){aimHeading=aims[wallIndex];pitch=0}
+    active=roomIndex;wall=wallIndex;
+    scene.background.set(night?0x10203a:0xdce5d7);scene.fog.color.set(night?0x182d40:0xd8dfcc);
+    sunlight.color.set(night?0x95b5ff:0xfff0cf);sunlight.intensity=night?.42:2.6;
+    ambient.intensity=night?.45:1.9;ambient.color.set(night?0xa7badc:0xfff8eb);
+    globe.emissiveIntensity=night?3:.25;stars.visible=moon.visible=night;
+    suite.get(active).lamps.forEach(([x,y,z,tx,ty,tz],j)=>{
+      const light=fixtures[j];light.position.set(destination+x,y,z);light.target.position.set(destination+tx,ty,tz);light.intensity=night?37:1.8;
+    });
+    if(reduced)heading=aimHeading;
+    if(!frame)animate();
+  }
+  let down=null,moved=false;
+  host.addEventListener("pointerdown",e=>{down=[e.clientX,e.clientY,heading,pitch];moved=false;host.setPointerCapture(e.pointerId)});
+  host.addEventListener("pointermove",e=>{
+    if(!down)return;const dx=e.clientX-down[0],dy=e.clientY-down[1];
+    if(Math.abs(dx)+Math.abs(dy)>5)moved=true;
+    if(moved){heading=aimHeading=T.MathUtils.clamp(down[2]-dx*.005,-1.65,1.65);pitch=T.MathUtils.clamp(down[3]+dy*.018,-2.6,3);draw()}
+  });
+  host.addEventListener("pointercancel",()=>{down=null});
+  host.addEventListener("pointerup",e=>{
+    if(!down)return;down=null;
+    if(moved){const closest=aims.reduce((best,a,i)=>Math.abs(a-heading)<Math.abs(aims[best]-heading)?i:best,0);
+      if(closest!==wall && museum.galleries[active].walls[closest].length)museum.visit(active,closest);return}
+    const r=host.getBoundingClientRect();
+    pointer.set((e.clientX-r.left)/r.width*2-1,1-(e.clientY-r.top)/r.height*2);
+    hitTest.setFromCamera(pointer,camera);
+    const hit=hitTest.intersectObjects(suite.get(active).frames,false)[0];
+    if(hit){const {id,index}=hit.object.userData.entry;museum.openWork(id,index)}
+  });
+  window.addEventListener("pavilion-view",e=>update(e.detail));
+  ready=true;fallback.hidden=true;resize();update(museum.current());new ResizeObserver(resize).observe(host);
 }
-try{launch()}catch(error){console.error(error);host.querySelector("canvas")?.remove();fallback.hidden=false;document.getElementById("sceneHelp").textContent="Choose a work from the wall list to see it up close."}
+try{launch()}catch(error){console.error(error);host.querySelector("canvas")?.remove();fallback.hidden=false;document.getElementById("sceneHelp").textContent="Choose a photograph from the wall list to open it."}
