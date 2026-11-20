@@ -7,7 +7,9 @@ const galleries=[];
 const venues=[
   {place:"The Woodlands",name:"Waterway boardwalk",stops:["Dockside easels","Left landing","Right landing"]},
   {place:"Huntsville",name:"Courthouse square",stops:["Clock arcade","West arcade","East arcade"]},
-  {place:"Houston",name:"Space hangar",stops:["Launch deck","Port gantry","Starboard gantry"]}
+  {place:"Houston",name:"Space hangar",stops:["Launch deck","Port gantry","Starboard gantry"]},
+  {place:"Esprit International School",name:"Montessori courtyard",stops:["Courtyard","Covered walk","Garden walk"]},
+  {place:"Spanish Schoolhouse",name:"Estrella de la Semana patio",stops:["Estrella display","Reading table","Art table"]}
 ];
 const locations=new Map();
 for(const wing of rooms){
@@ -49,7 +51,9 @@ function visit(index,wall=0){
   }
   $("wallList").replaceChildren(...entries.map(e=>button(e.view.title,()=>openWork(e.id,e.index))));
   $("fallback").src=entries[0].view.thumb;$("fallback").alt=entries[0].view.title;
+  if(window.museumGallery)window.museumGallery.visiting=true;
   emitView();
+  if(window.museumGallery)window.museumGallery.visiting=false;
 }
 for(const [index,room] of galleries.entries())$("roomPicker").add(new Option(room.title+" · "+room.venue.place,String(index)));
 $("roomPicker").onchange=()=>visit(Number($("roomPicker").value));
@@ -111,7 +115,5 @@ $("search").oninput=()=>{limit=24;render()};$("more").onclick=()=>{limit+=24;ren
 $("close").onclick=()=>$("viewer").close();
 $("viewer").onclick=e=>{if(e.target===$("viewer")){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}};
 $("back").onclick=()=>visit(roomIndex-1);$("next").onclick=()=>visit(roomIndex+1);
-$("scene").onkeydown=e=>{if(["ArrowLeft","ArrowRight"].includes(e.key)){e.preventDefault();visit(roomIndex+(e.key==="ArrowRight"?1:-1))}};
 window.museumGallery={current,galleries,visit,openWork,byId};
 visit(0);setLighting();render();
-

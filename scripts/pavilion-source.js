@@ -1,4 +1,5 @@
 import * as T from "three";
+import {architecture} from "./architecture.js";
 const host=document.getElementById("scene");
 const fallback=document.getElementById("fallback");
 function launch(){
@@ -117,10 +118,6 @@ function launch(){
       }
       // A low boardwalk crossing and a green-and-cream trolley beyond the exhibition.
       box(group,0,.26,-10,20,.24,2.3,dock);
-      box(group,1.4,1.30,-10,4.5,1.5,1.55,materialTrolley);
-      box(group,1.4,2.10,-10,4.74,.19,1.75,cream);
-      for(let j=0;j<6;j++)box(group,-.42+j*.72,1.65,-9.21,.53,.54,.04,cityGlass);
-      for(const x of [-.1,2.9])shape(group,globeShape,asphalt,x,.53,-9.33,.35,.35,.16);
     }else if(place===1){
       box(group,0,-.18,1,21,.36,18,tile);
       for(let j=-9;j<10;j+=1.2)box(group,j,.01,1,.018,.01,18,cream);
@@ -132,7 +129,7 @@ function launch(){
       box(group,2.8,5.99,-10.35,.07,.49,.04,bronze);box(group,2.99,5.72,-10.35,.38,.07,.04,bronze);
       shape(group,tip,copper,2.8,7.85,-12,2.45,2.05,2.45);shape(group,tube,cream,2.8,9.13,-12,.05,.83,.05);
       for(const x of [-4.7,-3,3,4.7])box(group,x,2.6,-10.22,1.03,2,.08,cityGlass);
-    }else{
+    }else if(place===2){
       box(group,0,-.16,0,21,.32,18,deck);
       for(const x of [-8.2,8.2]){
         box(group,x,.015,0,.1,.02,16,orange);
@@ -154,7 +151,7 @@ function launch(){
       }
     }
   }
-  const materialTrolley=material(0x315e48);
+  const addDetail=architecture();
   const palettes=[[0xff4149,0xffcc64,0x38e6a2,0x6eacff],[0xffbd66,0xff425c,0xffeaa0,0x5dde99],[0x79dfff,0xff548c,0xffe89a,0x8da1ff]];
   const glowCanvas=document.createElement("canvas");glowCanvas.width=glowCanvas.height=64;
   const gc=glowCanvas.getContext("2d"),grad=gc.createRadialGradient(32,32,0,32,32,32);
@@ -167,7 +164,7 @@ function launch(){
     for(let i=0;i<=36;i++){
       const t=i/36,x=(t-.5)*width,y=5.02-.53*Math.sin(t*Math.PI)**2,z=.50;
       wire.push(new T.Vector3(x,y,z));
-      if(i%2===0){points.push(x,y-.055,z);const color=new T.Color(palettes[place][i/2%4]);colors.push(color.r,color.g,color.b)}
+      if(i%2===0){points.push(x,y-.055,z);const color=new T.Color(palettes[place%palettes.length][i/2%4]);colors.push(color.r,color.g,color.b)}
     }
     const cord=new T.BufferGeometry().setFromPoints(wire);owned.push(cord);panel.add(new T.Line(cord,wireMat));
     const g=new T.BufferGeometry();g.setAttribute("position",new T.Float32BufferAttribute(points,3));g.setAttribute("color",new T.Float32BufferAttribute(colors,3));owned.push(g);
@@ -185,6 +182,9 @@ function launch(){
     group.position.x=i*spacing;scene.add(group);
     const place=description.theme,holiday=[],owned=[];
     buildSetting(group,place);
+    if(place>=3)box(group,0,-.18,1,21,.36,19,place===3?deck:tile);
+    box(group,0,-.12,8.55,21,.24,3.2,place===0?dock:place===1||place===4?tile:deck);
+    addDetail(group,place,owned);
     const lamps=[];
     description.walls.forEach((entries,wall)=>{
       const [x,z,angle]=wallPositions[wall],panel=new T.Group();
@@ -205,6 +205,11 @@ function launch(){
           box(panel,cx,3.35,-.12,.51,.21,.51,cream);
         }
         box(panel,0,4.96,-.14,width+.48,.24,.46,brick);
+      }else if(place>=3){
+        const frame=place===3?steel:wood;
+        for(const side of [-1,1])box(panel,side*(width/2-.08),2.45,0,.14,4.9,.17,frame);
+        for(const h of [.56,2.44,4.84])box(panel,0,h,-.04,width,.10,.14,frame);
+        box(panel,0,5,-.04,width+.30,.14,place===3?.74:.30,place===3?orange:cream);
       }else{
         shape(panel,hoop,steel,0,2.58,-.28,width*.51,2.67,.8);
         for(const h of [.62,2.4,4.35])box(panel,0,h,-.18,width,.12,.18,steel);
@@ -252,14 +257,23 @@ function launch(){
         box(panel,px+w*.35,py-h*.5-.17,.175,.26,.075,.025,matte);
       });
     });
+    if(place===0){
+      const trolleyWork=[...museum.byId.values()].find(work=>work.title==="The Woodlands trolley");
+      if(trolleyWork){
+        const target=new T.Mesh(cube,hitOnly);
+        target.scale.set(1.75,2.1,4.14);target.position.set(4.05,1.34,4.65);
+        target.userData.entry={id:trolleyWork.id,index:0};group.add(target);frames.push(target);
+      }
+    }
     const bay={group,frames,lamps,holiday,owned};suite.set(i,bay);return bay;
   }
+  const hitOnly=new T.MeshBasicMaterial({visible:false});
   const loader=new T.TextureLoader();
   function loadPictures(bay){
     if(bay.loaded)return;
     bay.loaded=true;
     for(const face of bay.frames){
-      const view=face.userData.entry.view;
+      const view=face.userData.entry.view;if(!view)continue;
       const tex=loader.load(window.localFrames?.[view.file]||view.thumb,()=>{if(!bay.retired)draw()});
       tex.colorSpace=T.SRGBColorSpace;
       face.material.map=tex;face.material.emissiveMap=tex;face.material.needsUpdate=true;
@@ -268,7 +282,7 @@ function launch(){
   function retire(bay){
     for(const resource of bay.owned)resource.dispose();
     bay.retired=true;scene.remove(bay.group);
-    for(const f of bay.frames){f.material.map?.dispose();f.material.dispose()}
+    for(const f of bay.frames){if(f.material===hitOnly)continue;f.material.map?.dispose();f.material.dispose()}
   }
   const fixtures=wallPositions.map(()=>{
     const light=new T.SpotLight(0xffd198,0,14,1.06,.65,1.25);
@@ -284,11 +298,13 @@ function launch(){
   scene.add(stars);
   const moon=new T.Mesh(new T.SphereGeometry(1.9,16,12),new T.MeshBasicMaterial({color:0xffe7bb,fog:false}));scene.add(moon);
   let camX=0,destination=0,heading=0,aimHeading=0,pitch=0,frame=0,active=-1,wall=-1,ready=false;
+  let walkX=0,walkZ=7.6,crossing=false,lastTime=0;
+  const held=new Set();
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   function draw(){
     if(!ready)return;
-    camera.position.set(camX+.18,2.35,5.0);
-    camera.lookAt(camX+.18+Math.sin(heading)*8,3.18+pitch,5.0-Math.cos(heading)*8);
+    camera.position.set(camX+walkX,1.78,walkZ);
+    camera.lookAt(camera.position.x+Math.sin(heading)*8,2.46+pitch,walkZ-Math.cos(heading)*8);
     landscape.position.x=camX;
     sunlight.position.x=camX-12;sunlight.target.position.x=camX;stars.position.x=camX;moon.position.set(camX-33,15,-52);
     renderer.render(scene,camera);
@@ -298,7 +314,7 @@ function launch(){
     camX+=(destination-camX)*.16;heading+=(aimHeading-heading)*.19;
     if(Math.abs(destination-camX)<.018)camX=destination;
     if(Math.abs(aimHeading-heading)<.002)heading=aimHeading;
-    draw();if(camX!==destination||heading!==aimHeading)frame=requestAnimationFrame(animate);
+    movePlayer();draw();if(held.size||camX!==destination||heading!==aimHeading)frame=requestAnimationFrame(animate);
   }
   function resize(){
     const w=host.clientWidth,h=host.clientHeight;camera.aspect=w/h;
@@ -312,9 +328,11 @@ function launch(){
       for(let i=Math.max(0,roomIndex-1);i<=Math.min(museum.galleries.length-1,roomIndex+1);i++){
         const bay=suite.get(i)||buildRoom(i);loadPictures(bay);
       }
-      destination=roomIndex*spacing;if(jump||reduced)camX=destination;
+      destination=roomIndex*spacing;camX=destination;
     }
-    if(active!==roomIndex||wall!==wallIndex){aimHeading=aims[wallIndex];pitch=0}
+    if(!crossing && (active!==roomIndex||wall!==wallIndex||museum.visiting)){
+      walkX=0;walkZ=7.6;const [x,z]=wallPositions[wallIndex];heading=aimHeading=Math.atan2(x,walkZ-z);pitch=0;
+    }
     active=roomIndex;wall=wallIndex;
     scene.background.set(night?0x10203a:0xdce5d7);scene.fog.color.set(night?0x182d40:0xd8dfcc);
     sunlight.color.set(night?0x95b5ff:0xfff0cf);sunlight.intensity=night?.42:2.6;
@@ -327,24 +345,60 @@ function launch(){
       const light=fixtures[j];light.position.set(destination+x,y,z);light.target.position.set(destination+tx,ty,tz);light.intensity=night?25:1.5;
     });
     if(reduced)heading=aimHeading;
-    if(!frame)animate();
+    if(!frame && !crossing)frame=requestAnimationFrame(animate);
+  }
+  function available(x,z){
+    if(z < -6.95 || z>9.75 || x< -10.15 || x>(museum.galleries.length-1)*spacing+10.15)return false;
+    const nearest=Math.max(0,Math.min(museum.galleries.length-1,Math.round(x/spacing)));
+    const local=x-nearest*spacing,place=museum.galleries[nearest].theme;
+    if(Math.abs(local)>9.95 && z<7.1)return false;
+    if(place===0 && Math.abs(local-4.05)<1.19 && Math.abs(z-4.65)<2.40)return false;
+    if(place===3 && local>5.1 && local<7 && z< -2.2)return false;
+    if(place===4 && Math.abs(Math.abs(local)-5.8)<1.6 && Math.abs(z+5.5)<.86)return false;
+    return wallPositions.every(([cx,cz,a],i)=>{
+      const dx=local-cx,dz=z-cz;
+      return Math.abs(dx*Math.cos(a)-dz*Math.sin(a))>(i?4.1:5)+.2 || Math.abs(dx*Math.sin(a)+dz*Math.cos(a))>.47;
+    });
+  }
+  function movePlayer(){
+    const now=performance.now(),dt=Math.min(.05,(now-lastTime)/1000);lastTime=now;
+    if(!held.size)return;
+    const f=Number(held.has("w"))-Number(held.has("s")),r=Number(held.has("d"))-Number(held.has("a"));
+    heading=aimHeading+=dt*1.55*(Number(held.has("e"))-Number(held.has("q")));
+    const distance=dt*3.35/Math.max(1,Math.hypot(f,r)),x=camX+walkX;
+    const nx=x+distance*(Math.sin(heading)*f+Math.cos(heading)*r),nz=walkZ+distance*(-Math.cos(heading)*f+Math.sin(heading)*r);
+    if(available(nx,walkZ))walkX=nx-camX;
+    if(available(camX+walkX,nz))walkZ=nz;
+    const absolute=camX+walkX,next=Math.round(absolute/spacing);
+    if(next!==active){crossing=true;walkX=absolute-next*spacing;museum.visit(next,0);crossing=false;}
+  }
+  function begin(key){held.add(key);if(!frame){lastTime=performance.now();frame=requestAnimationFrame(animate)}}
+  const keyMap={arrowup:"w",arrowdown:"s",arrowleft:"a",arrowright:"d"};
+  function key(e){const k=e.key.toLowerCase();return keyMap[k]||k}
+  host.onkeydown=e=>{const k=key(e);if("wasdqe".split("").includes(k)&&!e.ctrlKey&&!e.metaKey&&!e.altKey){e.preventDefault();begin(k)}};
+  window.addEventListener("keyup",e=>held.delete(key(e)));
+  host.addEventListener("blur",()=>held.clear());window.addEventListener("blur",()=>held.clear());
+  document.addEventListener("visibilitychange",()=>held.clear());
+  for(const button of document.querySelectorAll("[data-step]")){
+    button.onpointerdown=e=>{e.preventDefault();host.focus({preventScroll:true});button.setPointerCapture(e.pointerId);begin(button.dataset.step)};
+    button.onlostpointercapture=()=>held.delete(button.dataset.step);
+    button.onclick=e=>{if(e.detail===0){begin(button.dataset.step);setTimeout(()=>held.delete(button.dataset.step),200)}};
   }
   let down=null,moved=false;
-  host.addEventListener("pointerdown",e=>{down=[e.clientX,e.clientY,heading,pitch];moved=false;host.setPointerCapture(e.pointerId)});
+  host.addEventListener("pointerdown",e=>{host.focus({preventScroll:true});down=[e.clientX,e.clientY,heading,pitch];moved=false;host.setPointerCapture(e.pointerId)});
   host.addEventListener("pointermove",e=>{
     if(!down)return;const dx=e.clientX-down[0],dy=e.clientY-down[1];
     if(Math.abs(dx)+Math.abs(dy)>5)moved=true;
-    if(moved){heading=aimHeading=T.MathUtils.clamp(down[2]-dx*.005,-1.65,1.65);pitch=T.MathUtils.clamp(down[3]+dy*.018,-2.6,3);draw()}
+    if(moved){heading=aimHeading=down[2]-dx*.005;pitch=T.MathUtils.clamp(down[3]+dy*.018,-12,15);draw()}
   });
   host.addEventListener("pointercancel",()=>{down=null});
   host.addEventListener("pointerup",e=>{
     if(!down)return;down=null;
-    if(moved){const closest=aims.reduce((best,a,i)=>Math.abs(a-heading)<Math.abs(aims[best]-heading)?i:best,0);
-      if(closest!==wall && museum.galleries[active].walls[closest].length)museum.visit(active,closest);return}
+    if(moved)return;
     const r=host.getBoundingClientRect();
     pointer.set((e.clientX-r.left)/r.width*2-1,1-(e.clientY-r.top)/r.height*2);
     hitTest.setFromCamera(pointer,camera);
-    const hit=hitTest.intersectObjects(suite.get(active).frames,false)[0];
+    const hit=hitTest.intersectObjects(Array.from(suite.values()).flatMap(b=>b.frames),false)[0];
     if(hit){const {id,index}=hit.object.userData.entry;museum.openWork(id,index)}
   });
   window.addEventListener("pavilion-view",e=>update(e.detail));
