@@ -3092,7 +3092,7 @@ const MUSEUM = {
       "id": "w168",
       "title": "Blue graduation cap with tassel",
       "room": "Objects",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_192519472.jpg",
@@ -3114,7 +3114,7 @@ const MUSEUM = {
       "id": "w169",
       "title": "Blue paper cutout with lettering",
       "room": "Objects",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_192535283.jpg",
@@ -3386,7 +3386,7 @@ const MUSEUM = {
       "id": "w183",
       "title": "Emmy’s gold-edged graduation decoration",
       "room": "Objects",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194450815.jpg",
@@ -3445,7 +3445,7 @@ const MUSEUM = {
       "id": "w186",
       "title": "Orange and green parrot, mounted photograph",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194548624.jpg",
@@ -3467,7 +3467,7 @@ const MUSEUM = {
       "id": "w187",
       "title": "Emmy’s Venezuela classroom name card",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260508_194610603.jpg",
@@ -3480,33 +3480,35 @@ const MUSEUM = {
     },
     {
       "id": "w188",
-      "title": "Two matching photo-booth strips",
+      "title": "Emmy and Penelope at the arcade in The Woodlands",
       "room": "Family",
-      "artist": null,
+      "artist": "Family photograph",
       "views": [
         {
           "file": "PXL_20260508_194644932.jpg",
           "aliases": [],
-          "title": "Two matching photo-booth strips",
+          "title": "Emmy and Penelope at the arcade in The Woodlands",
           "src": "assets/artwork/PXL_20260508_194644932.jpg",
           "thumb": "thumb/PXL_20260508_194644932.jpg"
         }
-      ]
+      ],
+      "note": "These matching photo-booth strips are from a trip to the arcade in The Woodlands with Emmy and Penelope."
     },
     {
       "id": "w189",
-      "title": "Group portrait at Ice Castles",
+      "title": "Family trip to the Ice Castles in Colorado",
       "room": "Family",
-      "artist": null,
+      "artist": "Family photograph",
       "views": [
         {
           "file": "PXL_20260508_194702995.jpg",
           "aliases": [],
-          "title": "Group portrait at Ice Castles",
+          "title": "Family trip to the Ice Castles in Colorado",
           "src": "assets/artwork/PXL_20260508_194702995.jpg",
           "thumb": "thumb/PXL_20260508_194702995.jpg"
         }
-      ]
+      ],
+      "note": "A group photograph from the family’s Colorado trip to the Ice Castles."
     },
     {
       "id": "w190",
@@ -3557,7 +3559,7 @@ const MUSEUM = {
       "id": "w193",
       "title": "“I ♥ U” sign with a flying heart",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115551150.jpg",
@@ -3572,7 +3574,7 @@ const MUSEUM = {
       "id": "w194",
       "title": "“Queen of queens” with patterned hearts",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115556887.jpg",
@@ -3587,7 +3589,7 @@ const MUSEUM = {
       "id": "w195",
       "title": "Multicolored wolf face",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115609917.jpg",
@@ -3624,7 +3626,7 @@ const MUSEUM = {
       "id": "w197",
       "title": "Penelope’s Mexico classroom cover",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260509_115639677.jpg",
@@ -3654,7 +3656,7 @@ const MUSEUM = {
       "id": "w199",
       "title": "Penelope’s alphabet name strip",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115729838.jpg",
@@ -3669,7 +3671,7 @@ const MUSEUM = {
       "id": "w200",
       "title": "Heart-shaped friendship note with three dogs",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115741680.jpg",
@@ -3678,7 +3680,8 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260509_115741680.jpg",
           "thumb": "thumb/PXL_20260509_115741680.jpg"
         }
-      ]
+      ],
+      "note": "Penelope made this heart-shaped friendship note for Claudia, her best friend in third grade."
     },
     {
       "id": "w201",
@@ -3706,7 +3709,7 @@ const MUSEUM = {
       "id": "w202",
       "title": "Ribbon rainbow between cotton clouds",
       "room": "Objects",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115819495.jpg",
@@ -3773,7 +3776,7 @@ const MUSEUM = {
       "id": "w206",
       "title": "“Figuras Geométricas” cut-paper shapes",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115950916.jpg",
@@ -3818,7 +3821,7 @@ const MUSEUM = {
       "id": "w209",
       "title": "Classroom photographs on pink paper",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260509_120038332.jpg",
@@ -3833,7 +3836,7 @@ const MUSEUM = {
       "id": "w210",
       "title": "Outdoor photographs on orange paper",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo (keepsake)",
       "views": [
         {
           "file": "PXL_20260509_120050676.jpg",
@@ -3930,7 +3933,7 @@ const MUSEUM = {
       "id": "w216",
       "title": "Layered paper and painted letter P",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_120243896.jpg",
@@ -3945,7 +3948,7 @@ const MUSEUM = {
       "id": "w218",
       "title": "Sock puppet with black yarn hair",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142537711.jpg",
@@ -3982,7 +3985,7 @@ const MUSEUM = {
       "id": "w221",
       "title": "Flower garden beneath a blue sky",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_142729470.jpg",
@@ -4347,6 +4350,9 @@ const MUSEUM = {
   },
   "artistAliases": {
     "Penelope Trujillo": [
+      "Opie"
+    ],
+    "Penelope Trujillo (keepsake)": [
       "Opie"
     ]
   }
