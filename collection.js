@@ -2733,7 +2733,7 @@ const MUSEUM = {
           "thumb": "thumb/PXL_20260508_191547347.jpg"
         }
       ],
-      "note": "Emmy planned her Tomato and Bee seventh-birthday website on paper. This is her hand-drawn invitation.",
+      "note": "Emmy made these plans for her Tomato and Bee birthday website. She celebrated her seventh birthday on May 17, 2026. This is her hand-drawn invitation.",
       "website": {
         "url": "https://emmytrujillo.netlify.app/",
         "label": "Visit Emmy’s Tomato and Bee birthday website"
@@ -2753,7 +2753,7 @@ const MUSEUM = {
           "thumb": "thumb/PXL_20260508_191555111.jpg"
         }
       ],
-      "note": "Emmy planned her Tomato and Bee seventh-birthday website on paper. This page lists her birthday wishes.",
+      "note": "Emmy made these plans for her Tomato and Bee birthday website. She celebrated her seventh birthday on May 17, 2026. This page lists her birthday wishes.",
       "website": {
         "url": "https://emmytrujillo.netlify.app/",
         "label": "Visit Emmy’s Tomato and Bee birthday website"
@@ -2773,7 +2773,7 @@ const MUSEUM = {
           "thumb": "thumb/PXL_20260508_191601258.jpg"
         }
       ],
-      "note": "Emmy planned her Tomato and Bee seventh-birthday website on paper. Here she sketched a tomato and worked out the math problems for the site.",
+      "note": "Emmy made these plans for her Tomato and Bee birthday website. She celebrated her seventh birthday on May 17, 2026. Here she sketched a tomato and worked out the math problems for the site.",
       "website": {
         "url": "https://emmytrujillo.netlify.app/",
         "label": "Visit Emmy’s Tomato and Bee birthday website"
