@@ -155,7 +155,7 @@ const MUSEUM = {
       "id": "w154",
       "title": "Animales nocturnos",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191722680.jpg",
@@ -2678,7 +2678,7 @@ const MUSEUM = {
       "id": "w143",
       "title": "Emmy’s red photo board",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191238398.jpg",
@@ -2693,7 +2693,7 @@ const MUSEUM = {
       "id": "w144",
       "title": "Family photographs on bright pink board",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191407059.jpg",
@@ -2708,7 +2708,7 @@ const MUSEUM = {
       "id": "w145",
       "title": "Family photo collage with a rainbow border",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191452216.jpg",
@@ -2723,7 +2723,7 @@ const MUSEUM = {
       "id": "w146",
       "title": "Emmy’s Tomato and Bee birthday poster",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191547347.jpg",
@@ -2732,13 +2732,18 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_191547347.jpg",
           "thumb": "thumb/PXL_20260508_191547347.jpg"
         }
-      ]
+      ],
+      "note": "Emmy planned her Tomato and Bee seventh-birthday website on paper. This is her hand-drawn invitation.",
+      "website": {
+        "url": "https://emmytrujillo.netlify.app/",
+        "label": "Visit Emmy’s Tomato and Bee birthday website"
+      }
     },
     {
       "id": "w147",
       "title": "Birthday wish list with a red drawing",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191555111.jpg",
@@ -2747,13 +2752,18 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_191555111.jpg",
           "thumb": "thumb/PXL_20260508_191555111.jpg"
         }
-      ]
+      ],
+      "note": "Emmy planned her Tomato and Bee seventh-birthday website on paper. This page lists her birthday wishes.",
+      "website": {
+        "url": "https://emmytrujillo.netlify.app/",
+        "label": "Visit Emmy’s Tomato and Bee birthday website"
+      }
     },
     {
       "id": "w148",
       "title": "Tomato drawing with a note and arithmetic",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191601258.jpg",
@@ -2762,7 +2772,12 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_191601258.jpg",
           "thumb": "thumb/PXL_20260508_191601258.jpg"
         }
-      ]
+      ],
+      "note": "Emmy planned her Tomato and Bee seventh-birthday website on paper. Here she sketched a tomato and worked out the math problems for the site.",
+      "website": {
+        "url": "https://emmytrujillo.netlify.app/",
+        "label": "Visit Emmy’s Tomato and Bee birthday website"
+      }
     },
     {
       "id": "w149",
@@ -2842,7 +2857,7 @@ const MUSEUM = {
       "id": "w153",
       "title": "Father’s Day card with a backyard grill",
       "room": "Family",
-      "artist": null,
+      "artist": "Trujillo family",
       "views": [
         {
           "file": "PXL_20260508_191704787.jpg",
@@ -2864,7 +2879,7 @@ const MUSEUM = {
       "id": "w155",
       "title": "Gray dog wearing red roses",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191855073.jpg",
@@ -2879,7 +2894,7 @@ const MUSEUM = {
       "id": "w156",
       "title": "Loops and splashes in brown, red and yellow",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_191913618.jpg",
@@ -2916,7 +2931,7 @@ const MUSEUM = {
       "id": "w158",
       "title": "Color-block grid of letters and shapes",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_192028721.jpg",
@@ -2972,7 +2987,7 @@ const MUSEUM = {
       "id": "w161",
       "title": "Crossing blue and violet brushstrokes",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_192107795.jpg",
@@ -2987,7 +3002,7 @@ const MUSEUM = {
       "id": "w162",
       "title": "Pink and peach shapes on a blue ground",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_192127271.jpg",
@@ -3002,7 +3017,7 @@ const MUSEUM = {
       "id": "w163",
       "title": "Little figure beside a glitter-lined shape",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_192201770.jpg",
@@ -3047,7 +3062,7 @@ const MUSEUM = {
       "id": "w166",
       "title": "Houses and birds beneath a red sky",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_192405521.jpg",
@@ -3062,7 +3077,7 @@ const MUSEUM = {
       "id": "w167",
       "title": "Gray wash with red and green marks",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_192438415.jpg",
@@ -3136,7 +3151,7 @@ const MUSEUM = {
       "id": "w172",
       "title": "Green hand-shaped fish puppet",
       "room": "Objects",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_194036212.jpg",
@@ -3173,7 +3188,7 @@ const MUSEUM = {
       "id": "w174",
       "title": "Paper planets, crescent moon, and stars",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260508_194104458.jpg",
@@ -3497,7 +3512,7 @@ const MUSEUM = {
       "id": "w190",
       "title": "Yellow chick with two movable eyes",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115528647.jpg",
@@ -3512,7 +3527,7 @@ const MUSEUM = {
       "id": "w191",
       "title": "Flower made of handwritten paper petals",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "PXL_20260509_115538912.jpg",

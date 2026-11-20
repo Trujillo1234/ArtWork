@@ -22,6 +22,12 @@ function openWork(id,index=0){
   $("large").src=view.src;$("large").alt=view.title;
   $("credit").textContent=work.artist||"Artist unconfirmed";
   $("objectNote").textContent=work.note||"";
+  if(work.website){
+    const link=document.createElement("a");
+    link.href=work.website.url;
+    link.textContent=work.website.label;
+    $("objectNote").append(document.createElement("br"),link);
+  }
   $("file").textContent=[view.file,...view.aliases].join(" · ");
   $("pages").replaceChildren(...(views.length>1?views.map((v,i)=>{
     const b=button(String(i+1),()=>openWork(id,i));b.setAttribute("aria-label","View "+(i+1)+": "+v.title);b.title=v.title;b.setAttribute("aria-pressed",String(i===index));return b}):[]));
