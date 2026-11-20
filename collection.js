@@ -336,7 +336,7 @@ const MUSEUM = {
       "id": "w1",
       "title": "Pop-up paper chicken",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001533.jpg",
@@ -345,7 +345,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001533.jpg",
           "thumb": "thumb/1000001533.jpg"
         }
-      ]
+      ],
+      "note": "Penelope made this pop-up chicken during her Spanish Schoolhouse days."
     },
     {
       "id": "w2",
@@ -501,7 +502,7 @@ const MUSEUM = {
       "id": "w12",
       "title": "Three hearts on a striped ground",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001544.jpg",
@@ -546,7 +547,7 @@ const MUSEUM = {
       "id": "w15",
       "title": "A flower plus a heart",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001547.jpg",
@@ -635,7 +636,7 @@ const MUSEUM = {
       "id": "w20",
       "title": "Rainbow heart with hanging hearts",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001554.jpg",
@@ -766,7 +767,7 @@ const MUSEUM = {
       "id": "w25",
       "title": "A coffee cup beneath a heart-eyed face",
       "room": "Family",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001567.jpg",
@@ -781,7 +782,7 @@ const MUSEUM = {
       "id": "w26",
       "title": "DAD in block letters with hearts",
       "room": "Family",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "1000001568.jpg",
@@ -942,20 +943,28 @@ const MUSEUM = {
     },
     {
       "id": "w38",
-      "title": "Birds on flowering branches",
-      "room": "Studio",
-      "artist": null,
+      "title": "A letter to Penelope from Ms. Michele",
+      "room": "Family",
+      "artist": "Ms. Michele (letter writer)",
       "views": [
         {
           "file": "1000001596.jpg",
           "aliases": [
             "PXL_20260508_182915449.jpg"
           ],
-          "title": "Birds on flowering branches",
+          "title": "Birds on flowering branches, front of the letter",
           "src": "assets/artwork/1000001596.jpg",
           "thumb": "thumb/1000001596.jpg"
+        },
+        {
+          "file": "PXL_20260508_182921775.jpg",
+          "aliases": [],
+          "title": "A thank-you note to Penelope from Ms. Michele",
+          "src": "assets/artwork/PXL_20260508_182921775.jpg",
+          "thumb": "thumb/PXL_20260508_182921775.jpg"
         }
-      ]
+      ],
+      "note": "Ms. Michele thanks Penelope for the picture, the note, and the candy, and tells her she loves being her teacher."
     },
     {
       "id": "w41",
@@ -1073,7 +1082,7 @@ const MUSEUM = {
       "id": "w48",
       "title": "Red marks and a green outline on purple paper",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "1000001845.jpg",
@@ -1133,7 +1142,7 @@ const MUSEUM = {
       "id": "w52",
       "title": "Illustrated account of an imaginary animal",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001849.jpg",
@@ -1148,7 +1157,7 @@ const MUSEUM = {
       "id": "w53",
       "title": "Whale above large pencil lettering",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001850.jpg",
@@ -1193,7 +1202,7 @@ const MUSEUM = {
       "id": "w56",
       "title": "Yellow, pink and violet on a green ground",
       "room": "Studio",
-      "artist": null,
+      "artist": "Emmy Trujillo",
       "views": [
         {
           "file": "1000001853.jpg",
@@ -1322,7 +1331,7 @@ const MUSEUM = {
       "id": "w65",
       "title": "Sticker-covered sketchbook cover",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001864.jpg",
@@ -1332,7 +1341,7 @@ const MUSEUM = {
           "thumb": "thumb/1000001864.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "The cover of the sketchbook Penelope used on her trip to Paris with her father."
     },
     {
       "id": "w66",
@@ -1354,7 +1363,7 @@ const MUSEUM = {
       "id": "w67",
       "title": "Eiffel Tower in ink",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001866.jpg",
@@ -1364,13 +1373,13 @@ const MUSEUM = {
           "thumb": "thumb/1000001866.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "Penelope drew this on her trip to Paris with her father."
     },
     {
       "id": "w68",
       "title": "Numbered guide to a place setting",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001867.jpg",
@@ -1380,13 +1389,13 @@ const MUSEUM = {
           "thumb": "thumb/1000001867.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "Penelope drew this on her trip to Paris with her father."
     },
     {
       "id": "w69",
       "title": "Snow globe labeled General",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001868.jpg",
@@ -1396,13 +1405,13 @@ const MUSEUM = {
           "thumb": "thumb/1000001868.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "Penelope drew this on her trip to Paris with her father."
     },
     {
       "id": "w70",
       "title": "Figure beside a red house",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001869.jpg",
@@ -1412,7 +1421,7 @@ const MUSEUM = {
           "thumb": "thumb/1000001869.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "Penelope drew this in The Woodlands, Texas."
     },
     {
       "id": "w71",
@@ -1434,7 +1443,7 @@ const MUSEUM = {
       "id": "w72",
       "title": "Banana and coffee sketch",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001871.jpg",
@@ -1444,13 +1453,13 @@ const MUSEUM = {
           "thumb": "thumb/1000001871.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "Penelope sketched this in Barcelona while visiting Astrid."
     },
     {
       "id": "w73",
       "title": "Astrid in a plaid dress",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001872.jpg",
@@ -1460,29 +1469,29 @@ const MUSEUM = {
           "thumb": "thumb/1000001872.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "Penelope drew Astrid during a visit with her in Barcelona."
     },
     {
       "id": "w74",
-      "title": "A large face and a small figure",
+      "title": "Head of the Sam Houston statue",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001873.jpg",
           "aliases": [],
-          "title": "A large face and a small figure",
+          "title": "Head of the Sam Houston statue",
           "src": "assets/artwork/1000001873.jpg",
           "thumb": "thumb/1000001873.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "Penelope sketched the head of the Sam Houston statue on a family road trip."
     },
     {
       "id": "w75",
       "title": "Anything Can Be Art — sketchbook spread",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001874.jpg",
@@ -1492,7 +1501,7 @@ const MUSEUM = {
           "thumb": "thumb/1000001874.jpg"
         }
       ],
-      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
+      "note": "Penelope drew this on her trip to Paris with her father."
     },
     {
       "id": "w76",
@@ -1607,21 +1616,6 @@ const MUSEUM = {
           "title": "Marlene at New Mexico Tech",
           "src": "assets/artwork/1000001887.jpg",
           "thumb": "thumb/1000001887.jpg"
-        }
-      ]
-    },
-    {
-      "id": "w79",
-      "title": "A thank-you note to Penelope from Ms. Michele",
-      "room": "Family",
-      "artist": "Ms. Michele",
-      "views": [
-        {
-          "file": "PXL_20260508_182921775.jpg",
-          "aliases": [],
-          "title": "A thank-you note to Penelope from Ms. Michele",
-          "src": "assets/artwork/PXL_20260508_182921775.jpg",
-          "thumb": "thumb/PXL_20260508_182921775.jpg"
         }
       ]
     },
