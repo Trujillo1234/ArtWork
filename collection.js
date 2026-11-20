@@ -381,7 +381,7 @@ const MUSEUM = {
       "id": "w4",
       "title": "Radial pattern on black paper",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001536.jpg",
@@ -396,7 +396,7 @@ const MUSEUM = {
       "id": "w5",
       "title": "Nine pencil panels of animals and weather",
       "room": "Schoolroom",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001537.jpg",
@@ -426,7 +426,7 @@ const MUSEUM = {
       "id": "w7",
       "title": "Hypnotized skeleton",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001539.jpg",
@@ -516,7 +516,7 @@ const MUSEUM = {
       "id": "w13",
       "title": "Flowers in a Campbell's soup can",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001545.jpg",
@@ -605,7 +605,7 @@ const MUSEUM = {
       "id": "w18",
       "title": "Paper cat with a little fish",
       "room": "Objects",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001552.jpg",
@@ -796,7 +796,7 @@ const MUSEUM = {
       "id": "w27",
       "title": "The Dream Life",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001569.jpg",
@@ -885,7 +885,7 @@ const MUSEUM = {
       "id": "w33",
       "title": "Blue brushstroke on a red and white canvas",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001581.jpg",
@@ -1178,7 +1178,7 @@ const MUSEUM = {
       "id": "w55",
       "title": "Crescent moon and stars in watercolor",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001852.jpg",
@@ -1208,7 +1208,7 @@ const MUSEUM = {
       "id": "w57",
       "title": "Blue wash with a green border",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001854.jpg",
@@ -1238,7 +1238,7 @@ const MUSEUM = {
       "id": "w59",
       "title": "Gingerbread figure on a green ground",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001856.jpg",
@@ -1268,7 +1268,7 @@ const MUSEUM = {
       "id": "w61",
       "title": "Black-and-white spotted animal",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001858.jpg",
@@ -1276,6 +1276,15 @@ const MUSEUM = {
           "title": "Black-and-white spotted animal",
           "src": "assets/artwork/1000001858.jpg",
           "thumb": "thumb/1000001858.jpg"
+        }
+      ],
+      "relatedViews": [
+        {
+          "file": "1000001859.jpg",
+          "aliases": [],
+          "title": "Probable reverse, labeled Penelope",
+          "src": "assets/artwork/1000001859.jpg",
+          "thumb": "thumb/1000001859.jpg"
         }
       ]
     },
@@ -1298,7 +1307,7 @@ const MUSEUM = {
       "id": "w63",
       "title": "Antlered animal in black ink",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001860.jpg",
@@ -1322,13 +1331,14 @@ const MUSEUM = {
           "src": "assets/artwork/1000001864.jpg",
           "thumb": "thumb/1000001864.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w66",
       "title": "Statue of Liberty with raised torch",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001865.jpg",
@@ -1337,7 +1347,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001865.jpg",
           "thumb": "thumb/1000001865.jpg"
         }
-      ]
+      ],
+      "note": "Penelope drew this during a trip to Paris with her father, as he recalls."
     },
     {
       "id": "w67",
@@ -1352,7 +1363,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001866.jpg",
           "thumb": "thumb/1000001866.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w68",
@@ -1367,7 +1379,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001867.jpg",
           "thumb": "thumb/1000001867.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w69",
@@ -1382,7 +1395,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001868.jpg",
           "thumb": "thumb/1000001868.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w70",
@@ -1397,13 +1411,14 @@ const MUSEUM = {
           "src": "assets/artwork/1000001869.jpg",
           "thumb": "thumb/1000001869.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w71",
       "title": "Notre-Dame in pencil",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001870.jpg",
@@ -1412,7 +1427,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001870.jpg",
           "thumb": "thumb/1000001870.jpg"
         }
-      ]
+      ],
+      "note": "Penelope drew this during a trip to Paris with her father, as he recalls."
     },
     {
       "id": "w72",
@@ -1427,7 +1443,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001871.jpg",
           "thumb": "thumb/1000001871.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w73",
@@ -1442,7 +1459,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001872.jpg",
           "thumb": "thumb/1000001872.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w74",
@@ -1457,7 +1475,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001873.jpg",
           "thumb": "thumb/1000001873.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w75",
@@ -1472,13 +1491,14 @@ const MUSEUM = {
           "src": "assets/artwork/1000001874.jpg",
           "thumb": "thumb/1000001874.jpg"
         }
-      ]
+      ],
+      "note": "Photographed in the same sketchbook sequence as three drawings the family identified from Penelope’s Paris trip. Trip connection awaits confirmation."
     },
     {
       "id": "w76",
       "title": "City skyline above a pond",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "1000001875.jpg",
@@ -1487,7 +1507,8 @@ const MUSEUM = {
           "src": "assets/artwork/1000001875.jpg",
           "thumb": "thumb/1000001875.jpg"
         }
-      ]
+      ],
+      "note": "Penelope drew this during a trip to Paris with her father, as he recalls."
     },
     {
       "id": "w77",
@@ -1623,7 +1644,7 @@ const MUSEUM = {
       "id": "w81",
       "title": "Yellow cat beneath pink branches",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_183030931.jpg",
@@ -1772,7 +1793,7 @@ const MUSEUM = {
       "id": "w90",
       "title": "Orange wash with a row of circles",
       "room": "Studio",
-      "artist": null,
+      "artist": "Possibly Claudia",
       "views": [
         {
           "file": "PXL_20260508_183413728.jpg",
@@ -1780,6 +1801,16 @@ const MUSEUM = {
           "title": "Orange wash with a row of circles",
           "src": "assets/artwork/PXL_20260508_183413728.jpg",
           "thumb": "thumb/PXL_20260508_183413728.jpg"
+        }
+      ],
+      "note": "The next photograph in the camera sequence, taken seven seconds later, shows the name Claudia. The family identified Claudia as a friend of Penelope. The front and back pairing is provisional.",
+      "relatedViews": [
+        {
+          "file": "PXL_20260508_183420032.jpg",
+          "aliases": [],
+          "title": "Possible reverse bearing the name Claudia",
+          "src": "assets/artwork/PXL_20260508_183420032.jpg",
+          "thumb": "thumb/PXL_20260508_183420032.jpg"
         }
       ]
     },
@@ -1796,7 +1827,8 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_183420032.jpg",
           "thumb": "thumb/PXL_20260508_183420032.jpg"
         }
-      ]
+      ],
+      "note": "Possible reverse of “Orange wash with a row of circles”. The two photographs were taken seven seconds apart."
     },
     {
       "id": "w92",
@@ -2428,7 +2460,7 @@ const MUSEUM = {
       "id": "w129",
       "title": "Blue vase with pink flowers and stars",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260508_190603951.jpg",
@@ -2897,7 +2929,7 @@ const MUSEUM = {
       "id": "w159",
       "title": "An animal hanging from a tree branch",
       "room": "Studio",
-      "artist": null,
+      "artist": "Possibly Emilia",
       "views": [
         {
           "file": "PXL_20260508_192048743.jpg",
@@ -2905,6 +2937,16 @@ const MUSEUM = {
           "title": "An animal hanging from a tree branch",
           "src": "assets/artwork/PXL_20260508_192048743.jpg",
           "thumb": "thumb/PXL_20260508_192048743.jpg"
+        }
+      ],
+      "note": "The next photograph in the camera sequence, taken seven seconds later, shows the name Emilia. The family identified Emilia as a friend of Penelope. The front and back pairing is provisional.",
+      "relatedViews": [
+        {
+          "file": "PXL_20260508_192055351.jpg",
+          "aliases": [],
+          "title": "Possible reverse bearing the name Emilia",
+          "src": "assets/artwork/PXL_20260508_192055351.jpg",
+          "thumb": "thumb/PXL_20260508_192055351.jpg"
         }
       ]
     },
@@ -2921,7 +2963,8 @@ const MUSEUM = {
           "src": "assets/artwork/PXL_20260508_192055351.jpg",
           "thumb": "thumb/PXL_20260508_192055351.jpg"
         }
-      ]
+      ],
+      "note": "Possible reverse of “An animal hanging from a tree branch”. The two photographs were taken seven seconds apart."
     },
     {
       "id": "w161",
@@ -3788,7 +3831,7 @@ const MUSEUM = {
       "id": "w211",
       "title": "Portrait assembled from strips of photographs",
       "room": "Studio",
-      "artist": null,
+      "artist": "Penelope Trujillo",
       "views": [
         {
           "file": "PXL_20260509_120105276.jpg",

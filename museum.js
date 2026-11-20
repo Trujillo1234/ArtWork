@@ -16,13 +16,14 @@ function visit(index){
 }
 function button(label,fn){const b=document.createElement("button");b.type="button";b.textContent=label;b.onclick=fn;return b}
 function openWork(id,index=0){
-  const work=byId.get(id),view=work.views[index];
+  const work=byId.get(id),views=[...work.views,...(work.relatedViews||[])],view=views[index];
   $("objectRoom").textContent=work.room;
   $("objectTitle").textContent=view.title;
   $("large").src=view.src;$("large").alt=view.title;
   $("credit").textContent=work.artist||"Artist unconfirmed";
+  $("objectNote").textContent=work.note||"";
   $("file").textContent=[view.file,...view.aliases].join(" · ");
-  $("pages").replaceChildren(...(work.views.length>1?work.views.map((v,i)=>{
+  $("pages").replaceChildren(...(views.length>1?views.map((v,i)=>{
     const b=button(String(i+1),()=>openWork(id,i));b.setAttribute("aria-label","View "+(i+1)+": "+v.title);b.title=v.title;b.setAttribute("aria-pressed",String(i===index));return b}):[]));
   if(!$("viewer").open)$("viewer").showModal();
   else $("pages").children[index]?.focus();
@@ -30,7 +31,7 @@ function openWork(id,index=0){
 function render(){
   const q=$("search").value.trim().toLowerCase();
   const matches=MUSEUM.works.filter(w=>(filter==="All"||w.room===filter)&&
-    [w.title,w.artist,...w.views.flatMap(v=>[v.file,...v.aliases,v.title])].join(" ").toLowerCase().includes(q));
+    [w.title,w.artist,w.note,...w.views.flatMap(v=>[v.file,...v.aliases,v.title])].join(" ").toLowerCase().includes(q));
   $("count").textContent=matches.length?Math.min(limit,matches.length)+" of "+matches.length+" works":"No matching works";
   $("grid").replaceChildren(...matches.slice(0,limit).map(w=>{
     const b=button("",()=>openWork(w.id));b.className="card";
